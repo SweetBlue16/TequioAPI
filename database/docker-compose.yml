@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  tequio-db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: tequio-sql-server
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=${DB_PASSWORD}
+      - MSSQL_PID=Developer
+    ports:
+      - "1433:1433"
+    volumes:
+      - ./scripts:/usr/src/app/scripts
+      - tequio-db-data:/var/opt/mssql
+volumes:
+  tequio-db-data:
