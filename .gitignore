@@ -1,1 +1,19 @@
+# Entorno local y secretos
 .env
+appsettings.Development.json
+
+# Directorios de compilación y publicación (C#)
+[Bb]in/
+[Oo]bj/
+TestResults/
+
+# Caché y configuración de IDEs (Visual Studio, VS Code, Rider)
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Archivos temporales del sistema operativo
+.DS_Store
+Thumbs.db

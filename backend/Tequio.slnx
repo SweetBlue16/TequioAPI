@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Tequio.Api/Tequio.Api.csproj" />
+  <Project Path="Tequio.Domain/Tequio.Domain.csproj" />
+  <Project Path="Tequio.Infrastructure/Tequio.Infrastructure.csproj" />
+</Solution>
