@@ -1,6 +1,0 @@
-@Tequio.Api_HostAddress = http://localhost:5168
-
-GET {{Tequio.Api_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
