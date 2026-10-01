@@ -2,6 +2,7 @@
 using System.Net;
 using System.Text.Json;
 using Tequio.Domain.Constants;
+using Tequio.Domain.Email;
 
 namespace Tequio.Api.Middlewares
 {
@@ -31,7 +32,15 @@ namespace Tequio.Api.Middlewares
             {
                 await HandleExceptionAsync(context, HttpStatusCode.Unauthorized, ex.Message);
             }
+            catch (EmailDeliveryException ex)
+            {
+                await HandleExceptionAsync(context, HttpStatusCode.ServiceUnavailable, ex.Message);
+            }
             catch (SqlException)
+            {
+                await HandleExceptionAsync(context, HttpStatusCode.InternalServerError, ErrorMessages.DatabaseError);
+            }
+            catch (InvalidOperationException)
             {
                 await HandleExceptionAsync(context, HttpStatusCode.InternalServerError, ErrorMessages.DatabaseError);
             }

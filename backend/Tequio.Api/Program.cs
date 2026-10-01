@@ -3,16 +3,26 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Tequio.Api.Middlewares;
+using Tequio.Domain.Email;
 using Tequio.Domain.Repositories;
 using Tequio.Domain.Services;
+using Tequio.Domain.VerificationCodes;
+using Tequio.Infrastructure.Email;
 using Tequio.Infrastructure.Models;
 using Tequio.Infrastructure.Repositories;
+using Tequio.Infrastructure.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services
+    .AddOptions<EmailOptions>()
+    .Bind(builder.Configuration.GetSection(EmailOptions.SectionName))
+    .ValidateDataAnnotations()
+    .Validate(options => options.UseStartTls, "Email:UseStartTls must be enabled.");
 
 builder.Services.AddDbContext<TequioDbContext>(options =>
 {
@@ -40,6 +50,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJwtProvider, JwtProvider>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IVerificationCodeRepository, VerificationCodeRepository>();
+builder.Services.AddSingleton<IVerificationCodeGenerator, VerificationCodeGenerator>();
+builder.Services.AddSingleton<IEmailTemplateProvider, EmailTemplateProvider>();
+builder.Services.AddSingleton<ISmtpClientFactory, SmtpClientFactory>();
+builder.Services.AddTransient<IEmailService, EmailService>();
 
 var app = builder.Build();
 
