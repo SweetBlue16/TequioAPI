@@ -11,5 +11,6 @@
         public const string OtpExpired = "El código de verificación ha expirado. Solicita uno nuevo.";
         public const string OtpInvalid = "El código de verificación es incorrecto.";
         public const string DatabaseError = "Ocurrió un error al procesar la solicitud en la base de datos.";
+        public const string FileTooLarge = "La imagen supera el límite máximo permitido de 5MB.";
     }
 }

@@ -11,6 +11,7 @@ using Tequio.Infrastructure.Email;
 using Tequio.Infrastructure.Models;
 using Tequio.Infrastructure.Repositories;
 using Tequio.Infrastructure.Security;
+using Tequio.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,6 +52,9 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJwtProvider, JwtProvider>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IVerificationCodeRepository, VerificationCodeRepository>();
+builder.Services.AddScoped<IStorageService, CloudinaryStorageService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddSingleton<IVerificationCodeGenerator, VerificationCodeGenerator>();
 builder.Services.AddSingleton<IEmailTemplateProvider, EmailTemplateProvider>();
 builder.Services.AddSingleton<ISmtpClientFactory, SmtpClientFactory>();
