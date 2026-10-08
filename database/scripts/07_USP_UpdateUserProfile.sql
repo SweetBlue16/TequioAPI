@@ -1,19 +1,26 @@
-CREATE OR ALTER PROCEDURE USP_UpdateUserProfile
-	@userId INT,
-	@phoneNumber NVARCHAR(20) = NULL,
-	@locality NVARCHAR(100) = NULL,
-	@biography NVARCHAR(MAX) = NULL
+CREATE OR ALTER PROCEDURE [dbo].[USP_UpdateUserProfile]
+    @userId INT,
+    @firstName NVARCHAR(100),
+    @paternalLastName NVARCHAR(100),
+    @maternalLastName NVARCHAR(100) = NULL,
+    @birthDate DATE,
+    @phoneNumber NVARCHAR(20) = NULL,
+    @locality NVARCHAR(100) = NULL,
+    @biography NVARCHAR(MAX) = NULL
 AS
 BEGIN
-	SET NOCOUNT ON;
+    SET NOCOUNT ON;
 
-	UPDATE [User]
-	SET
-		PhoneNumber = ISNULL(@phoneNumber, PhoneNumber),
-		Locality = ISNULL(@locality, Locality),
-		Biography = ISNULL(@biography, Biography)
-	WHERE Id = @userId;
-
-	SELECT 1 AS IsSuccess;
+    UPDATE [dbo].[User]
+    SET 
+        [FirstName] = @firstName,
+        [PaternalLastName] = @paternalLastName,
+        [MaternalLastName] = @maternalLastName,
+        [BirthDate] = @birthDate,
+        [PhoneNumber] = @phoneNumber,
+        [Locality] = @locality,
+        [Biography] = @biography
+    WHERE 
+        [Id] = @userId;
 END
 GO
