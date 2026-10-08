@@ -1,4 +1,5 @@
-﻿using Tequio.Domain.Constants;
+﻿using Microsoft.Extensions.Logging;
+using Tequio.Domain.Constants;
 
 namespace Tequio.Domain.Services
 {
@@ -15,22 +16,25 @@ namespace Tequio.Domain.Services
     /// </summary>
     public class FileService : IFileService
     {
-        private readonly IStorageService _storageService;
+        private const long MaxFileSize = 5 * 1024 * 1024;
 
-        public FileService(IStorageService storageService)
+        private readonly IStorageService _storageService;
+        private readonly ILogger<FileService> _logger;
+
+        public FileService(IStorageService storageService, ILogger<FileService> logger)
         {
             _storageService = storageService;
+            _logger = logger;
         }
 
         public async Task<string> UploadImageAsync(Stream imageStream, string fileName)
         {
-            const long maxFileSize = 5 * 1024 * 1024; // 5 MB
-
-            if (imageStream.Length > maxFileSize)
+            if (imageStream.Length > MaxFileSize)
             {
                 throw new ArgumentException(ErrorMessages.FileTooLarge);
             }
 
+            _logger.LogInformation("El archivo {FileName} aprobó las validaciones de negocio. Iniciando transferencia a la nube.", fileName);
             return await _storageService.UploadFileAsync(imageStream, fileName);
         }
     }

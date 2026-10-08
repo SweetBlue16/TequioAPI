@@ -52,10 +52,7 @@ public sealed class EmailService : IEmailService
             ? SecureSocketOptions.StartTls
             : SecureSocketOptions.None;
 
-        _logger.LogInformation(
-            "Security code email delivery requested for {EmailType}.",
-            request.Type);
-
+        _logger.LogInformation("Solicitud de envío de correo de código de seguridad para {EmailType}.", request.Type);
         using var smtpClient = _smtpClientFactory.Create();
 
         try
@@ -72,33 +69,31 @@ public sealed class EmailService : IEmailService
             await smtpClient.SendAsync(message, cancellationToken);
             await smtpClient.DisconnectAsync(true, cancellationToken);
 
-            _logger.LogInformation(
-                "Security code email delivered for {EmailType}.",
-                request.Type);
+            _logger.LogInformation("Código de seguridad enviado para {EmailType}.", request.Type);
         }
-        catch (MailKit.Security.AuthenticationException exception)
+        catch (AuthenticationException exception)
         {
-            throw CreateDeliveryException("SMTP authentication failed.", exception);
+            throw CreateDeliveryException("La autenticación SMTP falló.", exception);
         }
         catch (System.Security.Authentication.AuthenticationException exception)
         {
-            throw CreateDeliveryException("SMTP TLS authentication failed.", exception);
+            throw CreateDeliveryException("La autenticación SMTP TLS falló.", exception);
         }
         catch (SmtpCommandException exception)
         {
-            throw CreateDeliveryException("The SMTP server rejected a command.", exception);
+            throw CreateDeliveryException("El servidor SMTP rechazó un comando.", exception);
         }
         catch (SmtpProtocolException exception)
         {
-            throw CreateDeliveryException("The SMTP protocol exchange failed.", exception);
+            throw CreateDeliveryException("El intercambio de protocolo SMTP falló.", exception);
         }
         catch (SocketException exception)
         {
-            throw CreateDeliveryException("The SMTP server could not be reached.", exception);
+            throw CreateDeliveryException("El servidor SMTP no pudo ser alcanzado.", exception);
         }
         catch (IOException exception)
         {
-            throw CreateDeliveryException("The SMTP connection failed.", exception);
+            throw CreateDeliveryException("La conexión SMTP falló.", exception);
         }
     }
 

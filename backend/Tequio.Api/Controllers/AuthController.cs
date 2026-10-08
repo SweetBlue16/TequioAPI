@@ -12,14 +12,17 @@ namespace Tequio.Api.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly IAuthService _authService;
+    private readonly ILogger<AuthController> _logger;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthController"/> class.
     /// </summary>
     /// <param name="authService">Authentication service.</param>
-    public AuthController(IAuthService authService)
+    /// <param name="logger">Logger instance.</param>
+    public AuthController(IAuthService authService, ILogger<AuthController> logger)
     {
         _authService = authService;
+        _logger = logger;
     }
 
     /// <summary>
@@ -33,6 +36,7 @@ public class AuthController : ControllerBase
         [FromBody] RegisterRequestDto request,
         CancellationToken cancellationToken)
     {
+        _logger.LogInformation("Intento de registro en proceso para el correo: {Email}", request.Email);
         await _authService.RegisterUserAsync(request, cancellationToken);
 
         return StatusCode(
@@ -54,6 +58,7 @@ public class AuthController : ControllerBase
         [FromBody] LoginRequestDto request,
         CancellationToken cancellationToken)
     {
+        _logger.LogInformation("Intento de inicio de sesión recibido para el correo: {Email}", request.Email);
         string token = await _authService.AuthenticateUserAsync(request, cancellationToken);
 
         return Ok(new
@@ -74,6 +79,7 @@ public class AuthController : ControllerBase
         [FromBody] VerifyAccountRequestDto request,
         CancellationToken cancellationToken)
     {
+        _logger.LogInformation("Intento de verificación de cuenta recibido para el correo: {Email}", request.Email);
         await _authService.VerifyAccountAsync(request, cancellationToken);
         return Ok(new { mensaje = "Tu cuenta fue verificada exitosamente." });
     }
@@ -89,6 +95,7 @@ public class AuthController : ControllerBase
         [FromBody] EmailAddressRequestDto request,
         CancellationToken cancellationToken)
     {
+        _logger.LogInformation("Solicitud de reenvío de código de verificación recibida para el correo: {Email}", request.Email);
         await _authService.ResendVerificationCodeAsync(request.Email, cancellationToken);
 
         return Ok(new
@@ -108,6 +115,7 @@ public class AuthController : ControllerBase
         [FromBody] EmailAddressRequestDto request,
         CancellationToken cancellationToken)
     {
+        _logger.LogInformation("Solicitud de recuperación de contraseña recibida para el correo: {Email}", request.Email);
         await _authService.SendPasswordRecoveryCodeAsync(request.Email, cancellationToken);
 
         return Ok(new

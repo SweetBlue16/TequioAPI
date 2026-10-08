@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using Tequio.Domain.Constants;
 using Tequio.Domain.Dtos;
 using Tequio.Domain.Email;
@@ -60,6 +61,7 @@ namespace Tequio.Domain.Services
         private readonly IVerificationCodeGenerator _verificationCodeGenerator;
         private readonly IVerificationCodeRepository _verificationCodeRepository;
         private readonly IEmailService _emailService;
+        private readonly ILogger<AuthService> _logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AuthService"/> class.
@@ -69,13 +71,15 @@ namespace Tequio.Domain.Services
             IJwtProvider jwtProvider,
             IVerificationCodeGenerator verificationCodeGenerator,
             IVerificationCodeRepository verificationCodeRepository,
-            IEmailService emailService)
+            IEmailService emailService,
+            ILogger<AuthService> logger)
         {
             _authRepository = authRepository;
             _jwtProvider = jwtProvider;
             _verificationCodeGenerator = verificationCodeGenerator;
             _verificationCodeRepository = verificationCodeRepository;
             _emailService = emailService;
+            _logger = logger;
         }
 
         /// <inheritdoc />
@@ -93,6 +97,7 @@ namespace Tequio.Domain.Services
                 SecurityCodeEmailType.AccountVerification,
                 cancellationToken);
 
+            _logger.LogInformation("Usuario {Email} registrado exitosamente en el sistema.", request.Email);
             return userId;
         }
 
@@ -109,6 +114,7 @@ namespace Tequio.Domain.Services
                 throw new UnauthorizedAccessException(ErrorMessages.InvalidCredentials);
             }
 
+            _logger.LogInformation("Inicio de sesión exitoso y token generado para el usuario {UserId}.", authData.UserId);
             return _jwtProvider.GenerateToken(authData.UserId!, authData.RoleId!);
         }
 
@@ -202,6 +208,7 @@ namespace Tequio.Domain.Services
                     ExpirationMinutes = VerificationCodeExpirationMinutes
                 },
                 cancellationToken);
+            _logger.LogInformation("Código de recuperación generado y enviado exitosamente a {Email}.", recipientEmail);
         }
     }
 }
