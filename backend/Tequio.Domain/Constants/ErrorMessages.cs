@@ -12,5 +12,8 @@
         public const string OtpInvalid = "El código de verificación es incorrecto.";
         public const string DatabaseError = "Ocurrió un error al procesar la solicitud en la base de datos.";
         public const string FileTooLarge = "La imagen supera el límite máximo permitido de 5MB.";
+        public const string InvalidUrl = "El formato de la URL no es válido.";
+        public const string RequiredFieldMissing = "Este campo es obligatorio.";
+        public const string RequiredImageUrl = "La URL de la imagen es obligatoria.";
     }
 }

@@ -8,7 +8,7 @@ namespace Tequio.Domain.Services
     /// </summary>
     public interface IUserService
     {
-        Task<string> UploadProfilePictureAsync(int userId, Stream imageStream, string fileName);
+        Task UpdateProfilePictureAsync(int userId, string pictureUrl);
     }
 
     /// <summary>
@@ -17,28 +17,15 @@ namespace Tequio.Domain.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        private readonly IStorageService _storageService;
 
-        public UserService(IUserRepository userRepository, IStorageService storageService)
+        public UserService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-            _storageService = storageService;
         }
 
-        public async Task<string> UploadProfilePictureAsync(int userId, Stream imageStream, string fileName)
+        public async Task UpdateProfilePictureAsync(int userId, string pictureUrl)
         {
-            const long maxFileSize = 5 * 1024 * 1024;
-
-            if (imageStream.Length > maxFileSize)
-            {
-                throw new ArgumentException(ErrorMessages.FileTooLarge);
-            }
-
-            string imageUrl = await _storageService.UploadFileAsync(imageStream, fileName);
-
-            await _userRepository.UpdateProfilePictureAsync(userId, imageUrl);
-
-            return imageUrl;
+            await _userRepository.UpdateProfilePictureAsync(userId, pictureUrl);
         }
     }
 }

@@ -55,6 +55,7 @@ builder.Services.AddScoped<IVerificationCodeRepository, VerificationCodeReposito
 builder.Services.AddScoped<IStorageService, CloudinaryStorageService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddSingleton<IVerificationCodeGenerator, VerificationCodeGenerator>();
 builder.Services.AddSingleton<IEmailTemplateProvider, EmailTemplateProvider>();
 builder.Services.AddSingleton<ISmtpClientFactory, SmtpClientFactory>();

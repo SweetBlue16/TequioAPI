@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Tequio.Domain.Dtos;
 using Tequio.Domain.Services;
 
 namespace Tequio.Api.Controllers
@@ -20,24 +21,16 @@ namespace Tequio.Api.Controllers
         }
 
         /// <summary>
-        /// Uploads and updates the user's profile picture.
+        /// Updates the user's profile picture URL.
         /// </summary>
-        [HttpPost("{id}/profile-picture")]
-        public async Task<IActionResult> UploadProfilePicture(int id, IFormFile file)
+        [HttpPut("{id}/profile-picture")]
+        public async Task<IActionResult> UpdateProfilePicture(int id, [FromBody] UpdateProfilePictureDto request)
         {
-            if (file == null || file.Length == 0)
-            {
-                return BadRequest(new { error = "No se proporcionó ninguna imagen válida." });
-            }
-
-            using var stream = file.OpenReadStream();
-
-            string url = await _userService.UploadProfilePictureAsync(id, stream, file.FileName);
+            await _userService.UpdateProfilePictureAsync(id, request.PictureUrl);
 
             return Ok(new
             {
-                mensaje = "Foto de perfil actualizada exitosamente.",
-                url = url
+                mensaje = "Foto de perfil actualizada exitosamente."
             });
         }
     }
