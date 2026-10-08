@@ -1,4 +1,6 @@
 ﻿
+using Tequio.Domain.Dtos;
+
 namespace Tequio.Domain.Repositories
 {
     /// <summary>
@@ -7,5 +9,7 @@ namespace Tequio.Domain.Repositories
     public interface IUserRepository
     {
         Task UpdateProfilePictureAsync(int userId, string profilePictureUrl);
+        Task<UserProfileDto> GetUserProfileAsync(int userId);
+        Task UpdateUserProfileAsync(int userId, UpdateUserProfileDto request);
     }
 }

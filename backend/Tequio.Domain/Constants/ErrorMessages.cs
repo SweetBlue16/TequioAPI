@@ -15,5 +15,6 @@
         public const string InvalidUrl = "El formato de la URL no es válido.";
         public const string RequiredFieldMissing = "Este campo es obligatorio.";
         public const string RequiredImageUrl = "La URL de la imagen es obligatoria.";
+        public const string RecordNotFound = "No se encontró el registro solicitado.";
     }
 }

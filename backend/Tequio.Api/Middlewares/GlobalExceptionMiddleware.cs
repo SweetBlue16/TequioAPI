@@ -44,6 +44,14 @@ namespace Tequio.Api.Middlewares
             {
                 await HandleExceptionAsync(context, HttpStatusCode.InternalServerError, ErrorMessages.DatabaseError);
             }
+            catch (KeyNotFoundException ex)
+            {
+                await HandleExceptionAsync(context, HttpStatusCode.NotFound, ex.Message);
+            }
+            catch (Exception)
+            {
+                await HandleExceptionAsync(context, HttpStatusCode.InternalServerError, "Ocurrió un error inesperado.");
+            }
         }
 
         /// <summary>
