@@ -30,7 +30,7 @@ BEGIN
           AND Status IN ('Draft', 'Active', 'Confirmed')
     )
     BEGIN
-        ;THROW 50017, 'Validation Error: Cannot deactivate product with active or confirmed batches (RN-10).', 1;
+        ;THROW 50017, 'Validation Error: Cannot deactivate product with active or confirmed batches.', 1;
     END
 
     UPDATE BaseProduct

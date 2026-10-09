@@ -16,5 +16,17 @@
         public const string RequiredFieldMissing = "Este campo es obligatorio.";
         public const string RequiredImageUrl = "La URL de la imagen es obligatoria.";
         public const string RecordNotFound = "No se encontró el registro solicitado.";
+
+        public const string NegativePageIndex = "El índice de página no puede ser negativo.";
+        public const string InvalidPageSize = "El tamaño de página debe ser mayor a cero.";
+        public const string PageSizeExceeded = "El tamaño de página no puede exceder los 100 productos.";
+
+        public const string ProducerNotFoundOrUnauthorized = "El usuario especificado no existe o no tiene permisos de productor.";
+        public const string CategoryNotFound = "La categoría especificada no existe.";
+        public const string DuplicateProductName = "Ya existe un producto activo con el mismo nombre para este productor.";
+
+        public const string ProductNotFoundOrForbidden = "El producto no existe o no pertenece al productor especificado.";
+        public const string ProductAlreadyDeactivated = "El producto ya se encuentra desactivado.";
+        public const string ProductHasActiveBatches = "No se puede dar de baja el producto porque tiene lotes activos o confirmados.";
     }
 }
