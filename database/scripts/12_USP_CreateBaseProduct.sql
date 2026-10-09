@@ -15,7 +15,7 @@ BEGIN
         WHERE Id = @producerId AND RoleId = 2
     )
     BEGIN
-        ;THROW 50010, 'Validation Error: Producer does not exist or lacks producer privileges.', 1;
+        ;THROW 50012, 'Validation Error: Producer does not exist or lacks producer privileges.', 1;
     END
 
     IF NOT EXISTS (
@@ -24,7 +24,7 @@ BEGIN
         WHERE Id = @categoryId
     )
     BEGIN
-        ;THROW 50011, 'Validation Error: The specified category does not exist.', 1;
+        ;THROW 50013, 'Validation Error: The specified category does not exist.', 1;
     END
 
     IF EXISTS (
@@ -35,7 +35,7 @@ BEGIN
           AND IsActive = 1
     )
     BEGIN
-        ;THROW 50012, 'Validation Error: An active product with the same name already exists for this producer.', 1;
+        ;THROW 50014, 'Validation Error: An active product with the same name already exists for this producer.', 1;
     END
 
     INSERT INTO BaseProduct (
