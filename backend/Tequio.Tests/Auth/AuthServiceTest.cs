@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using Moq;
 using Tequio.Domain.Constants;
 using Tequio.Domain.Dtos;
@@ -23,6 +24,7 @@ public sealed class AuthServiceTest
     private readonly Mock<IVerificationCodeGenerator> _codeGenerator = new();
     private readonly Mock<IVerificationCodeRepository> _codeRepository = new();
     private readonly Mock<IEmailService> _emailService = new();
+    private readonly Mock<ILogger<AuthService>> _logger = new();
 
     /// <summary>
     /// Verifies registration creates the user, generates and persists a code, and then sends it.
@@ -360,7 +362,9 @@ public sealed class AuthServiceTest
             _jwtProvider.Object,
             _codeGenerator.Object,
             _codeRepository.Object,
-            _emailService.Object);
+            _emailService.Object,
+            _logger.Object
+            );
     }
 
     private static RegisterRequestDto CreateRegisterRequest()
@@ -371,7 +375,7 @@ public sealed class AuthServiceTest
             Password = "SecurePassword123!",
             FirstName = "Ana",
             PaternalLastName = "López",
-            BirthDate = new DateTime(1990, 1, 1),
+            BirthDate = new DateTime(1990, 1, 1, 0, 0, 0, DateTimeKind.Utc),
             RoleId = 1
         };
     }

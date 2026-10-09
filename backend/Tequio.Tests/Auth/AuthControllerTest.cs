@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Moq;
 using System.Text.Json;
 using Tequio.Api.Controllers;
@@ -21,19 +22,20 @@ public sealed class AuthControllerTest
     public async Task TestRegisterWithSuccessfulFlowShouldNotReturnVerificationCode()
     {
         var authService = new Mock<IAuthService>();
+        var logger = new Mock<ILogger<AuthController>>();
         var request = new RegisterRequestDto
         {
             Email = "buyer@example.test",
             Password = "SecurePassword123!",
             FirstName = "Ana",
             PaternalLastName = "López",
-            BirthDate = new DateTime(1990, 1, 1),
+            BirthDate = new DateTime(1990, 1, 1, 0, 0 ,0, DateTimeKind.Utc),
             RoleId = 1
         };
         authService
             .Setup(service => service.RegisterUserAsync(request, It.IsAny<CancellationToken>()))
             .ReturnsAsync(42);
-        var controller = new AuthController(authService.Object);
+        var controller = new AuthController(authService.Object, logger.Object);
 
         IActionResult actionResult = await controller.Register(request, CancellationToken.None);
 

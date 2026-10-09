@@ -26,13 +26,13 @@ namespace Tequio.Infrastructure.Repositories
         {
             try
             {
-                using var command = _dbContext.Database.GetDbConnection().CreateCommand();
+                await using var command = _dbContext.Database.GetDbConnection().CreateCommand();
                 command.CommandText = "USP_GetUserProfile";
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.Add(new SqlParameter("@userId", userId));
 
                 await _dbContext.Database.OpenConnectionAsync();
-                using var reader = await command.ExecuteReaderAsync();
+                await using var reader = await command.ExecuteReaderAsync();
 
                 if (await reader.ReadAsync())
                 {
