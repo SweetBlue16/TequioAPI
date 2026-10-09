@@ -1,7 +1,8 @@
 CREATE OR ALTER PROCEDURE [dbo].[USP_GetProductsByCategory]
     @categoryId INT,
     @pageIndex INT,
-    @pageSize INT
+    @pageSize INT,
+    @totalCount INT OUTPUT
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -20,6 +21,13 @@ END
 BEGIN
         ;THROW 50011, 'Validation Error: Page size cannot exceed 100 products.', 1;
 END
+
+SELECT
+    @totalCount = COUNT([Id])
+FROM
+    [dbo].[BaseProduct]
+WHERE
+    [CategoryId] = @categoryId;
 
 SELECT
     [Id],

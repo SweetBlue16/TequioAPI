@@ -1,7 +1,8 @@
-CREATE OR ALTER PROCEDURE [dbo].[USP_GetProductsByProducer]
+CREATE OR ALTER PROCEDURE [dbo].[USP_GetProductsFromProducer]
     @producerId INT,
     @pageIndex INT,
-    @pageSize INT
+    @pageSize INT,
+    @totalCount INT OUTPUT
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -20,6 +21,13 @@ END
 BEGIN
         ;THROW 50008, 'Validation Error: Page size cannot exceed 100 products.', 1;
 END
+
+SELECT
+    @totalCount = COUNT([Id])
+FROM
+    [dbo].[BaseProduct]
+WHERE
+    [ProducerId] = @producerId;
 
 SELECT
     [Id],
