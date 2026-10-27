@@ -123,4 +123,24 @@ public class AuthController : ControllerBase
             mensaje = "Si existe una cuenta asociada, recibirás un código para recuperar tu cuenta."
         });
     }
+
+    /// <summary>
+    /// Resets the account password after verifying the security OTP code.
+    /// </summary>
+    /// <param name="request">Password reset payload.</param>
+    /// <param name="cancellationToken">Token used to cancel the request.</param>
+    /// <returns>A confirmation message.</returns>
+    [HttpPost("reset-password")]
+    public async Task<IActionResult> ResetPassword(
+        [FromBody] ResetPasswordRequestDto request,
+        CancellationToken cancellationToken)
+    {
+        _logger.LogInformation("Intento de restablecimiento de contraseña para el correo: {Email}", request.Email);
+        await _authService.ResetPasswordAsync(request, cancellationToken);
+
+        return Ok(new
+        {
+            mensaje = "Tu contraseña ha sido restablecida exitosamente."
+        });
+    }
 }

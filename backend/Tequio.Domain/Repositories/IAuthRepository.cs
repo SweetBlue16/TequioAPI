@@ -39,5 +39,16 @@ namespace Tequio.Domain.Repositories
         Task<UserVerificationData?> GetUserVerificationDataAsync(
             string email,
             CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Updates the password hash for the specified user.
+        /// </summary>
+        /// <param name="userId">The unique identifier of the user.</param>
+        /// <param name="passwordHash">The newly computed BCrypt hash.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        Task UpdatePasswordAsync(
+            int userId,
+            string passwordHash,
+            CancellationToken cancellationToken = default);
     }
 }

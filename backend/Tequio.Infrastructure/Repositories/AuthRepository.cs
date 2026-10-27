@@ -138,6 +138,34 @@ public sealed class AuthRepository : IAuthRepository
         }
     }
 
+    /// <inheritdoc />
+    public async Task UpdatePasswordAsync(
+        int userId,
+        string passwordHash,
+        CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            await ExecuteWithConnectionAsync<object?>(
+                async connection =>
+                {
+                    await using DbCommand command = connection.CreateCommand();
+                    command.CommandText = "USP_UpdateUserPassword";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add(new SqlParameter("@userId", SqlDbType.Int) { Value = userId });
+                    command.Parameters.Add(new SqlParameter("@newPasswordHash", SqlDbType.NVarChar, 255) { Value = passwordHash });
+
+                    await command.ExecuteNonQueryAsync(cancellationToken);
+                    return null;
+                },
+                cancellationToken);
+        }
+        catch (SqlException exception)
+        {
+            throw SqlExceptionMapper.Map(exception);
+        }
+    }
+
     private static DbCommand CreateGetUserByEmailCommand(DbConnection connection, string email)
     {
         DbCommand command = connection.CreateCommand();
