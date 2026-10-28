@@ -1,8 +1,12 @@
 # TEQUIO — Colección base de integración
 
-Preparación de [TESTS] 6.0 para una fase posterior CP-AUT-01 a CP-AUT-13.
-Esta colección contiene plantillas manuales y comprobaciones comunes de contrato;
-no implementa los trece casos ni encadena solicitudes automáticamente.
+La colección conserva las 16 plantillas de [TESTS] 6.0 y añade la carpeta
+`05 - Autenticación CP-AUT-01 a CP-AUT-13` de [TESTS] 6.2, con 49 solicitudes
+nuevas, OTP manual y resultados por escenario. Usar Collection Runner solo sobre
+esa carpeta, siguiendo [RESULTADOS_AUTENTICACION.md](RESULTADOS_AUTENTICACION.md).
+CP-AUT-05 y CP-AUT-10 permanecen NO IMPLEMENTADOS. Las instrucciones originales
+de este README corresponden a las carpetas 00–04; no mezclar sus registros con
+los de la suite bajo el mismo runId.
 
 Auditoría del repositorio en `main`, commit `e24d344`: controladores, DTO,
 servicios de autenticación/JWT, middleware, validadores de paginación,
@@ -77,7 +81,7 @@ de utilizarlo sin vaciar de nuevo contraseñas, tokens y OTP.
 | `buyerUserId`, `producerUserId` | vacíos | Solo se capturan de un GET `/users/me` válido. |
 | `buyerRoleId`, `producerRoleId` | `1`, `2` | Valores del seed: Comprador y Productor. Los roles 3 y 4 son Administrador y Administrador maestro; no se usan. |
 | `jwt` | vacío, secret | Se captura únicamente de login HTTP 200 con claims esperados. |
-| `expiredJwt` | vacío, secret | Reservado para la siguiente fase: JWT auténtico vencido de desarrollo, suministrado localmente por un canal seguro. No se fabrica ni se usa automáticamente. |
+| `expiredJwt` | vacío, secret | CP-AUT-11 lo rellena con el mismo JWT real capturado en CP-AUT-08 y aceptado previamente por GET, después de vencer naturalmente. No se fabrica ni se usa un token malformado. |
 | `verificationOtp`, `recoveryOtp` | vacíos, secret | Códigos del buzón, conservados como texto de seis dígitos, incluidos ceros iniciales. |
 | `testInboxAddress` | vacío | Buzón de pruebas real o dirección atendida por un capturador autorizado. |
 | `testInboxConfirmed` | `false` | Confirmación de que el buzón está bajo control del equipo de pruebas. |
@@ -255,7 +259,7 @@ productos, categorías administrativas ni endpoints para consultar OTP.
 - Esta entrega no comprueba conectividad, entrega real de correo ni persistencia
   de la instancia compartida. No ejecuta solicitudes contra TEQUIO ni SQL Server.
 
-Validación estática: JSON parseable, esquema oficial Collection v2.1,
+Validación histórica de 6.0: JSON parseable, esquema oficial Collection v2.1,
 deserialización por el SDK disponible con Newman, sintaxis de los scripts y
 24 comprobaciones locales de seguridad/captura y coincidencia con rutas/DTO,
 mediante respuestas simuladas. Las 16 solicitudes quedan bloqueadas con el
@@ -264,6 +268,13 @@ existentes para deserializar y validar el esquema oficial; no se ejecutó un Run
 contra la API ni se utilizaron las credenciales de la máquina. No se
 instalan dependencias. No se presenta esta revisión como una ejecución de los
 casos CP-AUT ni como importación manual en la interfaz de Postman.
+
+Para 6.2 se añadieron 15 variables de suite (64 totales), el validador offline
+`node postman/validate-auth.cjs` y el informe de autenticación enlazado arriba.
+La verificación actual consta de 22 comprobaciones offline con el esquema oficial
+y SDK disponibles; no equivale a ejecución de integración. Los estados por caso,
+el protocolo de OTP manual, las etapas prepare/execute, la espera de expiración,
+las dependencias y el registro de defectos se explican en ese informe.
 
 Referencias oficiales:
 [Collection v2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
