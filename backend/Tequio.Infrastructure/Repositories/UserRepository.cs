@@ -102,5 +102,23 @@ namespace Tequio.Infrastructure.Repositories
                 RegistrationDate = reader.GetDateTime(reader.GetOrdinal("RegistrationDate"))
             };
         }
+
+        public async Task PromoteToProducerAsync(
+                    int userId,
+                    CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                await _dbContext.Database.ExecuteSqlRawAsync(
+                    "EXEC USP_PromoteToProducer @userId",
+                    new[] { new SqlParameter("@userId", userId) },
+                    cancellationToken
+                );
+            }
+            catch (SqlException ex)
+            {
+                throw SqlExceptionMapper.Map(ex);
+            }
+        }
     }
 }

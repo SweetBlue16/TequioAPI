@@ -29,6 +29,8 @@ namespace Tequio.Infrastructure.Helpers
                 50015 => new ArgumentException(ErrorMessages.ProductNotFoundOrForbidden),
                 50016 => new InvalidOperationException(ErrorMessages.ProductAlreadyDeactivated),
                 50017 => new InvalidOperationException(ErrorMessages.ProductHasActiveBatches),
+                50018 => new ArgumentException(ErrorMessages.RecordNotFound),
+                50019 => new ArgumentException(ErrorMessages.UserAlreadyProducer),
                 _ => new InvalidOperationException(ErrorMessages.DatabaseError)
             };
         }

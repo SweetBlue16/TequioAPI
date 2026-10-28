@@ -132,6 +132,10 @@ namespace Tequio.Infrastructure.Repositories
             }
             catch (SqlException exception)
             {
+                Console.WriteLine($"\n================== SQL ERROR EN PRODUCTOS ==================");
+                Console.WriteLine($"Número de Error SQL: {exception.Number}");
+                Console.WriteLine($"Mensaje SQL: {exception.Message}");
+                Console.WriteLine($"============================================================\n");
                 throw SqlExceptionMapper.Map(exception);
             }
         }

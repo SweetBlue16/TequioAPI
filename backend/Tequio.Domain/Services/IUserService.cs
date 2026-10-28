@@ -13,6 +13,12 @@ namespace Tequio.Domain.Services
         Task UpdateProfilePictureAsync(int userId, string pictureUrl);
         Task<UserProfileDto> GetUserProfileAsync(int userId);
         Task UpdateUserProfileAsync(int userId, UpdateUserProfileDto request);
+        /// <summary>
+        /// Promotes the specified user to the producer role.
+        /// </summary>
+        /// <param name="userId">Unique identifier of the target user.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        Task PromoteToProducerAsync(int userId, CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -44,5 +50,23 @@ namespace Tequio.Domain.Services
             _logger.LogInformation("Delegando actualización de perfil del usuario {UserId} al repositorio.", userId);
             await _userRepository.UpdateUserProfileAsync(userId, request);
         }
+
+        /// <inheritdoc />
+        public async Task PromoteToProducerAsync(
+            int userId,
+            CancellationToken cancellationToken = default)
+        {
+            if (userId <= 0)
+            {
+                throw new ArgumentException(ErrorMessages.RecordNotFound);
+            }
+
+            _logger.LogInformation("Iniciando solicitud para promover al usuario {UserId} a rol de productor.", userId);
+
+            await _userRepository.PromoteToProducerAsync(userId, cancellationToken);
+
+            _logger.LogInformation("Usuario {UserId} promovido exitosamente a rol de productor.", userId);
+        }
+
     }
 }

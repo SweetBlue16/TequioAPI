@@ -28,5 +28,7 @@
         public const string ProductNotFoundOrForbidden = "El producto no existe o no pertenece al productor especificado.";
         public const string ProductAlreadyDeactivated = "El producto ya se encuentra desactivado.";
         public const string ProductHasActiveBatches = "No se puede dar de baja el producto porque tiene lotes activos o confirmados.";
+
+        public const string UserAlreadyProducer = "El usuario ya cuenta con el rol de productor.";
     }
 }

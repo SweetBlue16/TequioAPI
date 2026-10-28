@@ -19,7 +19,7 @@ namespace Tequio.Api.Controllers
         /// Retrieves products belonging to the specified user.
         /// </summary>
         /// <param name="producerId">The userId of the producer.</param>
-        /// <param name="pageIndex">Current page zero-based index.</param>
+        /// <param name="pageIndex">Current page 1-based index from query.</param>
         /// <param name="pageSize">Amount of products per page.</param>
         [HttpGet("producers/{producerId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -36,7 +36,10 @@ namespace Tequio.Api.Controllers
             NumberValidator.ValidateGreaterOrEqualToZero(id, "producerId");
             PageValidator.ValidatePageArguments(index, size);
 
-            var page = await productService.GetProductsFromProducer(id, index, size);
+            // Traduce la paginación base 1 del cliente a base 0 para el Stored Procedure
+            var dbPageIndex = index - 1;
+
+            var page = await productService.GetProductsFromProducer(id, dbPageIndex, size);
             return Ok(page);
         }
 
@@ -44,7 +47,7 @@ namespace Tequio.Api.Controllers
         /// Retrieves products belonging to the specified category.
         /// </summary>
         /// <param name="categoryId">Target category identifier.</param>
-        /// <param name="pageIndex">Current page zero-based index.</param>
+        /// <param name="pageIndex">Current page 1-based index from query.</param>
         /// <param name="pageSize">Amount of products per page.</param>
         [HttpGet("category/{categoryId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -61,7 +64,10 @@ namespace Tequio.Api.Controllers
             NumberValidator.ValidateGreaterOrEqualToZero(id, "categoryId");
             PageValidator.ValidatePageArguments(index, size);
 
-            var page = await productService.GetProductsByCategory(id, index, size);
+            // Traduce la paginación base 1 del cliente a base 0 para el Stored Procedure
+            var dbPageIndex = index - 1;
+
+            var page = await productService.GetProductsByCategory(id, dbPageIndex, size);
             return Ok(page);
         }
 

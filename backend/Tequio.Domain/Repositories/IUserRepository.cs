@@ -11,5 +11,6 @@ namespace Tequio.Domain.Repositories
         Task UpdateProfilePictureAsync(int userId, string profilePictureUrl);
         Task<UserProfileDto> GetUserProfileAsync(int userId);
         Task UpdateUserProfileAsync(int userId, UpdateUserProfileDto request);
+        Task PromoteToProducerAsync(int userId, CancellationToken cancellationToken = default);
     }
 }

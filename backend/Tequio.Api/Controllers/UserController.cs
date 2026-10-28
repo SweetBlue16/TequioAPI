@@ -66,5 +66,28 @@ namespace Tequio.Api.Controllers
                 mensaje = "Foto de perfil actualizada exitosamente."
             });
         }
+
+        /// <summary>
+        /// Promotes the authenticated user to the producer role.
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Action confirmation message.</returns>
+        [HttpPatch("me/role/producer")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<IActionResult> BecomeProducerAsync(CancellationToken cancellationToken)
+        {
+            int userId = User.GetUserId();
+            _logger.LogInformation("El usuario {UserId} solicitó darse de alta como vendedor.", userId);
+
+            await _userService.PromoteToProducerAsync(userId, cancellationToken);
+
+            return Ok(new
+            {
+                mensaje = "Te has registrado como vendedor exitosamente."
+            });
+        }
+
     }
 }
