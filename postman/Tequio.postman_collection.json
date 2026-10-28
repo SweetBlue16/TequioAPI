@@ -3,7 +3,7 @@
     "_postman_id": "5d62be43-95cc-411c-9b0c-8e81c714d19d",
     "name": "TEQUIO - Integration Base",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": "TEQUIO: 16 peticiones base de la actividad 6.0 y 49 solicitudes para los 13 escenarios de autenticación de 6.2. Seleccionar solo la carpeta 05 en Runner; leer RESULTADOS_AUTENTICACION.md. Etapas prepare/execute, OTP manual, procedencia de JWT y evidencia saneada por escenario. CP-AUT-05 y CP-AUT-10 no están implementados. Valores exportados seguros, sin secretos, sin limpieza de datos ni SQL desde scripts."
+    "description": "TEQUIO: 16 peticiones base de la actividad 6.0 y 49 solicitudes para los 13 escenarios de autenticación de 6.2. Seleccionar solo la carpeta 05 en Runner; leer RESULTADOS_AUTENTICACION.md. Etapas prepare/execute, OTP manual, procedencia de JWT y evidencia saneada por escenario. CP-AUT-05 y CP-AUT-10 no están implementados. Valores exportados seguros, sin secretos, sin limpieza de datos ni SQL desde scripts. Perfiles y catálogo: carpeta 06 con 11 escenarios; no ejecutar cargas externas ni lotes sin aprobación explícita."
   },
   "event": [
     {
@@ -11,7 +11,7 @@
       "script": {
         "type": "text/javascript",
         "exec": [
-          "if (!pm.info.requestName.startsWith('CP-AUT-')) {",
+          "if (!/^(CP-AUT-|CP-PER-|CP-MUL-|CP-CAT-)/.test(pm.info.requestName)) {",
           "// Shared safety and data preparation. No HTTP calls or SQL are made by scripts.",
           "const definitions = {",
           "  \"Read development OpenAPI document\": {",
@@ -256,7 +256,7 @@
       "script": {
         "type": "text/javascript",
         "exec": [
-          "if (!pm.info.requestName.startsWith('CP-AUT-')) {",
+          "if (!/^(CP-AUT-|CP-PER-|CP-MUL-|CP-CAT-)/.test(pm.info.requestName)) {",
           "// Baseline contracts only; this does not implement CP-AUT-01..13.",
           "const env = pm.environment;",
           "const op = pm.variables.get('operation');",
@@ -3424,6 +3424,2036 @@
               "response": []
             }
           ]
+        }
+      ]
+    },
+    {
+      "name": "06 - Perfiles, multimedia y catálogo",
+      "description": "11 escenarios CP-PER/MUL/CAT. Solo un caso seleccionado explícitamente; mutaciones, recursos externos y lotes requieren autorizaciones separadas. Leer RESULTADOS_PERFILES_CATALOGO.md.",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const pcManifest = {",
+              "  \"CP-PER-01 / 01 - Consultar perfil autenticado original\": {",
+              "    \"id\": \"CP-PER-01\",",
+              "    \"key\": \"CP-PER-01.1\",",
+              "    \"name\": \"CP-PER-01 / 01 - Consultar perfil autenticado original\",",
+              "    \"action\": \"snapshot\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/users/me\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": []",
+              "  },",
+              "  \"CP-PER-01 / 02 - Consultar segundo perfil de prueba como control\": {",
+              "    \"id\": \"CP-PER-01\",",
+              "    \"key\": \"CP-PER-01.2\",",
+              "    \"name\": \"CP-PER-01 / 02 - Consultar segundo perfil de prueba como control\",",
+              "    \"action\": \"snapshot\",",
+              "    \"role\": \"producer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/users/me\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-PER-01.1\"",
+              "    ],",
+              "    \"slot\": \"observer\"",
+              "  },",
+              "  \"CP-PER-01 / 03 - Actualizar campos permitidos con datos ficticios\": {",
+              "    \"id\": \"CP-PER-01\",",
+              "    \"key\": \"CP-PER-01.3\",",
+              "    \"name\": \"CP-PER-01 / 03 - Actualizar campos permitidos con datos ficticios\",",
+              "    \"action\": \"update\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"PUT\",",
+              "    \"route\": \"/api/v1/users/me\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-PER-01.2\"",
+              "    ]",
+              "  },",
+              "  \"CP-PER-01 / 04 - Comparar datos persistidos e identidad\": {",
+              "    \"id\": \"CP-PER-01\",",
+              "    \"key\": \"CP-PER-01.4\",",
+              "    \"name\": \"CP-PER-01 / 04 - Comparar datos persistidos e identidad\",",
+              "    \"action\": \"profileAfter\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/users/me\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-PER-01.3\"",
+              "    ]",
+              "  },",
+              "  \"CP-PER-01 / 05 - Comprobar que el perfil de control no cambió\": {",
+              "    \"id\": \"CP-PER-01\",",
+              "    \"key\": \"CP-PER-01.5\",",
+              "    \"name\": \"CP-PER-01 / 05 - Comprobar que el perfil de control no cambió\",",
+              "    \"action\": \"unchanged\",",
+              "    \"role\": \"producer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/users/me\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-PER-01.4\"",
+              "    ],",
+              "    \"slot\": \"observer\"",
+              "  },",
+              "  \"CP-PER-02 / 01 - Guardar perfil original\": {",
+              "    \"id\": \"CP-PER-02\",",
+              "    \"key\": \"CP-PER-02.1\",",
+              "    \"name\": \"CP-PER-02 / 01 - Guardar perfil original\",",
+              "    \"action\": \"snapshot\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/users/me\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": []",
+              "  },",
+              "  \"CP-PER-02 / 02 - Rechazar nombre obligatorio vacío sin cambios parciales\": {",
+              "    \"id\": \"CP-PER-02\",",
+              "    \"key\": \"CP-PER-02.2\",",
+              "    \"name\": \"CP-PER-02 / 02 - Rechazar nombre obligatorio vacío sin cambios parciales\",",
+              "    \"action\": \"invalidRequired\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"PUT\",",
+              "    \"route\": \"/api/v1/users/me\",",
+              "    \"statuses\": [",
+              "      400",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-PER-02.1\"",
+              "    ]",
+              "  },",
+              "  \"CP-PER-02 / 03 - Comparar perfil completo tras rechazo Required\": {",
+              "    \"id\": \"CP-PER-02\",",
+              "    \"key\": \"CP-PER-02.3\",",
+              "    \"name\": \"CP-PER-02 / 03 - Comparar perfil completo tras rechazo Required\",",
+              "    \"action\": \"unchanged\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/users/me\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-PER-02.2\"",
+              "    ]",
+              "  },",
+              "  \"CP-PER-02 / 04 - Rechazar teléfono de 21 caracteres\": {",
+              "    \"id\": \"CP-PER-02\",",
+              "    \"key\": \"CP-PER-02.4\",",
+              "    \"name\": \"CP-PER-02 / 04 - Rechazar teléfono de 21 caracteres\",",
+              "    \"action\": \"invalidLength\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"PUT\",",
+              "    \"route\": \"/api/v1/users/me\",",
+              "    \"statuses\": [",
+              "      400",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-PER-02.3\"",
+              "    ]",
+              "  },",
+              "  \"CP-PER-02 / 05 - Comparar perfil completo tras rechazo StringLength\": {",
+              "    \"id\": \"CP-PER-02\",",
+              "    \"key\": \"CP-PER-02.5\",",
+              "    \"name\": \"CP-PER-02 / 05 - Comparar perfil completo tras rechazo StringLength\",",
+              "    \"action\": \"unchanged\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/users/me\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-PER-02.4\"",
+              "    ]",
+              "  },",
+              "  \"CP-MUL-01 / 01 - Guardar perfil original\": {",
+              "    \"id\": \"CP-MUL-01\",",
+              "    \"key\": \"CP-MUL-01.1\",",
+              "    \"name\": \"CP-MUL-01 / 01 - Guardar perfil original\",",
+              "    \"action\": \"snapshot\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/users/me\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": []",
+              "  },",
+              "  \"CP-MUL-01 / 02 - Subir PNG ficticio dentro del límite\": {",
+              "    \"id\": \"CP-MUL-01\",",
+              "    \"key\": \"CP-MUL-01.2\",",
+              "    \"name\": \"CP-MUL-01 / 02 - Subir PNG ficticio dentro del límite\",",
+              "    \"action\": \"upload\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"POST\",",
+              "    \"route\": \"/api/v1/files/image\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-MUL-01.1\"",
+              "    ],",
+              "    \"fixture\": \"small\"",
+              "  },",
+              "  \"CP-MUL-01 / 03 - Asociar la URL real al perfil\": {",
+              "    \"id\": \"CP-MUL-01\",",
+              "    \"key\": \"CP-MUL-01.3\",",
+              "    \"name\": \"CP-MUL-01 / 03 - Asociar la URL real al perfil\",",
+              "    \"action\": \"associate\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"PUT\",",
+              "    \"route\": \"/api/v1/users/me/profile-picture\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-MUL-01.2\"",
+              "    ]",
+              "  },",
+              "  \"CP-MUL-01 / 04 - Comprobar fotografía e identidad por GET\": {",
+              "    \"id\": \"CP-MUL-01\",",
+              "    \"key\": \"CP-MUL-01.4\",",
+              "    \"name\": \"CP-MUL-01 / 04 - Comprobar fotografía e identidad por GET\",",
+              "    \"action\": \"pictureAfter\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/users/me\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-MUL-01.3\"",
+              "    ]",
+              "  },",
+              "  \"CP-MUL-02 / 01 - Guardar perfil original\": {",
+              "    \"id\": \"CP-MUL-02\",",
+              "    \"key\": \"CP-MUL-02.1\",",
+              "    \"name\": \"CP-MUL-02 / 01 - Guardar perfil original\",",
+              "    \"action\": \"snapshot\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/users/me\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": []",
+              "  },",
+              "  \"CP-MUL-02 / 02 - Exigir rechazo de texto inofensivo .txt\": {",
+              "    \"id\": \"CP-MUL-02\",",
+              "    \"key\": \"CP-MUL-02.2\",",
+              "    \"name\": \"CP-MUL-02 / 02 - Exigir rechazo de texto inofensivo .txt\",",
+              "    \"action\": \"upload\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"POST\",",
+              "    \"route\": \"/api/v1/files/image\",",
+              "    \"statuses\": [",
+              "      400",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-MUL-02.1\"",
+              "    ],",
+              "    \"fixture\": \"txt\"",
+              "  },",
+              "  \"CP-MUL-02 / 03 - Comprobar que el perfil no cambió\": {",
+              "    \"id\": \"CP-MUL-02\",",
+              "    \"key\": \"CP-MUL-02.3\",",
+              "    \"name\": \"CP-MUL-02 / 03 - Comprobar que el perfil no cambió\",",
+              "    \"action\": \"unchanged\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/users/me\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-MUL-02.2\"",
+              "    ],",
+              "    \"followRejected\": true",
+              "  },",
+              "  \"CP-MUL-03 / 01 - Guardar perfil original\": {",
+              "    \"id\": \"CP-MUL-03\",",
+              "    \"key\": \"CP-MUL-03.1\",",
+              "    \"name\": \"CP-MUL-03 / 01 - Guardar perfil original\",",
+              "    \"action\": \"snapshot\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/users/me\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": []",
+              "  },",
+              "  \"CP-MUL-03 / 02 - Subir PNG por debajo del límite\": {",
+              "    \"id\": \"CP-MUL-03\",",
+              "    \"key\": \"CP-MUL-03.2\",",
+              "    \"name\": \"CP-MUL-03 / 02 - Subir PNG por debajo del límite\",",
+              "    \"action\": \"upload\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"POST\",",
+              "    \"route\": \"/api/v1/files/image\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-MUL-03.1\"",
+              "    ],",
+              "    \"fixture\": \"small\"",
+              "  },",
+              "  \"CP-MUL-03 / 03 - Subir PNG exactamente de 5 MiB\": {",
+              "    \"id\": \"CP-MUL-03\",",
+              "    \"key\": \"CP-MUL-03.3\",",
+              "    \"name\": \"CP-MUL-03 / 03 - Subir PNG exactamente de 5 MiB\",",
+              "    \"action\": \"upload\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"POST\",",
+              "    \"route\": \"/api/v1/files/image\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-MUL-03.2\"",
+              "    ],",
+              "    \"fixture\": \"exact\"",
+              "  },",
+              "  \"CP-MUL-03 / 04 - Rechazar PNG de 5 MiB más un byte\": {",
+              "    \"id\": \"CP-MUL-03\",",
+              "    \"key\": \"CP-MUL-03.4\",",
+              "    \"name\": \"CP-MUL-03 / 04 - Rechazar PNG de 5 MiB más un byte\",",
+              "    \"action\": \"upload\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"POST\",",
+              "    \"route\": \"/api/v1/files/image\",",
+              "    \"statuses\": [",
+              "      400,",
+              "      413",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-MUL-03.3\"",
+              "    ],",
+              "    \"fixture\": \"over\"",
+              "  },",
+              "  \"CP-MUL-03 / 05 - Comprobar perfil sin asociaciones inesperadas\": {",
+              "    \"id\": \"CP-MUL-03\",",
+              "    \"key\": \"CP-MUL-03.5\",",
+              "    \"name\": \"CP-MUL-03 / 05 - Comprobar perfil sin asociaciones inesperadas\",",
+              "    \"action\": \"unchanged\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/users/me\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-MUL-03.4\"",
+              "    ],",
+              "    \"followRejected\": true",
+              "  },",
+              "  \"CP-MUL-04 / 01 - Guardar perfil original\": {",
+              "    \"id\": \"CP-MUL-04\",",
+              "    \"key\": \"CP-MUL-04.1\",",
+              "    \"name\": \"CP-MUL-04 / 01 - Guardar perfil original\",",
+              "    \"action\": \"snapshot\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/users/me\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": []",
+              "  },",
+              "  \"CP-MUL-04 / 02 - Observar nombre con secuencia de ruta\": {",
+              "    \"id\": \"CP-MUL-04\",",
+              "    \"key\": \"CP-MUL-04.2\",",
+              "    \"name\": \"CP-MUL-04 / 02 - Observar nombre con secuencia de ruta\",",
+              "    \"action\": \"rawUpload\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"POST\",",
+              "    \"route\": \"/api/v1/files/image\",",
+              "    \"statuses\": [",
+              "      200,",
+              "      400,",
+              "      413,",
+              "      415,",
+              "      500",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-MUL-04.1\"",
+              "    ],",
+              "    \"filename\": \"traversal\"",
+              "  },",
+              "  \"CP-MUL-04 / 03 - Observar nombre con separadores y caracteres especiales\": {",
+              "    \"id\": \"CP-MUL-04\",",
+              "    \"key\": \"CP-MUL-04.3\",",
+              "    \"name\": \"CP-MUL-04 / 03 - Observar nombre con separadores y caracteres especiales\",",
+              "    \"action\": \"rawUpload\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"POST\",",
+              "    \"route\": \"/api/v1/files/image\",",
+              "    \"statuses\": [",
+              "      200,",
+              "      400,",
+              "      413,",
+              "      415,",
+              "      500",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-MUL-04.2\"",
+              "    ],",
+              "    \"filename\": \"special\"",
+              "  },",
+              "  \"CP-MUL-04 / 04 - Comprobar perfil sin cambios\": {",
+              "    \"id\": \"CP-MUL-04\",",
+              "    \"key\": \"CP-MUL-04.4\",",
+              "    \"name\": \"CP-MUL-04 / 04 - Comprobar perfil sin cambios\",",
+              "    \"action\": \"unchanged\",",
+              "    \"role\": \"buyer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/users/me\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-MUL-04.3\"",
+              "    ],",
+              "    \"followRejected\": true",
+              "  },",
+              "  \"CP-CAT-01 / 01 - Comprobar identidad del productor de prueba\": {",
+              "    \"id\": \"CP-CAT-01\",",
+              "    \"key\": \"CP-CAT-01.1\",",
+              "    \"name\": \"CP-CAT-01 / 01 - Comprobar identidad del productor de prueba\",",
+              "    \"action\": \"snapshot\",",
+              "    \"role\": \"producer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/users/me\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": []",
+              "  },",
+              "  \"CP-CAT-01 / 02 - Registrar producto ficticio y capturar ID real\": {",
+              "    \"id\": \"CP-CAT-01\",",
+              "    \"key\": \"CP-CAT-01.2\",",
+              "    \"name\": \"CP-CAT-01 / 02 - Registrar producto ficticio y capturar ID real\",",
+              "    \"action\": \"create\",",
+              "    \"role\": \"producer\",",
+              "    \"method\": \"POST\",",
+              "    \"route\": \"/api/v1/products\",",
+              "    \"statuses\": [",
+              "      201",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-CAT-01.1\"",
+              "    ],",
+              "    \"target\": \"created\"",
+              "  },",
+              "  \"CP-CAT-01 / 03 - Buscar producto creado en páginas del productor\": {",
+              "    \"id\": \"CP-CAT-01\",",
+              "    \"key\": \"CP-CAT-01.3\",",
+              "    \"name\": \"CP-CAT-01 / 03 - Buscar producto creado en páginas del productor\",",
+              "    \"action\": \"scan\",",
+              "    \"role\": \"producer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/products/producers/{{pcProducerId}}?pageIndex={{pcPageIndex}}&pageSize=100\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-CAT-01.2\"",
+              "    ],",
+              "    \"target\": \"created\",",
+              "    \"mode\": \"present\"",
+              "  },",
+              "  \"CP-CAT-03 / 01 - Comprobar productor autenticado\": {",
+              "    \"id\": \"CP-CAT-03\",",
+              "    \"key\": \"CP-CAT-03.1\",",
+              "    \"name\": \"CP-CAT-03 / 01 - Comprobar productor autenticado\",",
+              "    \"action\": \"snapshot\",",
+              "    \"role\": \"producer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/users/me\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": []",
+              "  },",
+              "  \"CP-CAT-03 / 02 - Comprobar producto propio creado y activo\": {",
+              "    \"id\": \"CP-CAT-03\",",
+              "    \"key\": \"CP-CAT-03.2\",",
+              "    \"name\": \"CP-CAT-03 / 02 - Comprobar producto propio creado y activo\",",
+              "    \"action\": \"scan\",",
+              "    \"role\": \"producer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/products/producers/{{pcProducerId}}?pageIndex={{pcPageIndex}}&pageSize=100\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-CAT-03.1\",",
+              "      \"CP-CAT-01.3\"",
+              "    ],",
+              "    \"target\": \"created\",",
+              "    \"mode\": \"present\"",
+              "  },",
+              "  \"CP-CAT-03 / 03 - Desactivar con confirmación adicional de un uso\": {",
+              "    \"id\": \"CP-CAT-03\",",
+              "    \"key\": \"CP-CAT-03.3\",",
+              "    \"name\": \"CP-CAT-03 / 03 - Desactivar con confirmación adicional de un uso\",",
+              "    \"action\": \"deactivate\",",
+              "    \"role\": \"producer\",",
+              "    \"method\": \"PATCH\",",
+              "    \"route\": \"/api/v1/products/{{pcProductId}}/deactive\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-CAT-03.2\"",
+              "    ],",
+              "    \"target\": \"created\"",
+              "  },",
+              "  \"CP-CAT-03 / 04 - Explorar todas las páginas y comprobar ausencia entre activos\": {",
+              "    \"id\": \"CP-CAT-03\",",
+              "    \"key\": \"CP-CAT-03.4\",",
+              "    \"name\": \"CP-CAT-03 / 04 - Explorar todas las páginas y comprobar ausencia entre activos\",",
+              "    \"action\": \"scan\",",
+              "    \"role\": \"producer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/products/producers/{{pcProducerId}}?pageIndex={{pcPageIndex}}&pageSize=100\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-CAT-03.3\"",
+              "    ],",
+              "    \"target\": \"created\",",
+              "    \"mode\": \"absent\"",
+              "  },",
+              "  \"CP-CAT-04 / 01 - Comprobar productor antes de preparar producto dedicado\": {",
+              "    \"id\": \"CP-CAT-04\",",
+              "    \"key\": \"CP-CAT-04.1\",",
+              "    \"name\": \"CP-CAT-04 / 01 - Comprobar productor antes de preparar producto dedicado\",",
+              "    \"action\": \"snapshot\",",
+              "    \"role\": \"producer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/users/me\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": [],",
+              "    \"stage\": \"prepare-product\"",
+              "  },",
+              "  \"CP-CAT-04 / 02 - Crear producto exclusivo para lote autorizado\": {",
+              "    \"id\": \"CP-CAT-04\",",
+              "    \"key\": \"CP-CAT-04.2\",",
+              "    \"name\": \"CP-CAT-04 / 02 - Crear producto exclusivo para lote autorizado\",",
+              "    \"action\": \"create\",",
+              "    \"role\": \"producer\",",
+              "    \"method\": \"POST\",",
+              "    \"route\": \"/api/v1/products\",",
+              "    \"statuses\": [",
+              "      201",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-CAT-04.1\"",
+              "    ],",
+              "    \"target\": \"batch\",",
+              "    \"stage\": \"prepare-product\"",
+              "  },",
+              "  \"CP-CAT-04 / 03 - Acreditar producto dedicado activo por API\": {",
+              "    \"id\": \"CP-CAT-04\",",
+              "    \"key\": \"CP-CAT-04.3\",",
+              "    \"name\": \"CP-CAT-04 / 03 - Acreditar producto dedicado activo por API\",",
+              "    \"action\": \"scan\",",
+              "    \"role\": \"producer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/products/producers/{{pcProducerId}}?pageIndex={{pcPageIndex}}&pageSize=100\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-CAT-04.2\"",
+              "    ],",
+              "    \"target\": \"batch\",",
+              "    \"mode\": \"present\",",
+              "    \"stage\": \"prepare-product\"",
+              "  },",
+              "  \"CP-CAT-04 / 04 - Consultar producto después de preparación manual autorizada\": {",
+              "    \"id\": \"CP-CAT-04\",",
+              "    \"key\": \"CP-CAT-04.4\",",
+              "    \"name\": \"CP-CAT-04 / 04 - Consultar producto después de preparación manual autorizada\",",
+              "    \"action\": \"scan\",",
+              "    \"role\": \"producer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/products/producers/{{pcProducerId}}?pageIndex={{pcPageIndex}}&pageSize=100\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-CAT-04.3\"",
+              "    ],",
+              "    \"target\": \"batch\",",
+              "    \"mode\": \"present\",",
+              "    \"stage\": \"probe\"",
+              "  },",
+              "  \"CP-CAT-04 / 05 - Exigir 409 al intentar baja con lote\": {",
+              "    \"id\": \"CP-CAT-04\",",
+              "    \"key\": \"CP-CAT-04.5\",",
+              "    \"name\": \"CP-CAT-04 / 05 - Exigir 409 al intentar baja con lote\",",
+              "    \"action\": \"deactivate\",",
+              "    \"role\": \"producer\",",
+              "    \"method\": \"PATCH\",",
+              "    \"route\": \"/api/v1/products/{{pcProductId}}/deactive\",",
+              "    \"statuses\": [",
+              "      409",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-CAT-04.4\"",
+              "    ],",
+              "    \"target\": \"batch\",",
+              "    \"stage\": \"probe\"",
+              "  },",
+              "  \"CP-CAT-04 / 06 - Comprobar que el producto sigue activo\": {",
+              "    \"id\": \"CP-CAT-04\",",
+              "    \"key\": \"CP-CAT-04.6\",",
+              "    \"name\": \"CP-CAT-04 / 06 - Comprobar que el producto sigue activo\",",
+              "    \"action\": \"scan\",",
+              "    \"role\": \"producer\",",
+              "    \"method\": \"GET\",",
+              "    \"route\": \"/api/v1/products/producers/{{pcProducerId}}?pageIndex={{pcPageIndex}}&pageSize=100\",",
+              "    \"statuses\": [",
+              "      200",
+              "    ],",
+              "    \"requires\": [",
+              "      \"CP-CAT-04.5\"",
+              "    ],",
+              "    \"target\": \"batch\",",
+              "    \"mode\": \"present\",",
+              "    \"stage\": \"probe\",",
+              "    \"followRejected\": true",
+              "  }",
+              "};",
+              "// Shared guard for CP-PER, CP-MUL and CP-CAT. No hidden HTTP or SQL calls.",
+              "const pe=pm.environment, pg=k=>String(pe.get(k)||'');",
+              "const ps=(k,v)=>{pe.set(k,String(v));pm.variables.set(k,String(v));};",
+              "const m=pcManifest[pm.info.requestName];",
+              "let st;try{st=JSON.parse(pg('_pcState')||'null');}catch(_){st=null;}",
+              "const run=pg('runId');",
+              "const ids=['CP-PER-01','CP-PER-02','CP-MUL-01','CP-MUL-02','CP-MUL-03','CP-MUL-04','CP-CAT-01','CP-CAT-02','CP-CAT-03','CP-CAT-04','CP-CAT-05'];",
+              "function initial(id){return ['CP-CAT-02','CP-CAT-05'].includes(id)?'NO IMPLEMENTADO':['CP-PER-02','CP-MUL-04','CP-CAT-04'].includes(id)?'BLOQUEADO':'NO EJECUTADO';}",
+              "if(!st || st.runId!==run){st={runId:run,origin:'',cases:{},steps:{},owners:{},snapshots:{},expected:{},uploads:{},products:{},scans:{}};ids.forEach(id=>st.cases[id]={status:initial(id),reason:initial(id)==='BLOQUEADO'?'Alcance o precondición pendiente; ver informe':''});}",
+              "function save(){ps('_pcState',JSON.stringify(st));ps('pcResults',JSON.stringify({runId:run,cases:st.cases}));ps('pcEvidence',JSON.stringify(Object.values(st.steps).filter(x=>x.responses).map(x=>({caseId:x.caseId,step:x.key,method:x.method,path:x.path,responses:x.responses,status:x.status,reason:x.reason||''}))));}",
+              "function skip(reason,blocked=true){if(blocked&&m&&st.cases[m.id].status!=='FALLIDO')st.cases[m.id]={status:'BLOQUEADO',reason};save();pm.test.skip((m?m.id:'CP')+' — '+(blocked?'BLOQUEADO: ':'OMITIDO: ')+reason,function(){});pm.execution.skipRequest();throw new Error('PC request skipped');}",
+              "const need=k=>{if(!pg(k).trim())skip('Configurar '+k);return pg(k);};",
+              "if(!m)skip('Solicitud desconocida');",
+              "if(pg('pcSelectedCase')!==m.id)skip('Seleccionar explícitamente un solo caso en pcSelectedCase',false);",
+              "if(!/^[a-f0-9]{32}$/.test(run))skip('Conservar el runId de las cuentas ficticias autenticadas');",
+              "const base=need('baseUrl');",
+              "if(!/^https?:\\/\\/(?:[A-Za-z0-9][A-Za-z0-9.-]*|\\[[a-fA-F0-9:]+\\])(?::[0-9]{1,5})?$/.test(base)||pg('authorizedDevelopmentUrl')!==base||pg('developmentEnvironmentConfirmed')!=='true')skip('Confirmar el origen exacto autorizado de desarrollo');",
+              "if(pg('allowMutatingTests')!=='true')skip('Se requiere allowMutatingTests=true autorizado');",
+              "if(st.origin&&st.origin!==base)skip('No cambiar de origen durante la ejecución');st.origin=base;",
+              "if(m.method!==pm.request.method)skip('Método modificado');",
+              "if(m.id==='CP-CAT-04'){",
+              "  if(!['prepare-product','probe'].includes(pg('pcBatchStage')))skip('No existe preparación de lotes autorizada; pcBatchStage está deshabilitado');",
+              "  if(pg('pcBatchPreparationApprovedRunId')!==run||!pg('pcBatchPreparationMechanism').trim())skip('El equipo debe aprobar un mecanismo de desarrollo para preparar el lote; no ejecutar SQL');",
+              "  if(m.stage!==pg('pcBatchStage'))skip('Paso de otra etapa del lote',false);",
+              "  if(m.stage==='probe'&&(pg('pcBatchLinkedConfirmedRunId')!==run||!pg('pcBatchEvidenceRef').trim()||!['Draft','Active','Confirmed'].includes(pg('pcBatchState'))))skip('Falta evidencia autorizada de asociación a lote de prueba');",
+              "}",
+              "const prior=st.steps[m.key];",
+              "if(prior&&prior.done)skip('Paso ya respondido; conservar evidencia y no repetir escrituras',false);",
+              "if(prior&&!prior.done&&m.method!=='GET')skip('Escritura previa sin respuesta concluyente; no reintentar automáticamente');",
+              "for(const dep of m.requires){const r=st.steps[dep];if(!r||!r.done||(!r.flowReady&&!(m.followRejected&&r.observed)))skip('Falta precondición API: '+dep);}",
+              "if(pg('testInboxConfirmed')!=='true'||pg('emailRoutingConfirmed')!=='true')skip('Conservar la procedencia de las cuentas y buzón autorizado');",
+              "if(pg('buyerRoleId')!=='1'||pg('producerRoleId')!=='2')skip('Conservar los roles reales Comprador 1 y Productor 2');",
+              "const role=m.role;",
+              "let auth;try{auth=JSON.parse(pg('_authState')||'null');}catch(_){auth=null;}",
+              "const template=need(role+'EmailTemplate');if(!template.includes('{{runId}}'))skip('Plantilla sin runId');",
+              "const email=template.split('{{runId}}').join(run).toLowerCase();",
+              "const expectedId=need(role+'UserId');if(!/^[1-9][0-9]*$/.test(expectedId))skip('ID real requerido');",
+              "let token='';",
+              "if(auth&&auth.runId===run&&auth.origin===base&&auth.ids[role]===expectedId&&auth.claims[role]&&String(auth.claims[role].sub)===expectedId)token=pg(role==='buyer'?'authBuyerJwt':'authProducerJwt');",
+              "if(!token&&pg('_jwtRunId')===run&&pg('_jwtAccount')===role&&pg('_jwtUserId')===expectedId&&pg('_profileRunId')===run&&pg('_profileAccount')===role&&pg('_profileUserId')===expectedId)token=pg('jwt');",
+              "let claims;try{if(token.split('.').length!==3)throw new Error();claims=JSON.parse(require('buffer').Buffer.from(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/'),'base64').toString('utf8'));}catch(_){claims=null;}",
+              "if(!claims||String(claims.sub)!==expectedId||Number(claims.roleId)!==(role==='producer'?2:1)||!Number.isFinite(claims.exp)||claims.exp*1000<=Date.now())skip('Falta JWT vigente con procedencia e identidad de esta cuenta de prueba');",
+              "if(pg('buyerUserId')&&pg('producerUserId')&&pg('buyerUserId')===pg('producerUserId'))skip('Las cuentas de control deben ser distintas');",
+              "const binding=require('crypto-js').SHA256(JSON.stringify([run,base,pg('buyerEmailTemplate'),pg('producerEmailTemplate'),pg('buyerUserId'),pg('producerUserId')])).toString();",
+              "if(st.binding&&st.binding!==binding)skip('No cambiar cuentas, enrutamiento o destino de almacenamiento al reanudar');st.binding=binding;",
+              "pm.variables.set('baseUrl',base);pm.variables.set('pcRequestJwt',token);pm.variables.set('pcIdentity',JSON.stringify({id:Number(expectedId),email,role}));",
+              "const snapshotKey=m.id+'_'+(m.slot||'actor');",
+              "const snap=st.snapshots[snapshotKey];",
+              "if(m.method!=='GET'&&(!snap||snap.id!==Number(expectedId)||snap.email!==email))skip('Consultar y acreditar el perfil ficticio antes de cualquier escritura');",
+              "let body;",
+              "const fields=['firstName','paternalLastName','maternalLastName','birthDate','phoneNumber','locality','biography'];",
+              "if(['update','invalidRequired','invalidLength'].includes(m.action)){",
+              "  body=Object.fromEntries(fields.map(k=>[k,snap[k]]));",
+              "  if(m.action==='update')Object.assign(body,{firstName:'TEST_'+run+'_PER',paternalLastName:'TEST_Apellido',maternalLastName:'TEST_Materno',phoneNumber:'5551234567',locality:'TEST_'+run,biography:'TEST_'+run+' perfil actualizado'});",
+              "  else if(m.action==='invalidRequired')Object.assign(body,{firstName:'',locality:'TEST_'+run+'_NO_GUARDAR'});",
+              "  else Object.assign(body,{firstName:'TEST_'+run+'_NO_GUARDAR',phoneNumber:'X'.repeat(21)});",
+              "  if(m.action==='update')st.expected[m.id]=body;",
+              "}",
+              "if(['upload','rawUpload'].includes(m.action)){",
+              "  if(pg('pcAllowExternalUploads')!=='true'||pg('pcExternalUploadConfirmedRunId')!==run)skip('Las cargas externas requieren consentimiento separado por ejecución');",
+              "  const origin=need('pcStorageOrigin'),prefix=need('pcStoragePathPrefix');",
+              "  if(!/^https:\\/\\/[A-Za-z0-9.-]+$/.test(origin)||!prefix.startsWith('/')||!prefix.endsWith('/')||prefix.includes('..')||prefix.includes('\\\\')||prefix.includes('?'))skip('Configurar origen HTTPS y prefijo públicos del almacenamiento de pruebas autorizado');",
+              "  const storageBinding=require('crypto-js').SHA256(JSON.stringify([origin,prefix])).toString();if(st.storageBinding&&st.storageBinding!==storageBinding)skip('No cambiar almacenamiento entre cargas de una ejecución');st.storageBinding=storageBinding;",
+              "}",
+              "if(m.action==='upload'){",
+              "  if(pg('pcFixturesConfirmedRunId')!==run)skip('Generar, verificar y confirmar fixtures locales para este runId');",
+              "  let manifest;try{manifest=JSON.parse(pg('pcFixtureManifest'));}catch(_){skip('Copiar el manifiesto generado y verificado');}",
+              "  const f=manifest.files&&manifest.files[m.fixture];",
+              "  const sizes={exact:5242880,over:5242881};",
+              "  if(manifest.runId!==run||!f||!/^[a-f0-9]{64}$/.test(f.sha256)||!f.name.startsWith('TEST_'+run+'_'))skip('Fixture sin procedencia o hash esperado');",
+              "  if(sizes[m.fixture]&&f.size!==sizes[m.fixture])skip('El tamaño del fixture no corresponde al límite');",
+              "  if(m.fixture==='small'&&(!Number.isInteger(f.size)||f.size<=0||f.size>=5242880))skip('El fixture positivo debe ser no vacío y estar dentro del límite');",
+              "  if(m.fixture==='txt'&&!f.name.endsWith('.txt'))skip('Seleccionar texto inofensivo .txt');",
+              "  const field=pm.request.body.formdata.all().find(p=>p.key==='file'&&p.type==='file');const src=field&&field.src;",
+              "  if(typeof src!=='string'||src.split(/[\\\\/]/).at(-1)!==f.name)skip('Seleccionar en Body el archivo local exacto del manifiesto');",
+              "}",
+              "if(m.action==='rawUpload'){",
+              "  const boundary='TEQUIO_'+run;",
+              "  const filename=m.filename==='traversal'?'../../TEST_'+run+'.txt':'..\\\\..\\\\TEST_'+run+'_<>&.txt';",
+              "  pm.variables.set('pcBoundary',boundary);",
+              "  pm.variables.set('pcMultipartBody','--'+boundary+'\\r\\nContent-Disposition: form-data; name=\"file\"; filename=\"'+filename.replace(/\\\\/g,'\\\\\\\\')+'\"\\r\\nContent-Type: text/plain\\r\\n\\r\\nTEST_'+run+' harmless text only.\\r\\n--'+boundary+'--\\r\\n');",
+              "}",
+              "if(m.action==='associate'){",
+              "  const u=st.uploads[m.id];if(!u||u.runId!==run||u.ownerId!==Number(expectedId))skip('Falta URL real subida por esta cuenta durante el caso');body={pictureUrl:u.url};",
+              "}",
+              "if(m.action==='create'){",
+              "  const category=need('categoryId');if(!/^[1-9][0-9]*$/.test(category))skip('Categoría existente válida requerida');",
+              "  if(st.products[m.target])skip('El producto dedicado ya fue creado; no duplicarlo');",
+              "  body={name:'TEST_'+run+'_'+m.target,categoryId:Number(category),shortDescription:'TEST_'+run+' producto ficticio',measurementUnit:'kg',imageUrl:null};st.expected[m.key]=body;",
+              "}",
+              "if(['scan','deactivate'].includes(m.action)){",
+              "  const product=st.products[m.target];if(!product||product.runId!==run||product.ownerId!==Number(expectedId))skip('Solo se admite un ID real creado por esta cuenta en esta ejecución');",
+              "  pm.variables.set('pcProducerId',expectedId);pm.variables.set('pcProductId',String(product.id));",
+              "  if(m.action==='scan'){",
+              "    const max=Number(pg('pcMaxPages'));if(!Number.isInteger(max)||max<1||max>1000)skip('pcMaxPages debe estar entre 1 y 1000');",
+              "    const scan=st.scans[m.key]||(st.scans[m.key]={next:1,rows:[],total:null});if(scan.next>max)skip('Exploración incompleta: límite de páginas; no aprobar ausencia ni persistencia');pm.variables.set('pcPageIndex',String(scan.next));",
+              "  }else{",
+              "    if(pg('_productRunId')!==run||pg('_productOwnerId')!==expectedId||pg('_createdProductId')!==String(product.id)||pg('productId')!==String(product.id)||pg('_productObservedRunId')!==run)skip('Conservar las verificaciones existentes de creación y observación del producto');",
+              "    if(pg('confirmDeactivationRunId')!==run)skip('Confirmación adicional de desactivación requerida');ps('confirmDeactivationRunId','');",
+              "  }",
+              "}",
+              "const expectedUrl=pm.variables.replaceIn(base+m.route);if(pm.variables.replaceIn(pm.request.url.toString())!==expectedUrl)skip('Ruta HTTP modificada');",
+              "pm.variables.set('pcRequestBody',body?JSON.stringify(body):'');pm.variables.set('pcStepMeta',JSON.stringify(m));pm.variables.set('pcCaseKeys',JSON.stringify(Object.values(pcManifest).filter(s=>s.id===m.id).map(s=>s.key)));",
+              "st.steps[m.key]={...(prior||{}),key:m.key,caseId:m.id,method:m.method,path:pm.variables.replaceIn(m.route),done:false,flowReady:false};save();",
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const pe=pm.environment,m=JSON.parse(pm.variables.get('pcStepMeta')),st=JSON.parse(pe.get('_pcState')),who=JSON.parse(pm.variables.get('pcIdentity'));",
+              "const run=st.runId,code=pm.response.code,rec=st.steps[m.key],checks=[];",
+              "let data;try{data=pm.response.json();}catch(_){data=null;}",
+              "const obj=data&&typeof data==='object'&&!Array.isArray(data);",
+              "function check(name,value){const passed=Boolean(value);checks.push({name,passed});pm.test(m.id+' / '+m.key+' — '+name,function(){pm.expect(passed,'Contract failed; values omitted.').to.equal(true);});return passed;}",
+              "function save(){pe.set('_pcState',JSON.stringify(st));pe.set('pcResults',JSON.stringify({runId:run,cases:st.cases}));pe.set('pcEvidence',JSON.stringify(Object.values(st.steps).filter(x=>x.responses).map(x=>({caseId:x.caseId,step:x.key,method:x.method,path:x.path,responses:x.responses,status:x.status,reason:x.reason||''}))));}",
+              "const secretKeys=/^(password|passwordHash|newPassword|token|jwt|accessToken|refreshToken|otp|verificationCode|code|apiKey|apiSecret|secret)$/i;",
+              "const secrets=['buyerPassword','producerPassword','newPassword','jwt','expiredJwt','verificationOtp','recoveryOtp','authBuyerJwt','authProducerJwt','authAttemptsJwt','authRecoveryJwt','authExpiredCandidateJwt'].map(k=>String(pe.get(k)||'')).filter(Boolean);",
+              "function leaks(v){if(Array.isArray(v))return v.some(leaks);if(v&&typeof v==='object')return Object.entries(v).some(([k,x])=>secretKeys.test(k)||leaks(x));return typeof v==='string'&&secrets.some(secret=>v===secret||(secret.length>=8&&v.includes(secret)));}",
+              "const empty413=m.action==='upload'&&m.fixture==='over'&&code===413&&!obj&&pm.response.text().trim()==='';",
+              "const safe=check('Response follows the JSON contract or an empty 413 and exposes no secrets',(obj&&/application\\/(?:[a-z.+-]*\\+)?json/i.test(pm.response.headers.get('Content-Type')||'')&&!leaks(data))||empty413);",
+              "if(m.action!=='rawUpload')check('HTTP status matches the expected contract',m.statuses.includes(code));",
+              "function urlOK(url){if(typeof url!=='string')return false;const match=url.match(/^(https:\\/\\/[^/?#]+)(\\/[^?#]*)$/);if(!match||match[1]!==pe.get('pcStorageOrigin'))return false;let p;try{p=decodeURIComponent(match[2]);}catch(_){return false;}return p.startsWith(pe.get('pcStoragePathPrefix'))&&p.includes('/tequio-profiles/')&&!p.includes('\\\\')&&!p.includes('\\0')&&!p.split('/').some(part=>part==='..'||part==='.');}",
+              "const keys=['id','email','firstName','paternalLastName','maternalLastName','birthDate','phoneNumber','locality','biography','profilePictureUrl','isVerified','registrationDate'];",
+              "const canonical=d=>Object.fromEntries(keys.map(k=>[k,k==='birthDate'&&typeof d[k]==='string'?d[k].slice(0,10):d[k]]));",
+              "const equal=(a,b)=>JSON.stringify(a)===JSON.stringify(b);",
+              "const slot=m.id+'_'+(m.slot||'actor');let semantic=false,continueRead=false,incomplete=false;",
+              "if(['snapshot','profileAfter','unchanged','pictureAfter'].includes(m.action)){",
+              "  const valid=check('Profile contract matches the authenticated fictitious user',code===200&&obj&&keys.every(k=>Object.hasOwn(data,k))&&data.id===who.id&&data.email===who.email&&typeof data.firstName==='string'&&data.firstName.startsWith('TEST_'+run)&&typeof data.isVerified==='boolean');",
+              "  if(valid&&safe){const current=canonical(data);semantic=true;st.owners[who.role]={id:who.id,email:who.email};",
+              "    if(m.action==='snapshot')st.snapshots[slot]=current;",
+              "    else{",
+              "      let expected=st.snapshots[slot];",
+              "      if(m.action==='profileAfter')expected={...expected,...st.expected[m.id],birthDate:String(st.expected[m.id].birthDate).slice(0,10)};",
+              "      if(m.action==='pictureAfter')expected={...expected,profilePictureUrl:st.uploads[m.id].url};",
+              "      semantic=check('All profile fields match the expected state without partial or foreign changes',equal(current,expected));",
+              "    }",
+              "  }",
+              "}",
+              "if(['update','associate'].includes(m.action))semantic=check('Mutation returns HTTP 200 with a confirmation message',code===200&&obj&&typeof data.mensaje==='string');",
+              "if(['invalidRequired','invalidLength'].includes(m.action)){",
+              "  const field=m.action==='invalidRequired'?'firstname':'phonenumber';",
+              "  const errors=obj&&data.errors;",
+              "  semantic=check('HTTP 400 exposes a validation message for the actual DTO constraint',code===400&&errors&&Object.keys(errors).some(k=>k.toLowerCase().split('.').at(-1)===field&&Array.isArray(errors[k])&&errors[k].some(v=>typeof v==='string'&&v.length>0)));",
+              "  continueRead=Boolean(obj);",
+              "}",
+              "if(m.action==='upload'){",
+              "  if(m.fixture==='txt'||m.fixture==='over'){",
+              "    semantic=check('Rejected upload has no success URL and returns validation error or 413',empty413||(obj&&!Object.hasOwn(data,'url')&&typeof data.error==='string'&&(m.fixture==='txt'?code===400:[400,413].includes(code))));",
+              "    if(m.fixture==='over'&&code===400)semantic=check('Size rejection identifies the implemented 5 MiB limit',data.error==='La imagen supera el límite máximo permitido de 5MB.')&&semantic;",
+              "    continueRead=Boolean(obj||empty413);",
+              "  }else{",
+              "    semantic=check('Successful upload returns an authorized public URL',code===200&&obj&&typeof data.mensaje==='string'&&urlOK(data.url));",
+              "    if(semantic&&safe){st.uploads[m.id]={runId:run,ownerId:who.id,url:data.url};if(m.id==='CP-MUL-01'){pe.set('uploadedImageUrl',data.url);pe.set('_uploadRunId',run);pe.set('_uploadAccount',who.role);pe.set('_uploadUserId',String(who.id));}}",
+              "  }",
+              "}",
+              "if(m.action==='rawUpload'){",
+              "  semantic=check('Filename probe records an image API contract; a 200 alone proves no confinement',obj&&((code===200&&urlOK(data.url)&&typeof data.mensaje==='string')||([400,413,415,500].includes(code)&&typeof data.error==='string'&&!Object.hasOwn(data,'url'))));",
+              "  continueRead=Boolean(obj);",
+              "}",
+              "if(m.action==='create'){",
+              "  semantic=check('Creation returns HTTP 201 and a real positive product ID',code===201&&obj&&Number.isSafeInteger(data.productId)&&data.productId>0&&typeof data.mensaje==='string');",
+              "  if(semantic&&safe){const other=st.products[m.target==='created'?'batch':'created'];semantic=check('Dedicated products never reuse another captured product ID',!other||other.id!==data.productId)&&semantic;",
+              "    if(semantic)st.products[m.target]={id:data.productId,runId:run,ownerId:who.id,fields:st.expected[m.key]};",
+              "  }",
+              "}",
+              "if(m.action==='deactivate'){",
+              "  if(m.id==='CP-CAT-04'){",
+              "    semantic=check('RN-10 rejects deactivation with HTTP 409 Conflict, never 500',code===409&&obj&&typeof data.error==='string');continueRead=Boolean(obj&&[409,500].includes(code));",
+              "  }else semantic=check('Own product deactivation returns HTTP 200',code===200&&obj&&typeof data.mensaje==='string');",
+              "}",
+              "if(m.action==='scan'){",
+              "  const scan=st.scans[m.key],page=scan.next,target=st.products[m.target];",
+              "  const contract=check('Page has coherent zero-based pagination, item count and active owned products',code===200&&obj&&data.pageIndex===page-1&&data.pageSize===100&&Number.isSafeInteger(data.itemCount)&&data.itemCount>=0&&Array.isArray(data.products)&&data.products.length===Math.min(100,Math.max(0,data.itemCount-(page-1)*100))&&data.products.every(p=>Number.isSafeInteger(p.id)&&p.id>0&&p.producerId===who.id&&p.isActive===true));",
+              "  if(contract&&safe){",
+              "    if(scan.total===null)scan.total=data.itemCount;",
+              "    const stable=check('Catalog count remains stable throughout this full scan',scan.total===data.itemCount);",
+              "    const previousIds=new Set(scan.rows.map(p=>p.id));const unique=check('Pagination does not repeat product IDs',new Set(data.products.map(p=>p.id)).size===data.products.length&&data.products.every(p=>!previousIds.has(p.id)));",
+              "    if(stable&&unique){scan.rows.push(...data.products);",
+              "      if(scan.rows.length<scan.total){scan.next++;incomplete=true;pm.execution.setNextRequest(pm.info.requestName);}",
+              "      else{",
+              "        const found=scan.rows.filter(p=>p.id===target.id);",
+              "        if(m.mode==='absent'){",
+              "          const before=st.scans['CP-CAT-03.2'];",
+              "          semantic=check('Deactivated product is absent across every active page and all other products are unchanged',found.length===0&&before&&equal(scan.rows,before.rows.filter(p=>p.id!==target.id)));",
+              "        }else{",
+              "          const p=found[0],f=target.fields;",
+              "          semantic=check('Captured product persists with exact owner, name, category and payload fields',found.length===1&&p.producerId===target.ownerId&&p.name===f.name&&p.categoryId===f.categoryId&&p.shortDescription===f.shortDescription&&p.measurementUnit===f.measurementUnit&&p.imageUrl===f.imageUrl&&p.isActive===true);",
+              "          if(m.id==='CP-CAT-04'&&m.key==='CP-CAT-04.6')semantic=check('Rejected RN-10 operation leaves every visible active product field unchanged',equal(scan.rows,st.scans['CP-CAT-04.4'].rows))&&semantic;",
+              "          if(semantic){pe.set('productId',String(target.id));pe.set('_createdProductId',String(target.id));pe.set('_productRunId',run);pe.set('_productOwnerId',String(who.id));pe.set('_productObservedRunId',run);}",
+              "        }",
+              "      }",
+              "    }",
+              "  }",
+              "}",
+              "rec.responses=rec.responses||[];rec.responses.push({at:new Date().toISOString(),httpStatus:code,page:m.action==='scan'?Number(pm.variables.get('pcPageIndex')):null,checks});",
+              "const passed=checks.every(c=>c.passed);",
+              "rec.observed=Boolean(safe&&(obj||empty413));rec.done=!incomplete;rec.flowReady=Boolean(passed&&semantic&&safe);",
+              "rec.status=passed?(incomplete?'BLOQUEADO':'APROBADO'):'FALLIDO';",
+              "if(!passed)st.cases[m.id]={status:'FALLIDO',reason:m.id==='CP-CAT-04'&&code===500?'RN-10 respondió 500; esperado 409':'Una o más aserciones HTTP o de postcondición fallaron'};",
+              "if(continueRead&&safe)rec.observed=true;",
+              "const caseKeys=JSON.parse(pm.variables.get('pcCaseKeys'));",
+              "const complete=caseKeys.every(key=>st.steps[key]&&st.steps[key].done&&st.steps[key].flowReady);",
+              "if(complete&&st.cases[m.id].status!=='FALLIDO'){",
+              "  const partial={'CP-PER-02':'Se comprobaron restricciones DTO; el formato de email/teléfono requerido no está implementado','CP-MUL-04':'URL y perfil observados; no existe evidencia API del confinamiento físico en el proveedor','CP-CAT-04':'HTTP y producto observados; no existe consulta API para demostrar asociación al lote sin cambios'};",
+              "  st.cases[m.id]={status:partial[m.id]?'BLOQUEADO':'APROBADO',reason:partial[m.id]||'Todos los pasos y postcondiciones se ejecutaron con respuestas reales'};",
+              "}else if(st.cases[m.id].status!=='FALLIDO')st.cases[m.id]={status:'BLOQUEADO',reason:incomplete?'Faltan páginas; no aprobar por una página aislada':'Flujo incompleto o preparación manual pendiente'};",
+              "save();",
+              ""
+            ]
+          }
+        }
+      ],
+      "item": [
+        {
+          "name": "CP-PER-01 — Actualizar perfil",
+          "description": "Comparar GET original, PUT ficticio y GET posterior; email e ID invariantes y segundo perfil controlado sin cambios.\nCU/RF: identificadores no incluidos en el encargo ni localizados en el repositorio; trazabilidad nominal en el informe. Regla: sin número suministrado. Evidencia: pcResults y pcEvidence.",
+          "item": [
+            {
+              "name": "CP-PER-01 / 01 - Consultar perfil autenticado original",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/users/me",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Comparar GET original, PUT ficticio y GET posterior; email e ID invariantes y segundo perfil controlado sin cambios.\nPaso CP-PER-01.1. Precondiciones: cuenta ficticia con procedencia y GET real. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            },
+            {
+              "name": "CP-PER-01 / 02 - Consultar segundo perfil de prueba como control",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/users/me",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Comparar GET original, PUT ficticio y GET posterior; email e ID invariantes y segundo perfil controlado sin cambios.\nPaso CP-PER-01.2. Precondiciones: CP-PER-01.1. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            },
+            {
+              "name": "CP-PER-01 / 03 - Actualizar campos permitidos con datos ficticios",
+              "request": {
+                "method": "PUT",
+                "url": "{{baseUrl}}/api/v1/users/me",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Comparar GET original, PUT ficticio y GET posterior; email e ID invariantes y segundo perfil controlado sin cambios.\nPaso CP-PER-01.3. Precondiciones: CP-PER-01.2. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{{pcRequestBody}}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CP-PER-01 / 04 - Comparar datos persistidos e identidad",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/users/me",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Comparar GET original, PUT ficticio y GET posterior; email e ID invariantes y segundo perfil controlado sin cambios.\nPaso CP-PER-01.4. Precondiciones: CP-PER-01.3. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            },
+            {
+              "name": "CP-PER-01 / 05 - Comprobar que el perfil de control no cambió",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/users/me",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Comparar GET original, PUT ficticio y GET posterior; email e ID invariantes y segundo perfil controlado sin cambios.\nPaso CP-PER-01.5. Precondiciones: CP-PER-01.4. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "CP-PER-02 — Datos de perfil inválidos",
+          "description": "Probar Required y StringLength reales con GET posterior sin cambios. Alcance parcial: Email no existe y PhoneNumber no valida formato. El requisito de formato permanece BLOQUEADO.\nCU/RF: identificadores no incluidos en el encargo ni localizados en el repositorio; trazabilidad nominal en el informe. Regla: sin número suministrado. Evidencia: pcResults y pcEvidence.",
+          "item": [
+            {
+              "name": "CP-PER-02 / 01 - Guardar perfil original",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/users/me",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Probar Required y StringLength reales con GET posterior sin cambios. Alcance parcial: Email no existe y PhoneNumber no valida formato. El requisito de formato permanece BLOQUEADO.\nPaso CP-PER-02.1. Precondiciones: cuenta ficticia con procedencia y GET real. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            },
+            {
+              "name": "CP-PER-02 / 02 - Rechazar nombre obligatorio vacío sin cambios parciales",
+              "request": {
+                "method": "PUT",
+                "url": "{{baseUrl}}/api/v1/users/me",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Probar Required y StringLength reales con GET posterior sin cambios. Alcance parcial: Email no existe y PhoneNumber no valida formato. El requisito de formato permanece BLOQUEADO.\nPaso CP-PER-02.2. Precondiciones: CP-PER-02.1. Esperado: 400. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{{pcRequestBody}}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CP-PER-02 / 03 - Comparar perfil completo tras rechazo Required",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/users/me",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Probar Required y StringLength reales con GET posterior sin cambios. Alcance parcial: Email no existe y PhoneNumber no valida formato. El requisito de formato permanece BLOQUEADO.\nPaso CP-PER-02.3. Precondiciones: CP-PER-02.2. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            },
+            {
+              "name": "CP-PER-02 / 04 - Rechazar teléfono de 21 caracteres",
+              "request": {
+                "method": "PUT",
+                "url": "{{baseUrl}}/api/v1/users/me",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Probar Required y StringLength reales con GET posterior sin cambios. Alcance parcial: Email no existe y PhoneNumber no valida formato. El requisito de formato permanece BLOQUEADO.\nPaso CP-PER-02.4. Precondiciones: CP-PER-02.3. Esperado: 400. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{{pcRequestBody}}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CP-PER-02 / 05 - Comparar perfil completo tras rechazo StringLength",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/users/me",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Probar Required y StringLength reales con GET posterior sin cambios. Alcance parcial: Email no existe y PhoneNumber no valida formato. El requisito de formato permanece BLOQUEADO.\nPaso CP-PER-02.5. Precondiciones: CP-PER-02.4. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "CP-MUL-01 — Cargar imagen válida",
+          "description": "Imagen PNG ficticia dentro de 5 MiB, URL de almacenamiento autorizado, asociación al perfil y GET posterior. Requiere consentimiento explícito de recursos externos.\nCU/RF: identificadores no incluidos en el encargo ni localizados en el repositorio; trazabilidad nominal en el informe. Regla: RN-12. Evidencia: pcResults y pcEvidence.",
+          "item": [
+            {
+              "name": "CP-MUL-01 / 01 - Guardar perfil original",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/users/me",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Imagen PNG ficticia dentro de 5 MiB, URL de almacenamiento autorizado, asociación al perfil y GET posterior. Requiere consentimiento explícito de recursos externos.\nPaso CP-MUL-01.1. Precondiciones: cuenta ficticia con procedencia y GET real. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            },
+            {
+              "name": "CP-MUL-01 / 02 - Subir PNG ficticio dentro del límite",
+              "request": {
+                "method": "POST",
+                "url": "{{baseUrl}}/api/v1/files/image",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Imagen PNG ficticia dentro de 5 MiB, URL de almacenamiento autorizado, asociación al perfil y GET posterior. Requiere consentimiento explícito de recursos externos.\nPaso CP-MUL-01.2. Precondiciones: CP-MUL-01.1. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado.",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "file",
+                      "type": "file",
+                      "src": null,
+                      "description": "Seleccionar fixture generado del tipo small y runId actual; no se versionan binarios."
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CP-MUL-01 / 03 - Asociar la URL real al perfil",
+              "request": {
+                "method": "PUT",
+                "url": "{{baseUrl}}/api/v1/users/me/profile-picture",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Imagen PNG ficticia dentro de 5 MiB, URL de almacenamiento autorizado, asociación al perfil y GET posterior. Requiere consentimiento explícito de recursos externos.\nPaso CP-MUL-01.3. Precondiciones: CP-MUL-01.2. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{{pcRequestBody}}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CP-MUL-01 / 04 - Comprobar fotografía e identidad por GET",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/users/me",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Imagen PNG ficticia dentro de 5 MiB, URL de almacenamiento autorizado, asociación al perfil y GET posterior. Requiere consentimiento explícito de recursos externos.\nPaso CP-MUL-01.4. Precondiciones: CP-MUL-01.3. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "CP-MUL-02 — Formato no permitido",
+          "description": "Archivo .txt inofensivo: exigir HTTP 400 sin URL; 200 o 500 no cumplen el plan. GET posterior comprueba el perfil sin cambios, no inventario del proveedor.\nCU/RF: identificadores no incluidos en el encargo ni localizados en el repositorio; trazabilidad nominal en el informe. Regla: RN-12. Evidencia: pcResults y pcEvidence.",
+          "item": [
+            {
+              "name": "CP-MUL-02 / 01 - Guardar perfil original",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/users/me",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Archivo .txt inofensivo: exigir HTTP 400 sin URL; 200 o 500 no cumplen el plan. GET posterior comprueba el perfil sin cambios, no inventario del proveedor.\nPaso CP-MUL-02.1. Precondiciones: cuenta ficticia con procedencia y GET real. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            },
+            {
+              "name": "CP-MUL-02 / 02 - Exigir rechazo de texto inofensivo .txt",
+              "request": {
+                "method": "POST",
+                "url": "{{baseUrl}}/api/v1/files/image",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Archivo .txt inofensivo: exigir HTTP 400 sin URL; 200 o 500 no cumplen el plan. GET posterior comprueba el perfil sin cambios, no inventario del proveedor.\nPaso CP-MUL-02.2. Precondiciones: CP-MUL-02.1. Esperado: 400. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado.",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "file",
+                      "type": "file",
+                      "src": null,
+                      "description": "Seleccionar fixture generado del tipo txt y runId actual; no se versionan binarios."
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CP-MUL-02 / 03 - Comprobar que el perfil no cambió",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/users/me",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Archivo .txt inofensivo: exigir HTTP 400 sin URL; 200 o 500 no cumplen el plan. GET posterior comprueba el perfil sin cambios, no inventario del proveedor.\nPaso CP-MUL-02.3. Precondiciones: CP-MUL-02.2. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "CP-MUL-03 — Límites de tamaño",
+          "description": "PNG válidos dentro, exactamente 5242880 bytes y 5242881 bytes; positivos 200, excesivo 400 equivalente o 413. RN-12 distingue MB de MiB.\nCU/RF: identificadores no incluidos en el encargo ni localizados en el repositorio; trazabilidad nominal en el informe. Regla: RN-12. Evidencia: pcResults y pcEvidence.",
+          "item": [
+            {
+              "name": "CP-MUL-03 / 01 - Guardar perfil original",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/users/me",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "PNG válidos dentro, exactamente 5242880 bytes y 5242881 bytes; positivos 200, excesivo 400 equivalente o 413. RN-12 distingue MB de MiB.\nPaso CP-MUL-03.1. Precondiciones: cuenta ficticia con procedencia y GET real. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            },
+            {
+              "name": "CP-MUL-03 / 02 - Subir PNG por debajo del límite",
+              "request": {
+                "method": "POST",
+                "url": "{{baseUrl}}/api/v1/files/image",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "PNG válidos dentro, exactamente 5242880 bytes y 5242881 bytes; positivos 200, excesivo 400 equivalente o 413. RN-12 distingue MB de MiB.\nPaso CP-MUL-03.2. Precondiciones: CP-MUL-03.1. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado.",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "file",
+                      "type": "file",
+                      "src": null,
+                      "description": "Seleccionar fixture generado del tipo small y runId actual; no se versionan binarios."
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CP-MUL-03 / 03 - Subir PNG exactamente de 5 MiB",
+              "request": {
+                "method": "POST",
+                "url": "{{baseUrl}}/api/v1/files/image",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "PNG válidos dentro, exactamente 5242880 bytes y 5242881 bytes; positivos 200, excesivo 400 equivalente o 413. RN-12 distingue MB de MiB.\nPaso CP-MUL-03.3. Precondiciones: CP-MUL-03.2. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado.",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "file",
+                      "type": "file",
+                      "src": null,
+                      "description": "Seleccionar fixture generado del tipo exact y runId actual; no se versionan binarios."
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CP-MUL-03 / 04 - Rechazar PNG de 5 MiB más un byte",
+              "request": {
+                "method": "POST",
+                "url": "{{baseUrl}}/api/v1/files/image",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "PNG válidos dentro, exactamente 5242880 bytes y 5242881 bytes; positivos 200, excesivo 400 equivalente o 413. RN-12 distingue MB de MiB.\nPaso CP-MUL-03.4. Precondiciones: CP-MUL-03.3. Esperado: 400/413. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado.",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "file",
+                      "type": "file",
+                      "src": null,
+                      "description": "Seleccionar fixture generado del tipo over y runId actual; no se versionan binarios."
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CP-MUL-03 / 05 - Comprobar perfil sin asociaciones inesperadas",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/users/me",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "PNG válidos dentro, exactamente 5242880 bytes y 5242881 bytes; positivos 200, excesivo 400 equivalente o 413. RN-12 distingue MB de MiB.\nPaso CP-MUL-03.5. Precondiciones: CP-MUL-03.4. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "CP-MUL-04 — Nombre de archivo malicioso",
+          "description": "Multipart explícito con nombres de ruta y contenido de texto inofensivo. Solo se observa contrato/URL/perfil. Sin observabilidad del proveedor no se aprueba confinamiento físico: BLOQUEADO. RN-12.\nCU/RF: identificadores no incluidos en el encargo ni localizados en el repositorio; trazabilidad nominal en el informe. Regla: RN-12. Evidencia: pcResults y pcEvidence.",
+          "item": [
+            {
+              "name": "CP-MUL-04 / 01 - Guardar perfil original",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/users/me",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Multipart explícito con nombres de ruta y contenido de texto inofensivo. Solo se observa contrato/URL/perfil. Sin observabilidad del proveedor no se aprueba confinamiento físico: BLOQUEADO. RN-12.\nPaso CP-MUL-04.1. Precondiciones: cuenta ficticia con procedencia y GET real. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            },
+            {
+              "name": "CP-MUL-04 / 02 - Observar nombre con secuencia de ruta",
+              "request": {
+                "method": "POST",
+                "url": "{{baseUrl}}/api/v1/files/image",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data; boundary={{pcBoundary}}"
+                  }
+                ],
+                "description": "Multipart explícito con nombres de ruta y contenido de texto inofensivo. Solo se observa contrato/URL/perfil. Sin observabilidad del proveedor no se aprueba confinamiento físico: BLOQUEADO. RN-12.\nPaso CP-MUL-04.2. Precondiciones: CP-MUL-04.1. Esperado: 200/400/413/415/500. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{{pcMultipartBody}}"
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CP-MUL-04 / 03 - Observar nombre con separadores y caracteres especiales",
+              "request": {
+                "method": "POST",
+                "url": "{{baseUrl}}/api/v1/files/image",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data; boundary={{pcBoundary}}"
+                  }
+                ],
+                "description": "Multipart explícito con nombres de ruta y contenido de texto inofensivo. Solo se observa contrato/URL/perfil. Sin observabilidad del proveedor no se aprueba confinamiento físico: BLOQUEADO. RN-12.\nPaso CP-MUL-04.3. Precondiciones: CP-MUL-04.2. Esperado: 200/400/413/415/500. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{{pcMultipartBody}}"
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CP-MUL-04 / 04 - Comprobar perfil sin cambios",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/users/me",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Multipart explícito con nombres de ruta y contenido de texto inofensivo. Solo se observa contrato/URL/perfil. Sin observabilidad del proveedor no se aprueba confinamiento físico: BLOQUEADO. RN-12.\nPaso CP-MUL-04.4. Precondiciones: CP-MUL-04.3. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "CP-CAT-01 — Registrar producto",
+          "description": "Productor controlado, categoría existente, 201 con ID real y consulta paginada completa que acredita campos y propietario.\nCU/RF: identificadores no incluidos en el encargo ni localizados en el repositorio; trazabilidad nominal en el informe. Regla: sin número suministrado. Evidencia: pcResults y pcEvidence.",
+          "item": [
+            {
+              "name": "CP-CAT-01 / 01 - Comprobar identidad del productor de prueba",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/users/me",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Productor controlado, categoría existente, 201 con ID real y consulta paginada completa que acredita campos y propietario.\nPaso CP-CAT-01.1. Precondiciones: cuenta ficticia con procedencia y GET real. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            },
+            {
+              "name": "CP-CAT-01 / 02 - Registrar producto ficticio y capturar ID real",
+              "request": {
+                "method": "POST",
+                "url": "{{baseUrl}}/api/v1/products",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Productor controlado, categoría existente, 201 con ID real y consulta paginada completa que acredita campos y propietario.\nPaso CP-CAT-01.2. Precondiciones: CP-CAT-01.1. Esperado: 201. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{{pcRequestBody}}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CP-CAT-01 / 03 - Buscar producto creado en páginas del productor",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/products/producers/{{pcProducerId}}?pageIndex={{pcPageIndex}}&pageSize=100",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Productor controlado, categoría existente, 201 con ID real y consulta paginada completa que acredita campos y propietario.\nPaso CP-CAT-01.3. Precondiciones: CP-CAT-01.2. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "CP-CAT-02 — Editar producto propio",
+          "description": "NO IMPLEMENTADO: no hay endpoint de edición; no se inventa PUT ni se sustituye con registro.\nCU/RF: identificadores no incluidos en el encargo ni localizados en el repositorio; trazabilidad nominal en el informe. Regla: sin número suministrado. Evidencia: pcResults y pcEvidence.",
+          "item": []
+        },
+        {
+          "name": "CP-CAT-03 — Desactivar producto",
+          "description": "Solo producto creado y observado en el mismo runId, confirmación existente de un uso y exploración de todas las páginas activas posterior.\nCU/RF: identificadores no incluidos en el encargo ni localizados en el repositorio; trazabilidad nominal en el informe. Regla: sin número suministrado. Evidencia: pcResults y pcEvidence.",
+          "item": [
+            {
+              "name": "CP-CAT-03 / 01 - Comprobar productor autenticado",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/users/me",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Solo producto creado y observado en el mismo runId, confirmación existente de un uso y exploración de todas las páginas activas posterior.\nPaso CP-CAT-03.1. Precondiciones: cuenta ficticia con procedencia y GET real. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            },
+            {
+              "name": "CP-CAT-03 / 02 - Comprobar producto propio creado y activo",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/products/producers/{{pcProducerId}}?pageIndex={{pcPageIndex}}&pageSize=100",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Solo producto creado y observado en el mismo runId, confirmación existente de un uso y exploración de todas las páginas activas posterior.\nPaso CP-CAT-03.2. Precondiciones: CP-CAT-03.1, CP-CAT-01.3. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            },
+            {
+              "name": "CP-CAT-03 / 03 - Desactivar con confirmación adicional de un uso",
+              "request": {
+                "method": "PATCH",
+                "url": "{{baseUrl}}/api/v1/products/{{pcProductId}}/deactive",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Solo producto creado y observado en el mismo runId, confirmación existente de un uso y exploración de todas las páginas activas posterior.\nPaso CP-CAT-03.3. Precondiciones: CP-CAT-03.2. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            },
+            {
+              "name": "CP-CAT-03 / 04 - Explorar todas las páginas y comprobar ausencia entre activos",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/products/producers/{{pcProducerId}}?pageIndex={{pcPageIndex}}&pageSize=100",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "Solo producto creado y observado en el mismo runId, confirmación existente de un uso y exploración de todas las páginas activas posterior.\nPaso CP-CAT-03.4. Precondiciones: CP-CAT-03.3. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "CP-CAT-04 — Restricción de baja con lotes",
+          "description": "RN-10: preparar producto nuevo solo con mecanismo de lotes aprobado; no ejecutar SQL. PATCH esperado 409, incluso si la cadena actual devuelve 500. GET posterior acredita activo; la asociación al lote carece de consulta API, por lo que no puede aprobarse el caso completo.\nCU/RF: identificadores no incluidos en el encargo ni localizados en el repositorio; trazabilidad nominal en el informe. Regla: RN-10. Evidencia: pcResults y pcEvidence.",
+          "item": [
+            {
+              "name": "CP-CAT-04 / 01 - Comprobar productor antes de preparar producto dedicado",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/users/me",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "RN-10: preparar producto nuevo solo con mecanismo de lotes aprobado; no ejecutar SQL. PATCH esperado 409, incluso si la cadena actual devuelve 500. GET posterior acredita activo; la asociación al lote carece de consulta API, por lo que no puede aprobarse el caso completo.\nPaso CP-CAT-04.1. Precondiciones: cuenta ficticia con procedencia y GET real. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            },
+            {
+              "name": "CP-CAT-04 / 02 - Crear producto exclusivo para lote autorizado",
+              "request": {
+                "method": "POST",
+                "url": "{{baseUrl}}/api/v1/products",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "RN-10: preparar producto nuevo solo con mecanismo de lotes aprobado; no ejecutar SQL. PATCH esperado 409, incluso si la cadena actual devuelve 500. GET posterior acredita activo; la asociación al lote carece de consulta API, por lo que no puede aprobarse el caso completo.\nPaso CP-CAT-04.2. Precondiciones: CP-CAT-04.1. Esperado: 201. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{{pcRequestBody}}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CP-CAT-04 / 03 - Acreditar producto dedicado activo por API",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/products/producers/{{pcProducerId}}?pageIndex={{pcPageIndex}}&pageSize=100",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "RN-10: preparar producto nuevo solo con mecanismo de lotes aprobado; no ejecutar SQL. PATCH esperado 409, incluso si la cadena actual devuelve 500. GET posterior acredita activo; la asociación al lote carece de consulta API, por lo que no puede aprobarse el caso completo.\nPaso CP-CAT-04.3. Precondiciones: CP-CAT-04.2. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            },
+            {
+              "name": "CP-CAT-04 / 04 - Consultar producto después de preparación manual autorizada",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/products/producers/{{pcProducerId}}?pageIndex={{pcPageIndex}}&pageSize=100",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "RN-10: preparar producto nuevo solo con mecanismo de lotes aprobado; no ejecutar SQL. PATCH esperado 409, incluso si la cadena actual devuelve 500. GET posterior acredita activo; la asociación al lote carece de consulta API, por lo que no puede aprobarse el caso completo.\nPaso CP-CAT-04.4. Precondiciones: CP-CAT-04.3. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            },
+            {
+              "name": "CP-CAT-04 / 05 - Exigir 409 al intentar baja con lote",
+              "request": {
+                "method": "PATCH",
+                "url": "{{baseUrl}}/api/v1/products/{{pcProductId}}/deactive",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "RN-10: preparar producto nuevo solo con mecanismo de lotes aprobado; no ejecutar SQL. PATCH esperado 409, incluso si la cadena actual devuelve 500. GET posterior acredita activo; la asociación al lote carece de consulta API, por lo que no puede aprobarse el caso completo.\nPaso CP-CAT-04.5. Precondiciones: CP-CAT-04.4. Esperado: 409. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            },
+            {
+              "name": "CP-CAT-04 / 06 - Comprobar que el producto sigue activo",
+              "request": {
+                "method": "GET",
+                "url": "{{baseUrl}}/api/v1/products/producers/{{pcProducerId}}?pageIndex={{pcPageIndex}}&pageSize=100",
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{pcRequestJwt}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "description": "RN-10: preparar producto nuevo solo con mecanismo de lotes aprobado; no ejecutar SQL. PATCH esperado 409, incluso si la cadena actual devuelve 500. GET posterior acredita activo; la asociación al lote carece de consulta API, por lo que no puede aprobarse el caso completo.\nPaso CP-CAT-04.6. Precondiciones: CP-CAT-04.5. Esperado: 200. Entrada y aserciones: scripts compartidos de carpeta 06. No se aprueba un caso por un paso aislado."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "CP-CAT-05 — Modificar producto ajeno",
+          "description": "NO IMPLEMENTADO: falta edición de productos; no se utiliza desactivación como sustituto ni se tocan productos reales de terceros.\nCU/RF: identificadores no incluidos en el encargo ni localizados en el repositorio; trazabilidad nominal en el informe. Regla: sin número suministrado. Evidencia: pcResults y pcEvidence.",
+          "item": []
         }
       ]
     }

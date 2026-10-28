@@ -2,11 +2,30 @@
 
 La colección conserva las 16 plantillas de [TESTS] 6.0 y añade la carpeta
 `05 - Autenticación CP-AUT-01 a CP-AUT-13` de [TESTS] 6.2, con 49 solicitudes
-nuevas, OTP manual y resultados por escenario. Usar Collection Runner solo sobre
+nuevas, OTP manual y resultados por escenario. Para autenticación, usar Runner solo sobre
 esa carpeta, siguiendo [RESULTADOS_AUTENTICACION.md](RESULTADOS_AUTENTICACION.md).
 CP-AUT-05 y CP-AUT-10 permanecen NO IMPLEMENTADOS. Las instrucciones originales
 de este README corresponden a las carpetas 00–04; no mezclar sus registros con
 los de la suite bajo el mismo runId.
+
+La carpeta `06 - Perfiles, multimedia y catálogo` amplía esa misma colección con
+11 escenarios y 39 peticiones: **104 peticiones y 81 variables totales**. Conserva
+las 65 peticiones previas y sus guardas. Consultar
+[RESULTADOS_PERFILES_CATALOGO.md](RESULTADOS_PERFILES_CATALOGO.md) para la matriz,
+los fixtures locales, los permisos externos y RN-10/RN-12. Seleccionar un solo
+`pcSelectedCase` y ejecutar únicamente la carpeta 06; su valor inicial vacío,
+las cargas externas false y los lotes disabled impiden una ejecución automática
+sin preparación. No se añaden rutas de edición, video ni lotes inexistentes.
+
+Validación offline de esta ampliación:
+
+```powershell
+node postman/validate-profiles-catalog.cjs
+```
+
+El generador `postman/create-fixtures.cjs` no escribe archivos grandes salvo con
+el comando explícito generate RUN_ID. El directorio `.fixtures/` está ignorado
+por Git. Ninguna validación offline llama a la API o al almacenamiento externo.
 
 Auditoría del repositorio en `main`, commit `e24d344`: controladores, DTO,
 servicios de autenticación/JWT, middleware, validadores de paginación,

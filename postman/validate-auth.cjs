@@ -13,7 +13,8 @@ const root = __dirname;
 const collection = JSON.parse(fs.readFileSync(path.join(root,'Tequio.postman_collection.json'),'utf8'));
 const environment = JSON.parse(fs.readFileSync(path.join(root,'Tequio.Development.postman_environment.json'),'utf8'));
 const suite = collection.item.find(item=>item.name.startsWith('05 -'));
-const all = collection.item.flatMap(folder=>folder.item.flatMap(item=>item.request?[item]:item.item||[]));
+// Scope authentication regression assertions to the 65 preserved requests.
+const all = collection.item.slice(0,6).flatMap(folder=>folder.item.flatMap(item=>item.request?[item]:item.item||[]));
 const additions = suite.item.flatMap(folder=>folder.item);
 const originals = collection.item.slice(0,5).flatMap(folder=>folder.item);
 const envDefaults = Object.fromEntries(environment.values.map(v=>[v.key,v.value]));
@@ -52,7 +53,7 @@ let newmanRequire;
 try {newmanRequire=createRequire(require.resolve('newman/package.json',{paths:[path.join(process.env.APPDATA||'','npm/node_modules')]}));}catch{/* optional installed tools */}
 if(newmanRequire){
   test('installed Postman SDK deserializes the collection and environment',()=>{
-    const sdk=newmanRequire('postman-collection');assert.equal(new sdk.Collection(collection).items.count(),6);
+    const sdk=newmanRequire('postman-collection');assert.equal(new sdk.Collection(collection).items.count(),collection.item.length);
     assert.equal(new sdk.VariableScope(environment).values.count(),environment.values.length);sdkImport=true;
   });
 }

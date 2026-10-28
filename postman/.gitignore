@@ -1,0 +1,2 @@
+# Local generated fixtures and manifests; never upload or commit these implicitly.
+.fixtures/
