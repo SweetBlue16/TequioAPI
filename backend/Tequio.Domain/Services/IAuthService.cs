@@ -55,6 +55,13 @@ public interface IAuthService
     Task ResetPasswordAsync(
         ResetPasswordRequestDto request,
         CancellationToken cancellationToken = default);
+
+    Task RegisterAdminAsync(RegisterRequestDto request,
+        string masterAdminEmail, 
+        CancellationToken cancellationToken = default);
+
+    Task AuthorizeAdminAsync(AuthorizeAdminRequestDto request, 
+        CancellationToken cancellationToken = default);
 }
 
 /// <summary>
@@ -214,6 +221,61 @@ public class AuthService : IAuthService
         await _authRepository.UpdatePasswordAsync(user.UserId, newPasswordHash, cancellationToken);
 
         _logger.LogInformation("Contraseña restablecida exitosamente para el usuario {Email}.", request.Email);
+    }
+
+    public async Task RegisterAdminAsync(RegisterRequestDto request, string masterAdminEmail, CancellationToken cancellationToken = default)
+    {
+        bool exists = await _authRepository.UserExistsAsync(request.Email, cancellationToken);
+        if (exists)
+        {
+            throw new ArgumentException(ErrorMessages.EmailAlreadyRegistered);
+        }
+
+        string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
+        request.RoleId = 3;
+
+        int newAdminId = await _authRepository.CreateUserAsync(request, passwordHash, cancellationToken);
+
+        await GeneratePersistAndSendCodeAsync(
+            newAdminId,
+            masterAdminEmail,
+            "Master Admin",
+            SecurityCodeEmailType.AdminAuthorization,
+            cancellationToken);
+        _logger.LogInformation("El Administrador Maestro solicitó la creación del administrador {NewAdminEmail}.", request.Email);
+    }
+
+    public async Task AuthorizeAdminAsync(AuthorizeAdminRequestDto request, CancellationToken cancellationToken = default)
+    {
+        var user = await _authRepository.GetUserVerificationDataAsync(request.NewAdminEmail, cancellationToken);
+        if (user is null)
+        {
+            throw new ArgumentException("No se encontró una solicitud de registro para este correo.");
+        }
+
+        if (user.IsVerified)
+        {
+            throw new ArgumentException("Esta cuenta de administrador ya ha sido autorizada.");
+        }
+
+        await _verificationCodeRepository.ValidateAsync(
+            user.UserId,
+            request.VerificationCode,
+            SecurityCodeEmailType.AdminAuthorization,
+            cancellationToken);
+
+        await _emailService.SendSecurityCodeAsync(
+            new SecurityCodeEmailRequest
+            {
+                RecipientEmail = request.NewAdminEmail,
+                RecipientName = user.FirstName,
+                VerificationCode = "VERIFICADO",
+                Type = SecurityCodeEmailType.AccountVerification,
+                LanguageCode = DefaultLanguageCode,
+                ExpirationMinutes = 0
+            }, cancellationToken);
+
+        _logger.LogInformation("El Administrador Maestro autorizó la cuenta del nuevo administrador {NewAdminEmail}.", request.NewAdminEmail);  
     }
 
     private async Task GeneratePersistAndSendCodeAsync(

@@ -16,6 +16,10 @@
         public const string RequiredFieldMissing = "Este campo es obligatorio.";
         public const string RequiredImageUrl = "La URL de la imagen es obligatoria.";
         public const string RecordNotFound = "No se encontró el registro solicitado.";
+        public const string MasterAdminEmailRequired = "El correo electrónico del nuevo administrador es obligatorio.";
+        public const string OtpRequired = "El código de verificación es obligatorio.";
+        public const string InvalidEmail = "El formato del correo electrónico no es válido.";
+
 
         public const string NegativePageIndex = "El índice de página no puede ser negativo.";
         public const string InvalidPageSize = "El tamaño de página debe ser mayor a cero.";

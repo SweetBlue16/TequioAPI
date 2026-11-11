@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using Tequio.Api.Extensions;
 using Tequio.Domain.Dtos;
 using Tequio.Domain.Services;
 
@@ -141,6 +144,42 @@ public class AuthController : ControllerBase
         return Ok(new
         {
             mensaje = "Tu contraseña ha sido restablecida exitosamente."
+        });
+    }
+
+    [HttpPost("register-admin")]
+    [Authorize(Roles = "MasterAdmin")]
+    public async Task<IActionResult> RegisterAdmin(
+        [FromBody] RegisterRequestDto request,
+        CancellationToken cancellationToken)
+    {
+        string masterAdminEmail = User.FindFirstValue(ClaimTypes.Email)
+            ?? throw new UnauthorizedAccessException("No se pudo obtener el correo del administrador maestro.");
+
+        int masterAdminId = User.GetUserId();
+        _logger.LogInformation("El Administrador Maestro {MasterId} inició el registro del administrador {NewAdminEmail}.", masterAdminId, request.Email);
+
+        await _authService.RegisterAdminAsync(request, masterAdminEmail, cancellationToken);
+
+        return StatusCode(StatusCodes.Status201Created, new
+        {
+            mensaje = "Hemos enviado un código de autorización a tu correo electrónico. Por favor revisa tu bandeja de entrada, es posible que tengas que revisar tu bandeja de spam."
+        });
+    }
+
+    [HttpPost("authorize-admin")]
+    [Authorize(Roles = "MasterAdmin")]
+    public async Task<IActionResult> AuthorizeAdmin([FromBody] AuthorizeAdminRequestDto request, CancellationToken cancellationToken)
+    {
+        int masterAdminId = User.GetUserId();
+
+        _logger.LogInformation("El Administrador Maestro con ID {UserId} está ingresando el código para autorizar a {NewAdminEmail}.", masterAdminId, request.NewAdminEmail);
+
+        await _authService.AuthorizeAdminAsync(request, cancellationToken);
+
+        return Ok(new
+        {
+            mensaje = "Se ha creado la cuenta de administrador."
         });
     }
 }

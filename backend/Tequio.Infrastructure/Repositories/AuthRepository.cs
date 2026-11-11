@@ -166,6 +166,30 @@ public sealed class AuthRepository : IAuthRepository
         }
     }
 
+    public async Task<bool> UserExistsAsync(string email, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            object? result = await ExecuteWithConnectionAsync(
+            async connection =>
+            {
+                await using DbCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT COUNT(1) FROM [dbo].[User] WHERE [Email] = @email";
+                command.CommandType = CommandType.Text;
+                command.Parameters.Add(new SqlParameter("@email", email));
+
+                return await command.ExecuteScalarAsync(cancellationToken);
+            },
+            cancellationToken);
+
+            return Convert.ToInt32(result, CultureInfo.InvariantCulture) > 0;
+        }
+        catch (SqlException exception)
+        {
+            throw SqlExceptionMapper.Map(exception);
+        }
+    }
+
     private static DbCommand CreateGetUserByEmailCommand(DbConnection connection, string email)
     {
         DbCommand command = connection.CreateCommand();

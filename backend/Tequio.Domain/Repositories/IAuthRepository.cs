@@ -50,5 +50,7 @@ namespace Tequio.Domain.Repositories
             int userId,
             string passwordHash,
             CancellationToken cancellationToken = default);
+
+        Task<bool> UserExistsAsync(string email, CancellationToken cancellationToken = default);
     }
 }
