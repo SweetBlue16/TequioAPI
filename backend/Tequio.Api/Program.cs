@@ -7,6 +7,7 @@ using Tequio.Domain.Email;
 using Tequio.Domain.Repositories;
 using Tequio.Domain.Services;
 using Tequio.Domain.VerificationCodes;
+using Tequio.Infrastructure.Data;
 using Tequio.Infrastructure.Email;
 using Tequio.Infrastructure.Models;
 using Tequio.Infrastructure.Repositories;
@@ -58,6 +59,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<DataSeeder>();
 builder.Services.AddSingleton<IVerificationCodeGenerator, VerificationCodeGenerator>();
 builder.Services.AddSingleton<IEmailTemplateProvider, EmailTemplateProvider>();
 builder.Services.AddSingleton<ISmtpClientFactory, SmtpClientFactory>();
@@ -66,6 +68,12 @@ builder.Services.AddTransient<IEmailService, EmailService>();
 var app = builder.Build();
 
 app.UseMiddleware<GlobalExceptionMiddleware>();
+
+using (var scope = app.Services.CreateScope())
+{
+    var seeder = scope.ServiceProvider.GetRequiredService<DataSeeder>();
+    await seeder.SeedAdminAsync();
+}
 
 if (app.Environment.IsDevelopment())
 {

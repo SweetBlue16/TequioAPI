@@ -34,10 +34,19 @@ namespace Tequio.Domain.Services
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
+            string roleName = roleId switch
+            {
+                "1" => "Buyer",
+                "2" => "Producer",
+                "3" => "Admin",
+                "4" => "MasterAdmin",
+                _ => "Buyer"
+            };
+
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, userId),
-                new Claim("roleId", roleId),
+                new Claim(ClaimTypes.NameIdentifier, userId),
+                new Claim(ClaimTypes.Role, roleName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
