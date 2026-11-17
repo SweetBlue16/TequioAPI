@@ -60,6 +60,10 @@ public interface IAuthService
         string masterAdminEmail, 
         CancellationToken cancellationToken = default);
 
+    /// <summary>Resends authorization for an existing pending Admin, exclusively through MasterAdmin.</summary>
+    Task ResendAdminAuthorizationAsync(string adminEmail, string masterAdminEmail,
+        CancellationToken cancellationToken = default);
+
     Task AuthorizeAdminAsync(AuthorizeAdminRequestDto request, 
         CancellationToken cancellationToken = default);
 }
@@ -103,6 +107,10 @@ public class AuthService : IAuthService
         RegisterRequestDto request,
         CancellationToken cancellationToken = default)
     {
+        if (request.RoleId is not (1 or 2))
+        {
+            throw new ArgumentException("El registro público solo admite comprador o productor.");
+        }
         string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
         int userId = await _authRepository.CreateUserAsync(request, passwordHash, cancellationToken);
 
@@ -130,6 +138,15 @@ public class AuthService : IAuthService
             throw new UnauthorizedAccessException(ErrorMessages.InvalidCredentials);
         }
 
+        if (authData.RoleId == "3")
+        {
+            var admin = await _authRepository.GetUserVerificationDataAsync(request.Email, cancellationToken);
+            if (admin is null || !admin.IsVerified || admin.RoleId != 3)
+            {
+                throw new UnauthorizedAccessException("La cuenta está pendiente de autorización por el administrador maestro.");
+            }
+        }
+
         _logger.LogInformation("Inicio de sesión exitoso y token generado para el usuario {UserId}.", authData.UserId);
         return _jwtProvider.GenerateToken(authData.UserId!, authData.RoleId!);
     }
@@ -141,7 +158,7 @@ public class AuthService : IAuthService
     {
         var user = await _authRepository.GetUserVerificationDataAsync(request.Email, cancellationToken);
 
-        if (user is null)
+        if (user is null || user.RoleId is 3 or 4)
         {
             throw new ArgumentException(ErrorMessages.OtpInvalid);
         }
@@ -165,7 +182,7 @@ public class AuthService : IAuthService
     {
         var user = await _authRepository.GetUserVerificationDataAsync(email, cancellationToken);
 
-        if (user is null || user.IsVerified)
+        if (user is null || user.IsVerified || user.RoleId is 3 or 4)
         {
             return;
         }
@@ -225,9 +242,14 @@ public class AuthService : IAuthService
 
     public async Task RegisterAdminAsync(RegisterRequestDto request, string masterAdminEmail, CancellationToken cancellationToken = default)
     {
-        bool exists = await _authRepository.UserExistsAsync(request.Email, cancellationToken);
-        if (exists)
+        var existing = await _authRepository.GetUserVerificationDataAsync(request.Email, cancellationToken);
+        if (existing is not null)
         {
+            if (existing.RoleId == 3 && !existing.IsVerified)
+            {
+                await ResendAdminAuthorizationAsync(request.Email, masterAdminEmail, cancellationToken);
+                return;
+            }
             throw new ArgumentException(ErrorMessages.EmailAlreadyRegistered);
         }
 
@@ -245,10 +267,27 @@ public class AuthService : IAuthService
         _logger.LogInformation("El Administrador Maestro solicitó la creación del administrador {NewAdminEmail}.", request.Email);
     }
 
+    /// <inheritdoc />
+    public async Task ResendAdminAuthorizationAsync(string adminEmail, string masterAdminEmail,
+        CancellationToken cancellationToken = default)
+    {
+        var admin = await _authRepository.GetUserVerificationDataAsync(adminEmail, cancellationToken);
+        if (admin is null || admin.RoleId != 3)
+        {
+            throw new ArgumentException("No se encontró una solicitud pendiente de administrador.");
+        }
+        if (admin.IsVerified)
+        {
+            throw new ArgumentException("La cuenta de administrador ya está autorizada.");
+        }
+        await GeneratePersistAndSendCodeAsync(admin.UserId, masterAdminEmail, "Administrador maestro",
+            SecurityCodeEmailType.AdminAuthorization, cancellationToken);
+    }
+
     public async Task AuthorizeAdminAsync(AuthorizeAdminRequestDto request, CancellationToken cancellationToken = default)
     {
         var user = await _authRepository.GetUserVerificationDataAsync(request.NewAdminEmail, cancellationToken);
-        if (user is null)
+        if (user is null || user.RoleId != 3)
         {
             throw new ArgumentException("No se encontró una solicitud de registro para este correo.");
         }
@@ -264,17 +303,7 @@ public class AuthService : IAuthService
             SecurityCodeEmailType.AdminAuthorization,
             cancellationToken);
 
-        await _emailService.SendSecurityCodeAsync(
-            new SecurityCodeEmailRequest
-            {
-                RecipientEmail = request.NewAdminEmail,
-                RecipientName = user.FirstName,
-                VerificationCode = "VERIFICADO",
-                Type = SecurityCodeEmailType.AccountVerification,
-                LanguageCode = DefaultLanguageCode,
-                ExpirationMinutes = 0
-            }, cancellationToken);
-
+        // Authorization itself is committed atomically by SQL. Do not send a fabricated OTP as a receipt.
         _logger.LogInformation("El Administrador Maestro autorizó la cuenta del nuevo administrador {NewAdminEmail}.", request.NewAdminEmail);  
     }
 
@@ -305,6 +334,6 @@ public class AuthService : IAuthService
             },
             cancellationToken);
 
-        _logger.LogInformation("Código de recuperación generado y enviado exitosamente a {Email}.", recipientEmail);
+        _logger.LogInformation("Código de seguridad enviado para {Purpose}.", type);
     }
 }

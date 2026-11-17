@@ -302,3 +302,6 @@ y [pm.execution.skipRequest](https://learning.postman.com/latest-v-12/docs/tests
 Al terminar una sesión, volver a `allowMutatingTests=false`, vaciar JWT, OTP y
 contraseñas locales si ya no son necesarios, y conservar solo evidencia saneada.
 No borrar usuarios, tablas, bases de datos ni volúmenes. Sin commits ni pushes.
+
+
+Puntos físicos de entrega: [instalación, contrato y verificación](../docs/PUNTOS_ENTREGA.md).

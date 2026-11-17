@@ -355,6 +355,128 @@ public sealed class AuthServiceTest
         VerifyNoCodeOperations();
     }
 
+
+    [Fact]
+    public async Task TestRegisterAdminWithPendingAccountShouldResendWithoutCreatingOrChangingCredentials()
+    {
+        _authRepository.Setup(r => r.GetUserVerificationDataAsync(Email, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new UserVerificationData(42, "Ana", false, 3));
+        SetupGeneratedCode(SecurityCodeEmailType.AdminAuthorization);
+        await CreateService().RegisterAdminAsync(CreateRegisterRequest(), "master@example.invalid");
+        _authRepository.Verify(r => r.CreateUserAsync(It.IsAny<RegisterRequestDto>(), It.IsAny<string>(),
+            It.IsAny<CancellationToken>()), Times.Never);
+        _emailService.Verify(e => e.SendSecurityCodeAsync(It.Is<SecurityCodeEmailRequest>(r =>
+            r.RecipientEmail == "master@example.invalid" && r.Type == SecurityCodeEmailType.AdminAuthorization),
+            It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task TestAuthorizeAdminWithValidOtpShouldOnlyConsumeAuthorizationWithoutSendingFakeOtp()
+    {
+        _authRepository.Setup(r => r.GetUserVerificationDataAsync(Email, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new UserVerificationData(42, "Ana", false, 3));
+        await CreateService().AuthorizeAdminAsync(new AuthorizeAdminRequestDto
+        {
+            NewAdminEmail = Email, VerificationCode = Code
+        });
+        _codeRepository.Verify(r => r.ValidateAsync(42, Code, SecurityCodeEmailType.AdminAuthorization,
+            It.IsAny<CancellationToken>()), Times.Once);
+        _emailService.Verify(e => e.SendSecurityCodeAsync(It.IsAny<SecurityCodeEmailRequest>(),
+            It.IsAny<CancellationToken>()), Times.Never);
+    }
+
+    [Theory]
+    [InlineData(1, false)]
+    [InlineData(3, true)]
+    public async Task TestResendAdminAuthorizationWithInvalidTargetShouldReject(int roleId, bool verified)
+    {
+        _authRepository.Setup(r => r.GetUserVerificationDataAsync(Email, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new UserVerificationData(42, "Ana", verified, roleId));
+        await Assert.ThrowsAsync<ArgumentException>(() =>
+            CreateService().ResendAdminAuthorizationAsync(Email, "master@example.invalid"));
+        VerifyNoCodeOperations();
+    }
+
+    [Fact]
+    public async Task TestPublicVerificationWithAdminAccountShouldNeverAuthorizeOrResend()
+    {
+        _authRepository.Setup(r => r.GetUserVerificationDataAsync(Email, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new UserVerificationData(42, "Ana", false, 3));
+        await Assert.ThrowsAsync<ArgumentException>(() => CreateService().VerifyAccountAsync(
+            new VerifyAccountRequestDto { Email = Email, VerificationCode = Code }));
+        await CreateService().ResendVerificationCodeAsync(Email);
+        VerifyNoCodeOperations();
+        _codeRepository.Verify(r => r.ValidateAsync(It.IsAny<int>(), It.IsAny<string>(),
+            It.IsAny<SecurityCodeEmailType>(), It.IsAny<CancellationToken>()), Times.Never);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task TestLoginWithAdminAccountShouldRequireAuthorization(bool verified)
+    {
+        var request = new LoginRequestDto { Email = Email, Password = "TEST_PASSWORD_123" };
+        _authRepository.Setup(r => r.GetUserAuthDataAsync(Email, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(("42", "3", BCrypt.Net.BCrypt.HashPassword(request.Password)));
+        _authRepository.Setup(r => r.GetUserVerificationDataAsync(Email, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new UserVerificationData(42, "Ana", verified, 3));
+        _jwtProvider.Setup(p => p.GenerateToken("42", "3")).Returns("TEST_TOKEN");
+        if (verified)
+        {
+            Assert.Equal("TEST_TOKEN", await CreateService().AuthenticateUserAsync(request));
+        }
+        else
+        {
+            await Assert.ThrowsAsync<UnauthorizedAccessException>(() => CreateService().AuthenticateUserAsync(request));
+            _jwtProvider.Verify(p => p.GenerateToken(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+        }
+    }
+
+    [Fact]
+    public async Task TestPublicRegistrationWithAdminRoleShouldRejectBeforePersistence()
+    {
+        var request = CreateRegisterRequest();
+        request.RoleId = 3;
+        await Assert.ThrowsAsync<ArgumentException>(() => CreateService().RegisterUserAsync(request));
+        _authRepository.Verify(r => r.CreateUserAsync(It.IsAny<RegisterRequestDto>(), It.IsAny<string>(),
+            It.IsAny<CancellationToken>()), Times.Never);
+    }
+
+
+    [Fact]
+    public async Task TestRegisterAdminWithNewAccountShouldSendAuthorizationOnlyToMasterAdmin()
+    {
+        var request = CreateRegisterRequest();
+        _authRepository.Setup(r => r.CreateUserAsync(request, It.IsAny<string>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(42);
+        SetupGeneratedCode(SecurityCodeEmailType.AdminAuthorization);
+        await CreateService().RegisterAdminAsync(request, "master@example.invalid");
+        Assert.Equal(3, request.RoleId);
+        _codeRepository.Verify(r => r.SaveAsync(42, Code, SecurityCodeEmailType.AdminAuthorization,
+            It.IsAny<CancellationToken>()), Times.Once);
+        _emailService.Verify(e => e.SendSecurityCodeAsync(It.Is<SecurityCodeEmailRequest>(r =>
+            r.RecipientEmail == "master@example.invalid" && r.RecipientEmail != Email &&
+            r.Type == SecurityCodeEmailType.AdminAuthorization && r.ExpirationMinutes == 15),
+            It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task TestResendAdminAuthorizationWithSmtpFailureShouldRemainRetryableWithoutDuplicateAccount()
+    {
+        _authRepository.Setup(r => r.GetUserVerificationDataAsync(Email, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new UserVerificationData(42, "Ana", false, 3));
+        SetupGeneratedCode(SecurityCodeEmailType.AdminAuthorization);
+        _emailService.Setup(e => e.SendSecurityCodeAsync(It.IsAny<SecurityCodeEmailRequest>(),
+            It.IsAny<CancellationToken>())).ThrowsAsync(new EmailDeliveryException(
+                "No fue posible enviar el correo.", new TimeoutException()));
+        await Assert.ThrowsAsync<EmailDeliveryException>(() =>
+            CreateService().ResendAdminAuthorizationAsync(Email, "master@example.invalid"));
+        _authRepository.Verify(r => r.CreateUserAsync(It.IsAny<RegisterRequestDto>(), It.IsAny<string>(),
+            It.IsAny<CancellationToken>()), Times.Never);
+        _codeRepository.Verify(r => r.ValidateAsync(It.IsAny<int>(), It.IsAny<string>(),
+            It.IsAny<SecurityCodeEmailType>(), It.IsAny<CancellationToken>()), Times.Never);
+    }
+
     private AuthService CreateService()
     {
         return new AuthService(

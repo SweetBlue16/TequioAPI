@@ -1,0 +1,2053 @@
+{
+  "info": {
+    "name": "TEQUIO | CP-PTO | Puntos físicos de entrega",
+    "description": "Numeración CP-PTO-01 a 13 creada para esta entrega: no existían identificadores CP-PTO documentados. Ejecutar solo contra datos de prueba. RN-07 requiere el fixture separado; su ausencia produce error, nunca aprobación. baseUrl incluye /api/v1. Consultar docs/PUNTOS_ENTREGA.md.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "CP-PTO-01 | Alta válida",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{validPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.collectionVariables.unset('linkedSnapshot');",
+              "const runId = pm.variables.replaceIn('{{$guid}}').replace(/-/g, '');",
+              "pm.collectionVariables.set('runId', runId);",
+              "for (const key of ['adminToken','nonAdminToken','municipalityId']) {",
+              "  if (!pm.environment.get(key)) throw new Error('Configura ' + key + ' en el entorno local.');",
+              "}",
+              "const payload = {name:'TEST_'+runId+'_Café',street:'Enriquez',number:'1',neighborhood:'Centro',zipCode:'91000',city:pm.environment.get('municipalityName') || 'Xalapa',municipalityId:Number(pm.environment.get('municipalityId')),businessHours:'09:00 - 18:00',references:'Ejecución controlada CP-PTO',latitude:19.53,longitude:-96.92};",
+              "pm.collectionVariables.set('validPayload', JSON.stringify(payload));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+              "const b=pm.response.json();",
+              "pm.test('Identificador y ubicación del recurso',()=> { pm.expect(b.id).to.be.a('number').above(0); pm.expect(pm.response.headers.get('Location')).to.include('/delivery-points/'+b.id); });",
+              "if (pm.response.code===201) pm.environment.set('deliveryPointId',b.id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-01.1 | Persistencia del alta",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/delivery-points/{{deliveryPointId}}",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "const b=pm.response.json(), expected=JSON.parse(pm.collectionVariables.get('validPayload'));",
+              "pm.test('Campos persistidos',()=> { for (const [key,value] of Object.entries(expected)) pm.expect(b[key],key).to.eql(value); pm.expect(b.isActive).to.eql(true); });",
+              "pm.collectionVariables.set('createdSnapshot', JSON.stringify(b));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-02 | Repetir exactamente el alta",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{validPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-02.2 | Duplicado ignora espacios mayúsculas y acentos",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{normalizedPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const p=JSON.parse(pm.collectionVariables.get('validPayload'));",
+              "p.name='  '+p.name.normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase()+'  ';",
+              "pm.variables.set('normalizedPayload',JSON.stringify(p));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-02.1 | Alta rechazada conserva datos",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/delivery-points/{{deliveryPointId}}",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test('Sin cambios tras duplicado',()=>pm.expect(pm.response.json()).to.eql(JSON.parse(pm.collectionVariables.get('createdSnapshot'))));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-03 | POST alta sin rol Administrador",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{nonAdminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{validPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-04 | POST alta sin token",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points",
+        "auth": {
+          "type": "noauth"
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{validPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 401\", () => pm.response.to.have.status(401));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-03 | PUT {{deliveryPointId}} sin rol Administrador",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points/{{deliveryPointId}}",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{nonAdminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{validPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-04 | PUT {{deliveryPointId}} sin token",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points/{{deliveryPointId}}",
+        "auth": {
+          "type": "noauth"
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{validPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 401\", () => pm.response.to.have.status(401));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-03 | PATCH deactive sin rol Administrador",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": "{{baseUrl}}/delivery-points/{{deliveryPointId}}/deactive",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{nonAdminToken}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-04 | PATCH deactive sin token",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": "{{baseUrl}}/delivery-points/{{deliveryPointId}}/deactive",
+        "auth": {
+          "type": "noauth"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 401\", () => pm.response.to.have.status(401));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-03 | PATCH active sin rol Administrador",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": "{{baseUrl}}/delivery-points/{{deliveryPointId}}/active",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{nonAdminToken}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 403\", () => pm.response.to.have.status(403));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-04 | PATCH active sin token",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": "{{baseUrl}}/delivery-points/{{deliveryPointId}}/active",
+        "auth": {
+          "type": "noauth"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 401\", () => pm.response.to.have.status(401));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-04.1 | Rechazos de autorización conservan estado",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/delivery-points/{{deliveryPointId}}",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test('Sin cambios tras 401/403',()=>pm.expect(pm.response.json()).to.eql(JSON.parse(pm.collectionVariables.get('createdSnapshot'))));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-05 | Capturar punto con lote vigente",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/delivery-points/{{linkedDeliveryPointId}}",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.environment.get('linkedDeliveryPointId') || !pm.environment.get('linkedBatchId')) {",
+              "  throw new Error('RN-07 NO EJECUTADO: ejecuta delivery-points-fixture.sql en una base de pruebas y configura linkedDeliveryPointId/linkedBatchId.');",
+              "}"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test('Fixture activo',()=>pm.expect(pm.response.json().isActive).to.eql(true));",
+              "const linked=pm.response.json();",
+              "pm.test('Punto de prueba controlado',()=>pm.expect(linked.name).to.match(/^TEST_[0-9a-f]{32}_linked$/));",
+              "if(pm.response.code===200 && linked.isActive===true && /^TEST_[0-9a-f]{32}_linked$/.test(linked.name)) {",
+              "  pm.collectionVariables.set('linkedSnapshot',JSON.stringify(linked));",
+              "}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-05.1 | RN-07 rechaza desactivación",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": "{{baseUrl}}/delivery-points/{{linkedDeliveryPointId}}/deactive",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.environment.get('linkedDeliveryPointId') || !pm.environment.get('linkedBatchId')) {",
+              "  throw new Error('RN-07 NO EJECUTADO: ejecuta delivery-points-fixture.sql en una base de pruebas y configura linkedDeliveryPointId/linkedBatchId.');",
+              "}",
+              "const snapshot=JSON.parse(pm.collectionVariables.get('linkedSnapshot') || '{}');",
+              "if (!/^TEST_[0-9a-f]{32}_linked$/.test(snapshot.name || '') || snapshot.id !== Number(pm.environment.get('linkedDeliveryPointId')) || snapshot.isActive !== true) {",
+              "  pm.execution.skipRequest();",
+              "  throw new Error('RN-07 NO EJECUTADO: falta verificar un fixture activo TEST_ de esta base.');",
+              "}"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-06 | RN-07 conserva registro y estado",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/delivery-points/{{linkedDeliveryPointId}}",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (!pm.environment.get('linkedDeliveryPointId') || !pm.environment.get('linkedBatchId')) {",
+              "  throw new Error('RN-07 NO EJECUTADO: ejecuta delivery-points-fixture.sql en una base de pruebas y configura linkedDeliveryPointId/linkedBatchId.');",
+              "}"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test('Punto idéntico después del rechazo',()=>pm.expect(pm.response.json()).to.eql(JSON.parse(pm.collectionVariables.get('linkedSnapshot'))));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-07 | Desactivar punto sin lotes",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": "{{baseUrl}}/delivery-points/{{deliveryPointId}}/deactive",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test('Mensaje de éxito',()=>pm.expect(pm.response.json().mensaje).to.be.a('string'));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-07.1 | Registro conservado e inactivo",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/delivery-points/{{deliveryPointId}}",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test('Baja lógica',()=>pm.expect(pm.response.json()).to.eql({...JSON.parse(pm.collectionVariables.get('createdSnapshot')),isActive:false}));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-08 | POST sin latitud",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{invalidPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const p=JSON.parse(pm.collectionVariables.get('validPayload')); p.name += '_invalid';",
+              "delete p.latitude;",
+              "pm.variables.set('invalidPayload',JSON.stringify(p));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-08 | PUT sin latitud",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points/{{deliveryPointId}}",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{invalidPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const p=JSON.parse(pm.collectionVariables.get('validPayload')); p.name += '_invalid';",
+              "delete p.latitude;",
+              "pm.variables.set('invalidPayload',JSON.stringify(p));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-08 | POST sin longitud",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{invalidPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const p=JSON.parse(pm.collectionVariables.get('validPayload')); p.name += '_invalid';",
+              "delete p.longitude;",
+              "pm.variables.set('invalidPayload',JSON.stringify(p));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-08 | PUT sin longitud",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points/{{deliveryPointId}}",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{invalidPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const p=JSON.parse(pm.collectionVariables.get('validPayload')); p.name += '_invalid';",
+              "delete p.longitude;",
+              "pm.variables.set('invalidPayload',JSON.stringify(p));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-08 | POST sin coordenadas",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{invalidPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const p=JSON.parse(pm.collectionVariables.get('validPayload')); p.name += '_invalid';",
+              "delete p.latitude;",
+              "delete p.longitude;",
+              "pm.variables.set('invalidPayload',JSON.stringify(p));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-08 | PUT sin coordenadas",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points/{{deliveryPointId}}",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{invalidPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const p=JSON.parse(pm.collectionVariables.get('validPayload')); p.name += '_invalid';",
+              "delete p.latitude;",
+              "delete p.longitude;",
+              "pm.variables.set('invalidPayload',JSON.stringify(p));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-08 | POST latitud menor",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{invalidPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const p=JSON.parse(pm.collectionVariables.get('validPayload')); p.name += '_invalid';",
+              "p.latitude=-91;",
+              "pm.variables.set('invalidPayload',JSON.stringify(p));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-08 | PUT latitud menor",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points/{{deliveryPointId}}",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{invalidPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const p=JSON.parse(pm.collectionVariables.get('validPayload')); p.name += '_invalid';",
+              "p.latitude=-91;",
+              "pm.variables.set('invalidPayload',JSON.stringify(p));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-08 | POST latitud mayor",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{invalidPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const p=JSON.parse(pm.collectionVariables.get('validPayload')); p.name += '_invalid';",
+              "p.latitude=91;",
+              "pm.variables.set('invalidPayload',JSON.stringify(p));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-08 | PUT latitud mayor",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points/{{deliveryPointId}}",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{invalidPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const p=JSON.parse(pm.collectionVariables.get('validPayload')); p.name += '_invalid';",
+              "p.latitude=91;",
+              "pm.variables.set('invalidPayload',JSON.stringify(p));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-08 | POST longitud menor",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{invalidPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const p=JSON.parse(pm.collectionVariables.get('validPayload')); p.name += '_invalid';",
+              "p.longitude=-181;",
+              "pm.variables.set('invalidPayload',JSON.stringify(p));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-08 | PUT longitud menor",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points/{{deliveryPointId}}",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{invalidPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const p=JSON.parse(pm.collectionVariables.get('validPayload')); p.name += '_invalid';",
+              "p.longitude=-181;",
+              "pm.variables.set('invalidPayload',JSON.stringify(p));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-08 | POST longitud mayor",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{invalidPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const p=JSON.parse(pm.collectionVariables.get('validPayload')); p.name += '_invalid';",
+              "p.longitude=181;",
+              "pm.variables.set('invalidPayload',JSON.stringify(p));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-08 | PUT longitud mayor",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points/{{deliveryPointId}}",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{invalidPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const p=JSON.parse(pm.collectionVariables.get('validPayload')); p.name += '_invalid';",
+              "p.longitude=181;",
+              "pm.variables.set('invalidPayload',JSON.stringify(p));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-08 | POST no numérica",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{invalidPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const p=JSON.parse(pm.collectionVariables.get('validPayload')); p.name += '_invalid';",
+              "p.latitude=\"abc\";",
+              "pm.variables.set('invalidPayload',JSON.stringify(p));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-08 | PUT no numérica",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points/{{deliveryPointId}}",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{invalidPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const p=JSON.parse(pm.collectionVariables.get('validPayload')); p.name += '_invalid';",
+              "p.latitude=\"abc\";",
+              "pm.variables.set('invalidPayload',JSON.stringify(p));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-09 | Municipio inexistente",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{invalidPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const p=JSON.parse(pm.collectionVariables.get('validPayload'));p.municipalityId=2147483647;p.name+='_invalid';pm.variables.set('invalidPayload',JSON.stringify(p));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-10 | GET identificador inexistente",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/delivery-points/{{missingDeliveryPointId}}",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-10 | PUT identificador inexistente",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points/{{missingDeliveryPointId}}",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{validPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-10 | PATCH identificador inexistente",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": "{{baseUrl}}/delivery-points/{{missingDeliveryPointId}}/deactive",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-11 | Alta auxiliar para actualización",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{secondPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const p=JSON.parse(pm.collectionVariables.get('validPayload'));p.name+='_second';pm.collectionVariables.set('secondPayload',JSON.stringify(p));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+              "if(pm.response.code===201) pm.collectionVariables.set('secondDeliveryPointId',pm.response.json().id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-11.1 | Capturar auxiliar",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/delivery-points/{{secondDeliveryPointId}}",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.collectionVariables.set('secondSnapshot',JSON.stringify(pm.response.json()));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-11.2 | Actualización duplicada",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points/{{secondDeliveryPointId}}",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{validPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+              "pm.test(\"Error de aplicación sin detalles internos\", () => { const b=pm.response.json(); pm.expect(b.error).to.be.a(\"string\"); pm.expect(JSON.stringify(b)).not.to.match(/SqlException|StackTrace|Password|Server=/i); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-11.3 | Duplicado conserva auxiliar",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/delivery-points/{{secondDeliveryPointId}}",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test('Actualización atómica',()=>pm.expect(pm.response.json()).to.eql(JSON.parse(pm.collectionVariables.get('secondSnapshot'))));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-12 | Actualización válida con coordenadas cero",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/delivery-points/{{secondDeliveryPointId}}",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{{updatedPayload}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const p=JSON.parse(pm.collectionVariables.get('secondPayload'));p.latitude=0;p.longitude=0;pm.collectionVariables.set('updatedPayload',JSON.stringify(p));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-12.1 | Persistencia de coordenadas cero",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/delivery-points/{{secondDeliveryPointId}}",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test('Cero es válido',()=>{const b=pm.response.json();pm.expect(b.latitude).to.eql(0);pm.expect(b.longitude).to.eql(0);});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-13 | Limpieza lógica del auxiliar propio",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": "{{baseUrl}}/delivery-points/{{secondDeliveryPointId}}/deactive",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP-PTO-13.1 | Errores de edición no alteraron punto inicial",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/delivery-points/{{deliveryPointId}}",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{adminToken}}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test('Sin modificaciones tras validaciones rechazadas',()=>pm.expect(pm.response.json()).to.eql({...JSON.parse(pm.collectionVariables.get('createdSnapshot')),isActive:false}));"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "variable": []
+}

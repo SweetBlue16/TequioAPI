@@ -1,8 +1,9 @@
-﻿using Microsoft.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Net;
 using System.Text.Json;
 using Tequio.Domain.Constants;
 using Tequio.Domain.Email;
+using Tequio.Domain.Services;
 
 namespace Tequio.Api.Middlewares
 {
@@ -25,6 +26,16 @@ namespace Tequio.Api.Middlewares
             try
             {
                 await _next(context);
+            }
+            catch (VerificationCodeRateLimitException ex)
+            {
+                context.Response.Headers.RetryAfter = ex.RetryAfterSeconds.ToString();
+                await HandleExceptionAsync(context, HttpStatusCode.TooManyRequests, ex.Message);
+            }
+            catch (DeliveryPointConflictException ex)
+            {
+                _logger.LogWarning(ex, "Conflicto en punto de entrega.");
+                await HandleExceptionAsync(context, HttpStatusCode.Conflict, ex.Message);
             }
             catch (ArgumentException ex)
             {

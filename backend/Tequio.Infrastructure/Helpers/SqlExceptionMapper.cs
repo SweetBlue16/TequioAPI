@@ -1,5 +1,6 @@
-﻿using Microsoft.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using Tequio.Domain.Constants;
+using Tequio.Domain.Services;
 
 namespace Tequio.Infrastructure.Helpers
 {
@@ -12,6 +13,9 @@ namespace Tequio.Infrastructure.Helpers
         {
             return exception.Number switch
             {
+                50020 => new VerificationCodeRateLimitException("Espera un minuto antes de pedir otro código.", 60),
+                50021 => new VerificationCodeRateLimitException(
+                    "Se alcanzó el límite. Espera a que venza el periodo de quince minutos.", 900),
                 50001 => new ArgumentException(ErrorMessages.AgeRestriction),
                 50002 => new ArgumentException(ErrorMessages.EmailAlreadyRegistered),
                 50003 => new ArgumentException(ErrorMessages.OtpInvalid),

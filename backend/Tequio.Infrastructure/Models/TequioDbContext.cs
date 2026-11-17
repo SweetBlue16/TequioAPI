@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
@@ -64,7 +64,7 @@ public partial class TequioDbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__Batch__3214EC07DBD0D620");
 
-            entity.ToTable("Batch");
+            entity.ToTable("Batch", table => table.UseSqlOutputClause(false));
 
             entity.Property(e => e.BatchName).HasMaxLength(150);
             entity.Property(e => e.Deadline).HasColumnType("datetime");

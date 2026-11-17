@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Tequio.Infrastructure.Models;
@@ -26,6 +26,8 @@ public partial class DeliveryPoint
     public decimal Latitude { get; set; }
 
     public decimal Longitude { get; set; }
+
+    public int MunicipalityId { get; set; }
 
     public bool IsActive { get; set; }
 

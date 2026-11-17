@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using Tequio.Api.Extensions;
 using Tequio.Domain.Dtos;
 using Tequio.Domain.Services;
@@ -150,13 +149,18 @@ public class AuthController : ControllerBase
     [HttpPost("register-admin")]
     [Authorize(Roles = "MasterAdmin")]
     public async Task<IActionResult> RegisterAdmin(
-        [FromBody] RegisterRequestDto request,
+        RegisterRequestDto request,
+        [FromServices] IUserService userService,
         CancellationToken cancellationToken)
     {
-        string masterAdminEmail = User.FindFirstValue(ClaimTypes.Email)
-            ?? throw new UnauthorizedAccessException("No se pudo obtener el correo del administrador maestro.");
-
         int masterAdminId = User.GetUserId();
+        var masterAdminProfile = await userService.GetUserProfileAsync(masterAdminId);
+        string masterAdminEmail = masterAdminProfile.Email;
+        if (string.IsNullOrWhiteSpace(masterAdminEmail))
+        {
+            throw new UnauthorizedAccessException("No se pudo obtener el correo del administrador maestro.");
+        }
+
         _logger.LogInformation("El Administrador Maestro {MasterId} inició el registro del administrador {NewAdminEmail}.", masterAdminId, request.Email);
 
         await _authService.RegisterAdminAsync(request, masterAdminEmail, cancellationToken);
@@ -165,6 +169,19 @@ public class AuthController : ControllerBase
         {
             mensaje = "Hemos enviado un código de autorización a tu correo electrónico. Por favor revisa tu bandeja de entrada, es posible que tengas que revisar tu bandeja de spam."
         });
+    }
+
+    /// <summary>Continues an existing Admin request without creating another account.</summary>
+    [HttpPost("resend-admin-authorization")]
+    [Authorize(Roles = "MasterAdmin")]
+    public async Task<IActionResult> ResendAdminAuthorization(
+        [FromBody] EmailAddressRequestDto request,
+        [FromServices] IUserService userService,
+        CancellationToken cancellationToken)
+    {
+        var masterAdmin = await userService.GetUserProfileAsync(User.GetUserId());
+        await _authService.ResendAdminAuthorizationAsync(request.Email, masterAdmin.Email, cancellationToken);
+        return Ok(new { mensaje = "Se envió un nuevo código al correo del administrador maestro." });
     }
 
     [HttpPost("authorize-admin")]

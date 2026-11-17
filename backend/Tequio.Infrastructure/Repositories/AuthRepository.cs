@@ -128,7 +128,8 @@ public sealed class AuthRepository : IAuthRepository
                     return new UserVerificationData(
                         reader.GetInt32(reader.GetOrdinal("Id")),
                         reader.GetString(reader.GetOrdinal("FirstName")),
-                        reader.GetBoolean(reader.GetOrdinal("IsVerified")));
+                        reader.GetBoolean(reader.GetOrdinal("IsVerified")),
+                        reader.GetInt32(reader.GetOrdinal("RoleId")));
                 },
                 cancellationToken);
         }

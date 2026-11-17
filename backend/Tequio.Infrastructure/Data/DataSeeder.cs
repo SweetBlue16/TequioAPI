@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Tequio.Infrastructure.Models;
@@ -20,7 +20,7 @@ namespace Tequio.Infrastructure.Data
             _configuration = configuration;
         }
 
-        public async Task SeedAdminAsync()
+        public virtual async Task SeedAdminAsync()
         {
             string email = _configuration["MasterAdmin:Email"] ?? string.Empty;
             string password = _configuration["MasterAdmin:Password"] ?? string.Empty;
