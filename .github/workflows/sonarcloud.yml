@@ -52,11 +52,11 @@ jobs:
             /d:sonar.cs.cobertura.reportsPaths="**/coverage.cobertura.xml"
 
       - name: Build solution
-        run: dotnet build --no-incremental
+        run: dotnet build backend/Tequio.slnx --no-incremental
 
       - name: Run xUnit tests with coverage
         run: |
-          dotnet test --no-build \
+          dotnet test backend/Tequio.slnx --no-build \
             --collect:"XPlat Code Coverage" \
             --results-directory ./TestResults
 
