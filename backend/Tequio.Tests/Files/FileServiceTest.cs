@@ -15,13 +15,12 @@ public sealed class FileServiceTest
     private readonly Mock<ILogger<FileService>> _logger = new();
 
     [Theory]
-    [InlineData(0)] // Empty files are rejected by FilesController, not FileService.
-    [InlineData(1)]
+    [InlineData(4)]
     [InlineData(MaxFileSize - 1)]
     [InlineData(MaxFileSize)]
     public async Task TestUploadImageWithinLimitShouldDelegateSameStreamAndReturnUrl(int size)
     {
-        using var stream = new MemoryStream(new byte[size]);
+        using var stream = new MemoryStream(CreateJpeg(size));
         const string url = "https://images.example.test/profile.jpg";
         _storage.Setup(storage => storage.UploadFileAsync(stream, FileName)).ReturnsAsync(url);
 
@@ -51,7 +50,7 @@ public sealed class FileServiceTest
     [Fact]
     public async Task TestUploadImageWithStorageFailureShouldPropagateSameError()
     {
-        using var stream = new MemoryStream(new byte[1]);
+        using var stream = new MemoryStream(CreateJpeg(4));
         var expected = new InvalidOperationException("Storage upload failed.");
         _storage.Setup(storage => storage.UploadFileAsync(stream, FileName)).ThrowsAsync(expected);
 
@@ -78,6 +77,39 @@ public sealed class FileServiceTest
         stream.VerifyGet(value => value.Length, Times.Once);
         stream.VerifyNoOtherCalls();
         _storage.VerifyNoOtherCalls();
+    }
+
+    [Theory]
+    [InlineData("text.jpg")]
+    [InlineData("text.txt")]
+    public async Task TestUploadImageWithUnsupportedContentsShouldRejectBeforeStorage(string fileName)
+    {
+        using var stream = new MemoryStream("not an image"u8.ToArray());
+
+        await Assert.ThrowsAsync<ArgumentException>(() => CreateService().UploadImageAsync(stream, fileName));
+        Assert.Equal(0, stream.Position);
+        _storage.VerifyNoOtherCalls();
+    }
+
+    [Fact]
+    public async Task TestUploadImageWithFilePathShouldPassOnlyTheLeafName()
+    {
+        using var stream = new MemoryStream(CreateJpeg(16));
+        const string url = "https://images.example.test/profile.jpg";
+        _storage.Setup(storage => storage.UploadFileAsync(stream, FileName)).ReturnsAsync(url);
+
+        Assert.Equal(url, await CreateService().UploadImageAsync(stream, "folder/subfolder/" + FileName));
+        Assert.Equal(0, stream.Position);
+        _storage.VerifyAll();
+    }
+
+    private static byte[] CreateJpeg(int size)
+    {
+        var bytes = new byte[size];
+        bytes[0] = 0xff;
+        bytes[1] = 0xd8;
+        bytes[2] = 0xff;
+        return bytes;
     }
 
     private FileService CreateService() => new(_storage.Object, _logger.Object);

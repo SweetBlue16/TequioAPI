@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Register buyer through the public form",
+    "status": "passed"
+  },
+  {
+    "name": "Reject valid credentials before email verification",
+    "status": "passed"
+  },
+  {
+    "name": "Verify the one-time code delivered over STARTTLS",
+    "status": "passed"
+  },
+  {
+    "name": "Sign in as verified buyer",
+    "status": "passed"
+  },
+  {
+    "name": "Open the catalog and preserve buyer restrictions",
+    "status": "passed"
+  },
+  {
+    "name": "Focus after opening",
+    "element": "<section class=\"_termsScrollBox_14irm_17\" aria-label=\"Políticas y lineamientos para vendedores\"><article class=\"_policyItem_14irm_"
+  },
+  {
+    "name": "Focus after closing",
+    "element": "<button type=\"button\" class=\"_registerButton_yoazp_201\">Darme de alta como vendedor gratis</button>"
+  },
+  {
+    "name": "Operate the seller terms modal by keyboard with restored focus",
+    "status": "passed"
+  },
+  {
+    "name": "Check the anonymous protected route redirect",
+    "status": "passed"
+  }
+]

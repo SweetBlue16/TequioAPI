@@ -1,0 +1,93 @@
+Summary
+  Generated on: 23/11/2026 - 04:01:23 p. m.
+  Parser: OpenCover
+  Assemblies: 3
+  Classes: 68
+  Files: 63
+  Line coverage: 41.5%
+  Covered lines: 1061
+  Uncovered lines: 1492
+  Coverable lines: 2553
+  Total lines: 4740
+  Branch coverage: 31.2% (213 of 681)
+  Covered branches: 213
+  Total branches: 681
+  Method coverage: 50.2% (190 of 378)
+  Full method coverage: 44.4% (168 of 378)
+  Covered methods: 190
+  Fully covered methods: 168
+  Total methods: 378
+
+Tequio.Api                                                        49.2%
+  ApiValidationMessages                                            100%
+  Microsoft.AspNetCore.OpenApi.Generated                             0%
+  Program                                                         79.3%
+  System.Runtime.CompilerServices                                    0%
+  Tequio.Api.Controllers.AuthController                           95.2%
+  Tequio.Api.Controllers.DeliveryPointController                  69.5%
+  Tequio.Api.Controllers.FilesController                           100%
+  Tequio.Api.Controllers.ProductController                        96.6%
+  Tequio.Api.Controllers.UserController                            100%
+  Tequio.Api.Extensions.ClaimsPrincipalExtensions                 71.4%
+  Tequio.Api.Middlewares.GlobalExceptionMiddleware                69.2%
+  Tequio.Api.Validators.NumberValidator                            100%
+  Tequio.Api.Validators.PageValidator                              100%
+  Tequio.Api.Validators.StringConverter                            100%
+
+Tequio.Domain                                                     90.2%
+  Tequio.Domain.Dtos.AuthorizeAdminRequestDto                      100%
+  Tequio.Domain.Dtos.CreateBaseProductDto                          100%
+  Tequio.Domain.Dtos.DeliveryPointDto                                0%
+  Tequio.Domain.Dtos.DeliveryPointPageDto                          100%
+  Tequio.Domain.Dtos.EmailAddressRequestDto                        100%
+  Tequio.Domain.Dtos.LoginRequestDto                               100%
+  Tequio.Domain.Dtos.ProductDto                                    100%
+  Tequio.Domain.Dtos.ProductPageDto                                100%
+  Tequio.Domain.Dtos.RegisterRequestDto                            100%
+  Tequio.Domain.Dtos.ResetPasswordRequestDto                       100%
+  Tequio.Domain.Dtos.SaveDeliveryPointDto                          100%
+  Tequio.Domain.Dtos.UpdateProfilePictureDto                       100%
+  Tequio.Domain.Dtos.UpdateUserProfileDto                          100%
+  Tequio.Domain.Dtos.UserProfileDto                                100%
+  Tequio.Domain.Dtos.VerifyAccountRequestDto                       100%
+  Tequio.Domain.Email.EmailContent                                 100%
+  Tequio.Domain.Email.EmailDeliveryException                       100%
+  Tequio.Domain.Email.EmailTemplateProvider                       93.5%
+  Tequio.Domain.Email.SecurityCodeEmailRequest                     100%
+  Tequio.Domain.Models.UserVerificationData                        100%
+  Tequio.Domain.Services.AuthService                              78.4%
+  Tequio.Domain.Services.DeliveryPointConflictException            100%
+  Tequio.Domain.Services.DeliveryPointService                     93.5%
+  Tequio.Domain.Services.FileService                                85%
+  Tequio.Domain.Services.JwtProvider                              96.7%
+  Tequio.Domain.Services.JwtSigningKey                             100%
+  Tequio.Domain.Services.ProductConflictException                  100%
+  Tequio.Domain.Services.ProductOwnershipException                 100%
+  Tequio.Domain.Services.ProductService                            100%
+  Tequio.Domain.Services.UserService                               100%
+  Tequio.Domain.Services.VerificationCodeRateLimitException        100%
+
+Tequio.Infrastructure                                              9.6%
+  Tequio.Infrastructure.Data.DataSeeder                             20%
+  Tequio.Infrastructure.Email.EmailOptions                         100%
+  Tequio.Infrastructure.Email.EmailService                        73.9%
+  Tequio.Infrastructure.Email.SmtpClientFactory                      0%
+  Tequio.Infrastructure.Helpers.SqlExceptionMapper                   0%
+  Tequio.Infrastructure.Models.BaseProduct                           0%
+  Tequio.Infrastructure.Models.Batch                                 0%
+  Tequio.Infrastructure.Models.DeliveryPoint                         0%
+  Tequio.Infrastructure.Models.Order                                 0%
+  Tequio.Infrastructure.Models.OrderDetail                           0%
+  Tequio.Infrastructure.Models.Package                               0%
+  Tequio.Infrastructure.Models.ProductCategory                       0%
+  Tequio.Infrastructure.Models.Role                                  0%
+  Tequio.Infrastructure.Models.TequioDbContext                     6.2%
+  Tequio.Infrastructure.Models.User                                  0%
+  Tequio.Infrastructure.Models.VerificationCode                      0%
+  Tequio.Infrastructure.Repositories.AuthRepository                  0%
+  Tequio.Infrastructure.Repositories.DeliveryPointRepository         0%
+  Tequio.Infrastructure.Repositories.ProductRepository               0%
+  Tequio.Infrastructure.Repositories.UserRepository                  0%
+  Tequio.Infrastructure.Repositories.VerificationCodeRepository      0%
+  Tequio.Infrastructure.Security.VerificationCodeGenerator         100%
+  Tequio.Infrastructure.Services.CloudinaryStorageService            0%

@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 using System.Data.Common;
@@ -15,6 +15,8 @@ namespace Tequio.Infrastructure.Repositories
     /// </summary>
     public class UserRepository : IUserRepository
     {
+        private const string UserIdParameter = "@userId";
+
         private readonly TequioDbContext _dbContext;
 
         public UserRepository(TequioDbContext dbContext)
@@ -29,7 +31,7 @@ namespace Tequio.Infrastructure.Repositories
                 await using var command = _dbContext.Database.GetDbConnection().CreateCommand();
                 command.CommandText = "USP_GetUserProfile";
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add(new SqlParameter("@userId", userId));
+                command.Parameters.Add(new SqlParameter(UserIdParameter, userId));
 
                 await _dbContext.Database.OpenConnectionAsync();
                 await using var reader = await command.ExecuteReaderAsync();
@@ -52,7 +54,7 @@ namespace Tequio.Infrastructure.Repositories
             {
                 await _dbContext.Database.ExecuteSqlRawAsync(
                     "EXEC USP_UpdateUserProfilePicture @userId, @profilePictureUrl",
-                    new SqlParameter("@userId", userId),
+                    new SqlParameter(UserIdParameter, userId),
                     new SqlParameter("@profilePictureUrl", profilePictureUrl)
                 );
             }
@@ -68,7 +70,7 @@ namespace Tequio.Infrastructure.Repositories
             {
                 await _dbContext.Database.ExecuteSqlRawAsync(
                     "EXEC USP_UpdateUserProfile @userId, @firstName, @paternalLastName, @maternalLastName, @birthDate, @phoneNumber, @locality, @biography",
-                    new SqlParameter("@userId", userId),
+                    new SqlParameter(UserIdParameter, userId),
                     new SqlParameter("@firstName", request.FirstName),
                     new SqlParameter("@paternalLastName", request.PaternalLastName),
                     new SqlParameter("@maternalLastName", request.MaternalLastName ?? (object)DBNull.Value),
@@ -111,7 +113,7 @@ namespace Tequio.Infrastructure.Repositories
             {
                 await _dbContext.Database.ExecuteSqlRawAsync(
                     "EXEC USP_PromoteToProducer @userId",
-                    new[] { new SqlParameter("@userId", userId) },
+                    new[] { new SqlParameter(UserIdParameter, userId) },
                     cancellationToken
                 );
             }

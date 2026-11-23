@@ -1,0 +1,165 @@
+
+> tequioapp@0.0.0 test:coverage
+> jest --coverage --ci --runInBand --json --outputFile=C:\Projects\TEQUIO\TequioAPI\docs\reports\2026-11-23-iteracion-1/jest-final.json
+
+-------------------------------------------------------------|---------|----------|---------|---------|-------------------------------------------------------
+File                                                         | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                                     
+-------------------------------------------------------------|---------|----------|---------|---------|-------------------------------------------------------
+All files                                                    |   44.21 |    44.61 |   40.75 |   43.85 |                                                       
+ src                                                         |       0 |        0 |       0 |       0 |                                                       
+  App.tsx                                                    |       0 |        0 |       0 |       0 | 1-38                                                  
+ src/components/admin/AdminWelcome                           |       0 |        0 |       0 |       0 |                                                       
+  AdminWelcome.tsx                                           |       0 |        0 |       0 |       0 | 1-30                                                  
+ src/components/admin/deliveryPoints/DeliveryPointDetailCard |       0 |        0 |       0 |       0 |                                                       
+  DeliveryPointDetailCard.tsx                                |       0 |        0 |       0 |       0 | 1-168                                                 
+ src/components/admin/deliveryPoints/DeliveryPointListItem   |       0 |        0 |       0 |       0 |                                                       
+  DeliveryPointListItem.tsx                                  |       0 |        0 |       0 |       0 | 1-102                                                 
+ src/components/admin/deliveryPoints/DeliveryPointListTable  |       0 |        0 |       0 |       0 |                                                       
+  DeliveryPointListTable.tsx                                 |       0 |        0 |       0 |       0 | 1-64                                                  
+ src/components/admin/deliveryPoints/DeliveryPointToolbar    |       0 |      100 |       0 |       0 |                                                       
+  DeliveryPointToolbar.tsx                                   |       0 |      100 |       0 |       0 | 1-67                                                  
+ src/components/admin/deliveryPoints/DeliveryPointWizard     |   35.03 |    37.07 |   30.55 |   36.06 |                                                       
+  DeliveryPointWizard.tsx                                    |       0 |        0 |       0 |       0 | 1-240                                                 
+  useDeliveryPointWizard.ts                                  |   48.97 |    56.89 |      55 |   52.38 | 70-71,75-78,95-105,109-128,132-150,155-156            
+ src/components/common/Avatar                                |   91.66 |    71.42 |      50 |    90.9 |                                                       
+  Avatar.tsx                                                 |   91.66 |    71.42 |      50 |    90.9 | 51                                                    
+ src/components/common/Button                                |     100 |      100 |     100 |     100 |                                                       
+  Button.tsx                                                 |     100 |      100 |     100 |     100 |                                                       
+ src/components/common/Card                                  |     100 |    83.33 |     100 |     100 |                                                       
+  Card.tsx                                                   |     100 |    83.33 |     100 |     100 | 61,70                                                 
+ src/components/common/CodeInput                             |       0 |        0 |       0 |       0 |                                                       
+  CodeInput.tsx                                              |       0 |        0 |       0 |       0 | 1-132                                                 
+ src/components/common/ColorBar                              |     100 |       50 |     100 |     100 |                                                       
+  ColorBar.tsx                                               |     100 |       50 |     100 |     100 | 10-11                                                 
+ src/components/common/ComboBox                              |     100 |      100 |     100 |     100 |                                                       
+  ComboBox.tsx                                               |     100 |      100 |     100 |     100 |                                                       
+ src/components/common/DateInputField                        |     100 |    88.23 |     100 |     100 |                                                       
+  DateInputField.tsx                                         |     100 |    88.23 |     100 |     100 | 40,76                                                 
+ src/components/common/ImageUploader                         |   89.85 |     87.5 |   73.33 |   89.23 |                                                       
+  ImagePreview.tsx                                           |    91.3 |       75 |   83.33 |      90 | 37-38                                                 
+  ImageUploader.tsx                                          |   89.13 |       90 |   66.66 |   88.88 | 59-60,64-65,82                                        
+ src/components/common/InputField                            |   89.47 |    83.33 |   33.33 |   94.11 |                                                       
+  InputField.tsx                                             |   89.47 |    83.33 |   33.33 |   94.11 | 51                                                    
+ src/components/common/MapboxPicker                          |     100 |       96 |     100 |     100 |                                                       
+  MapboxPicker.tsx                                           |     100 |       96 |     100 |     100 | 65                                                    
+ src/components/common/Modal                                 |      88 |    95.65 |      60 |    87.5 |                                                       
+  Modal.tsx                                                  |      88 |    95.65 |      60 |    87.5 | 62-90                                                 
+ src/components/common/NavTextButton                         |      90 |       80 |     100 |   88.88 |                                                       
+  NavTextButton.tsx                                          |      90 |       80 |     100 |   88.88 | 32                                                    
+ src/components/common/OrnamentCard                          |       0 |        0 |       0 |       0 |                                                       
+  OrnamentCard.tsx                                           |       0 |        0 |       0 |       0 | 1-46                                                  
+ src/components/common/Pagination                            |   65.62 |    42.85 |   57.14 |   63.33 |                                                       
+  Pagination.tsx                                             |   65.62 |    42.85 |   57.14 |   63.33 | 42-50,64-65,70-71,105,120                             
+ src/components/common/SearchBar                             |       0 |        0 |       0 |       0 |                                                       
+  SearchBar.tsx                                              |       0 |        0 |       0 |       0 | 1-66                                                  
+ src/components/common/SortSelect                            |       0 |        0 |       0 |       0 |                                                       
+  SortSelect.tsx                                             |       0 |        0 |       0 |       0 | 1-79                                                  
+ src/components/common/Stepper                               |   95.45 |    93.33 |   66.66 |   95.23 |                                                       
+  Stepper.tsx                                                |   95.45 |    93.33 |   66.66 |   95.23 | 90                                                    
+ src/components/common/TextLink                              |      90 |    57.14 |     100 |   88.88 |                                                       
+  TextLink.tsx                                               |      90 |    57.14 |     100 |   88.88 | 78                                                    
+ src/components/common/Toast                                 |     100 |      100 |     100 |     100 |                                                       
+  Toast.tsx                                                  |     100 |      100 |     100 |     100 |                                                       
+ src/components/layout/AdminSidebar                          |     100 |       60 |     100 |     100 |                                                       
+  AdminSidebar.tsx                                           |     100 |       60 |     100 |     100 | 59-68                                                 
+ src/components/layout/Navbar                                |   97.05 |      100 |   83.33 |   96.66 |                                                       
+  Navbar.tsx                                                 |   97.05 |      100 |   83.33 |   96.66 | 43                                                    
+ src/components/layout/ProducerSidebar                       |       0 |        0 |       0 |       0 |                                                       
+  ProducerSidebar.tsx                                        |       0 |        0 |       0 |       0 | 1-110                                                 
+ src/components/producer/BecomeSellerModal                   |       0 |        0 |       0 |       0 |                                                       
+  BecomeSellerModal.tsx                                      |       0 |        0 |       0 |       0 | 1-126                                                 
+ src/components/producer/JoinSellersPrompt                   |       0 |      100 |       0 |       0 |                                                       
+  JoinSellersPrompt.tsx                                      |       0 |      100 |       0 |       0 | 1-102                                                 
+ src/components/producer/ProducerWelcome                     |       0 |        0 |       0 |       0 |                                                       
+  ProducerWelcome.tsx                                        |       0 |        0 |       0 |       0 | 1-33                                                  
+ src/components/producer/products/AddProductForm             |    96.9 |    93.93 |     100 |   96.66 |                                                       
+  AddProductForm.tsx                                         |     100 |      100 |     100 |     100 |                                                       
+  useAddProductForm.ts                                       |   96.15 |     90.9 |     100 |   95.83 | 52-54                                                 
+ src/components/producer/products/ProductListItem            |       0 |        0 |       0 |       0 |                                                       
+  ProductListItem.tsx                                        |       0 |        0 |       0 |       0 | 1-91                                                  
+ src/components/producer/products/ProductListTable           |       0 |        0 |       0 |       0 |                                                       
+  ProductListTable.tsx                                       |       0 |        0 |       0 |       0 | 1-60                                                  
+ src/components/producer/products/ProductToolbar             |       0 |        0 |       0 |       0 |                                                       
+  ProductToolbar.tsx                                         |       0 |        0 |       0 |       0 | 1-62                                                  
+ src/config                                                  |       0 |      100 |       0 |       0 |                                                       
+  mapbox.ts                                                  |       0 |      100 |       0 |       0 | 2                                                     
+ src/contexts                                                |   87.09 |    66.66 |   84.21 |   91.89 |                                                       
+  AuthContext.ts                                             |   64.28 |       25 |      50 |      70 | 23-25                                                 
+  AuthServiceContext.tsx                                     |   91.13 |    72.41 |   88.23 |   95.31 | 38,80-81                                              
+ src/pages                                                   |       0 |      100 |       0 |       0 |                                                       
+  MyProducts.tsx                                             |       0 |      100 |       0 |       0 | 1-2                                                   
+ src/pages/admin                                             |   85.71 |    83.33 |   66.66 |      85 |                                                       
+  Admin.tsx                                                  |   85.71 |    83.33 |   66.66 |      85 | 24-25,40                                              
+ src/pages/admin/AddDeliveryPoint                            |       0 |        0 |       0 |       0 |                                                       
+  AddDeliveryPoint.tsx                                       |       0 |        0 |       0 |       0 | 1-81                                                  
+ src/pages/admin/DeliveryPoints                              |       0 |        0 |       0 |       0 |                                                       
+  DeliveryPoints.tsx                                         |       0 |        0 |       0 |       0 | 1-253                                                 
+ src/pages/admin/EditDeliveryPoint                           |       0 |        0 |       0 |       0 |                                                       
+  EditDeliveryPoint.tsx                                      |       0 |        0 |       0 |       0 | 1-129                                                 
+ src/pages/auth/Login                                        |   92.85 |    83.33 |      75 |   94.33 |                                                       
+  Login.tsx                                                  |   92.85 |    83.33 |      75 |   94.33 | 92,145-185                                            
+ src/pages/auth/RecoverAccount                               |       0 |        0 |       0 |       0 |                                                       
+  RecoverAccount.tsx                                         |       0 |        0 |       0 |       0 | 1-212                                                 
+ src/pages/auth/RecoverAccount/components                    |       0 |        0 |       0 |       0 |                                                       
+  RequestCodeStep.tsx                                        |       0 |      100 |       0 |       0 | 1-34                                                  
+  ResetPasswordStep.tsx                                      |       0 |        0 |       0 |       0 | 1-91                                                  
+  SuccessStep.tsx                                            |       0 |      100 |       0 |       0 | 1-13                                                  
+ src/pages/auth/Register                                     |       0 |        0 |       0 |       0 |                                                       
+  Register.tsx                                               |       0 |        0 |       0 |       0 | 1-185                                                 
+ src/pages/auth/Register/components                          |   55.44 |    36.92 |   36.36 |   55.67 |                                                       
+  RegisterWizard.tsx                                         |   62.92 |    36.92 |    42.1 |   62.79 | 71-74,101-106,139-160,169,171,185-189,201-202,234-347 
+  RoleSelector.tsx                                           |       0 |      100 |       0 |       0 | 1-70                                                  
+ src/pages/auth/VerifyAccount                                |       0 |        0 |       0 |       0 |                                                       
+  VerifyAccount.tsx                                          |       0 |        0 |       0 |       0 | 1-268                                                 
+ src/pages/catalog                                           |     100 |    88.46 |     100 |     100 |                                                       
+  Catalog.tsx                                                |     100 |    88.46 |     100 |     100 | 48-52,91                                              
+ src/pages/producer                                          |       0 |        0 |       0 |       0 |                                                       
+  Producer.tsx                                               |       0 |        0 |       0 |       0 | 1-91                                                  
+ src/pages/producer/AddProduct                               |   93.65 |       75 |      90 |   93.44 |                                                       
+  AddProduct.tsx                                             |   93.65 |       75 |      90 |   93.44 | 42-43,62,112                                          
+ src/pages/producer/Products                                 |       0 |        0 |       0 |       0 |                                                       
+  Products.tsx                                               |       0 |        0 |       0 |       0 | 1-307                                                 
+ src/pages/profile                                           |   92.68 |    83.82 |    91.3 |   93.58 |                                                       
+  ProfilePage.tsx                                            |   92.68 |    83.82 |    91.3 |   93.58 | 79,112,121-125,263                                    
+ src/routes                                                  |   18.75 |      100 |    7.69 |   21.42 |                                                       
+  AdminRoutes.tsx                                            |       0 |      100 |       0 |       0 | 1-27                                                  
+  AppRouter.tsx                                              |       0 |      100 |       0 |       0 | 1-73                                                  
+  AuthRoutes.tsx                                             |       0 |      100 |       0 |       0 | 1-21                                                  
+  ProducerRoutes.tsx                                         |       0 |      100 |       0 |       0 | 1-21                                                  
+  ProtectedRoutes.tsx                                        |     100 |      100 |     100 |     100 |                                                       
+ src/services                                                |     100 |      100 |     100 |     100 |                                                       
+  api.ts                                                     |     100 |      100 |     100 |     100 |                                                       
+ src/services/auth                                           |   72.22 |    79.31 |   57.89 |   69.38 |                                                       
+  AuthService.ts                                             |       0 |        0 |       0 |       0 | 11-49                                                 
+  TokenStorage.ts                                            |     100 |      100 |     100 |     100 |                                                       
+  attachAuthInterceptors.ts                                  |    92.3 |    66.66 |      75 |    90.9 | 12                                                    
+  decodeSession.ts                                           |   93.33 |    94.44 |     100 |   93.33 | 39                                                    
+ src/services/deliveryPoints                                 |       0 |        0 |       0 |       0 |                                                       
+  DeliveryPointService.ts                                    |       0 |        0 |       0 |       0 | 1-209                                                 
+  deliveryPointError.ts                                      |       0 |        0 |       0 |       0 | 1-15                                                  
+ src/services/files                                          |   33.33 |        0 |      50 |   33.33 |                                                       
+  FileService.ts                                             |   33.33 |        0 |      50 |   33.33 | 28-45                                                 
+ src/services/products                                       |      30 |      100 |      20 |      30 |                                                       
+  ProductService.ts                                          |      30 |      100 |      20 |      30 | 38-73                                                 
+ src/services/profile                                        |   61.53 |       50 |      50 |   66.66 |                                                       
+  ProfileService.ts                                          |   61.53 |       50 |      50 |   66.66 | 44-49,65                                              
+ src/utils                                                   |   48.63 |    25.71 |   45.71 |   44.32 |                                                       
+  apiError.ts                                                |       0 |      100 |       0 |       0 | 12                                                    
+  deliveryPointGeocoding.ts                                  |   26.92 |       10 |    12.5 |      25 | 47,67-83,99-116,127-140                               
+  deliveryPointValidators.ts                                 |   35.06 |    12.24 |      10 |   27.53 | 26-44,56-69,93-104,111-117,124-130,137-147,156-175    
+  formValidators.ts                                          |      75 |    50.98 |    87.5 |   70.66 | 52,95,130,146-161,201-204,221-233                     
+-------------------------------------------------------------|---------|----------|---------|---------|-------------------------------------------------------
+
+=============================== Coverage summary ===============================
+Statements   : 44.21% ( 1047/2368 )
+Branches     : 44.61% ( 526/1179 )
+Functions    : 40.75% ( 194/476 )
+Lines        : 43.85% ( 953/2173 )
+================================================================================
+
+Test Suites: 17 passed, 17 total
+Tests:       125 passed, 125 total
+Snapshots:   0 total
+Time:        43.006 s
+Ran all test suites.
+Test results written to: ..\TequioAPI\docs\reports\2026-11-23-iteracion-1\jest-final.json

@@ -1,0 +1,5 @@
+README.md
+backend\Tequio.Api\Program.cs
+postman\README.md
+backend\Tequio.Domain\Services\JwtSigningKey.cs
+backend\Tequio.Tests\Auth\AdminAuthorizationHttpTest.cs

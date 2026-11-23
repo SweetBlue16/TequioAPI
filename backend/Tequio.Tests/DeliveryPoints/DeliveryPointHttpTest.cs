@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
@@ -22,12 +23,14 @@ public sealed class DeliveryPointHttpTest
 {
     private sealed class Factory : WebApplicationFactory<Program>
     {
+        public JwtSigningKey SigningKey { get; } = new(RandomNumberGenerator.GetBytes(32));
+
         public Mock<IDeliveryPointRepository> Repository { get; } = new();
         public IConfiguration TestConfiguration { get; } = new ConfigurationBuilder()
             .AddInMemoryCollection(new Dictionary<string, string?>
             {
-                ["Jwt:Key"] = "TEST_ONLY_SIGNING_KEY_WITH_MORE_THAN_32_CHARACTERS",
-                ["Jwt:Issuer"] = "TequioTests", ["Jwt:Audience"] = "TequioTests"
+                ["Jwt:Issuer"] = "TequioTests",
+                ["Jwt:Audience"] = "TequioTests"
             }).Build();
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -36,6 +39,7 @@ public sealed class DeliveryPointHttpTest
             builder.ConfigureAppConfiguration((_, config) => config.AddConfiguration(TestConfiguration));
             builder.ConfigureServices(services =>
             {
+                services.AddSingleton(SigningKey);
                 services.RemoveAll<IDeliveryPointRepository>();
                 services.AddSingleton(Repository.Object);
                 services.RemoveAll<DataSeeder>();
@@ -52,7 +56,7 @@ public sealed class DeliveryPointHttpTest
             if (role is not null)
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
-                    "Bearer", new JwtProvider(TestConfiguration).GenerateToken("123", role));
+                    "Bearer", new JwtProvider(TestConfiguration, SigningKey).GenerateToken("123", role));
             }
             return client;
         }

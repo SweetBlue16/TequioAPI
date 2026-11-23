@@ -40,8 +40,8 @@ namespace Tequio.Domain.Repositories
         /// <param name="cancellationToken">Token used to cancel the asynchronous operation.</param>
         /// <returns>Paginated response containing matching products and total item count.</returns>
         Task<ProductPageDto> GetProductsFromProducerAsync(
-            int producerId, 
-            int pageIndex, 
+            int producerId,
+            int pageIndex,
             int pageSize,
             CancellationToken cancellationToken = default);
 
@@ -54,8 +54,8 @@ namespace Tequio.Domain.Repositories
         /// <param name="cancellationToken">Token used to cancel the asynchronous operation.</param>
         /// <returns>Paginated response containing matching products and total item count.</returns>
         Task<ProductPageDto> GetProductsByCategoryAsync(
-            int categoryId, 
-            int pageIndex, 
+            int categoryId,
+            int pageIndex,
             int pageSize,
             CancellationToken cancellationToken = default);
     }

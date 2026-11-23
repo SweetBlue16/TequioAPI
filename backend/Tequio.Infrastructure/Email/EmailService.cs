@@ -52,7 +52,10 @@ public sealed class EmailService : IEmailService
             ? SecureSocketOptions.StartTls
             : SecureSocketOptions.None;
 
-        _logger.LogInformation("Solicitud de envío de correo de código de seguridad para {EmailType}.", request.Type);
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation("Solicitud de envío de correo de código de seguridad para {EmailType}.", request.Type);
+        }
         using var smtpClient = _smtpClientFactory.Create();
 
         try
@@ -69,7 +72,10 @@ public sealed class EmailService : IEmailService
             await smtpClient.SendAsync(message, cancellationToken);
             await smtpClient.DisconnectAsync(true, cancellationToken);
 
-            _logger.LogInformation("Código de seguridad enviado para {EmailType}.", request.Type);
+            if (_logger.IsEnabled(LogLevel.Information))
+            {
+                _logger.LogInformation("Código de seguridad enviado para {EmailType}.", request.Type);
+            }
         }
         catch (AuthenticationException exception)
         {

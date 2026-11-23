@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Verified Admin sees the delivery points panel",
+    "status": "passed"
+  },
+  {
+    "name": "A native button opens the point and is independent of its secondary controls",
+    "status": "failed",
+    "error": "locator.waitFor: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('dialog') to be visible\u001b[22m\n"
+  }
+]

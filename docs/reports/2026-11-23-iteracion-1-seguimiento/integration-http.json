@@ -1,0 +1,224 @@
+[
+  {
+    "label": "Sign in with verified test account",
+    "method": "POST",
+    "route": "/auth/login",
+    "expected": 200,
+    "actual": 200
+  },
+  {
+    "label": "Master Admin creates a pending Admin account",
+    "method": "POST",
+    "route": "/auth/register-admin",
+    "expected": 201,
+    "actual": 201
+  },
+  {
+    "label": "Master Admin authorizes the pending Admin",
+    "method": "POST",
+    "route": "/auth/authorize-admin",
+    "expected": 200,
+    "actual": 200
+  },
+  {
+    "label": "Sign in with verified test account",
+    "method": "POST",
+    "route": "/auth/login",
+    "expected": 200,
+    "actual": 200
+  },
+  {
+    "label": "Admin role rejected in public registration",
+    "method": "POST",
+    "route": "/auth/register",
+    "expected": 400,
+    "actual": 400
+  },
+  {
+    "label": "Register public test profile",
+    "method": "POST",
+    "route": "/auth/register",
+    "expected": 201,
+    "actual": 201
+  },
+  {
+    "label": "Reject incorrect verification code",
+    "method": "POST",
+    "route": "/auth/verify",
+    "expected": 400,
+    "actual": 400
+  },
+  {
+    "label": "Reject incorrect verification code",
+    "method": "POST",
+    "route": "/auth/verify",
+    "expected": 400,
+    "actual": 400
+  },
+  {
+    "label": "Reject incorrect verification code",
+    "method": "POST",
+    "route": "/auth/verify",
+    "expected": 400,
+    "actual": 400
+  },
+  {
+    "label": "Reject old correct code after attempts run out",
+    "method": "POST",
+    "route": "/auth/verify",
+    "expected": 400,
+    "actual": 400
+  },
+  {
+    "label": "Request another verification code",
+    "method": "POST",
+    "route": "/auth/resend-verification-code",
+    "expected": 200,
+    "actual": 200
+  },
+  {
+    "label": "Verify public test profile",
+    "method": "POST",
+    "route": "/auth/verify",
+    "expected": 200,
+    "actual": 200
+  },
+  {
+    "label": "Sign in with verified test account",
+    "method": "POST",
+    "route": "/auth/login",
+    "expected": 200,
+    "actual": 200
+  },
+  {
+    "label": "Register public test profile",
+    "method": "POST",
+    "route": "/auth/register",
+    "expected": 201,
+    "actual": 201
+  },
+  {
+    "label": "Verify public test profile",
+    "method": "POST",
+    "route": "/auth/verify",
+    "expected": 200,
+    "actual": 200
+  },
+  {
+    "label": "Sign in with verified test account",
+    "method": "POST",
+    "route": "/auth/login",
+    "expected": 200,
+    "actual": 200
+  },
+  {
+    "label": "Read producer profile",
+    "method": "GET",
+    "route": "/users/me",
+    "expected": 200,
+    "actual": 200
+  },
+  {
+    "label": "Buyer cannot create catalog products",
+    "method": "POST",
+    "route": "/products",
+    "expected": 403,
+    "actual": 403
+  },
+  {
+    "label": "Create producer test catalog product",
+    "method": "POST",
+    "route": "/products",
+    "expected": 201,
+    "actual": 201
+  },
+  {
+    "label": "Read category and confirm the product persists",
+    "method": "GET",
+    "route": "/products/category/1?pageIndex=1&pageSize=100",
+    "expected": 200,
+    "actual": 200
+  },
+  {
+    "label": "Update authenticated producer profile",
+    "method": "PUT",
+    "route": "/users/me",
+    "expected": 200,
+    "actual": 200
+  },
+  {
+    "label": "Read updated producer profile",
+    "method": "GET",
+    "route": "/users/me",
+    "expected": 200,
+    "actual": 200
+  },
+  {
+    "label": "Request password recovery through the isolated inbox",
+    "method": "POST",
+    "route": "/auth/recover",
+    "expected": 200,
+    "actual": 200
+  },
+  {
+    "label": "Reset password with received OTP",
+    "method": "POST",
+    "route": "/auth/reset-password",
+    "expected": 200,
+    "actual": 200
+  },
+  {
+    "label": "Reject old password after reset",
+    "method": "POST",
+    "route": "/auth/login",
+    "expected": 401,
+    "actual": 401
+  },
+  {
+    "label": "Sign in with verified test account",
+    "method": "POST",
+    "route": "/auth/login",
+    "expected": 200,
+    "actual": 200
+  },
+  {
+    "label": "Reject reused recovery OTP",
+    "method": "POST",
+    "route": "/auth/reset-password",
+    "expected": 400,
+    "actual": 400
+  },
+  {
+    "label": "Existing active batch prevents product deactivation",
+    "method": "PATCH",
+    "route": "/products/10/deactive",
+    "expected": 409,
+    "actual": 409
+  },
+  {
+    "label": "Create a separate product with no batches",
+    "method": "POST",
+    "route": "/products",
+    "expected": 201,
+    "actual": 201
+  },
+  {
+    "label": "Deactivate only the unlinked product",
+    "method": "PATCH",
+    "route": "/products/11/deactive",
+    "expected": 200,
+    "actual": 200
+  },
+  {
+    "label": "Check both product states through the catalog",
+    "method": "GET",
+    "route": "/products/category/1?pageIndex=1&pageSize=100",
+    "expected": 200,
+    "actual": 200
+  },
+  {
+    "label": "Producer denied administrative action",
+    "expected": 403,
+    "actual": 403
+  }
+]

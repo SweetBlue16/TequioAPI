@@ -1,0 +1,760 @@
+{
+  "stats": {
+    "iterations": {
+      "total": 1,
+      "pending": 0,
+      "failed": 0
+    },
+    "items": {
+      "total": 47,
+      "pending": 0,
+      "failed": 0
+    },
+    "scripts": {
+      "total": 71,
+      "pending": 0,
+      "failed": 0
+    },
+    "prerequests": {
+      "total": 47,
+      "pending": 0,
+      "failed": 0
+    },
+    "requests": {
+      "total": 47,
+      "pending": 0,
+      "failed": 0
+    },
+    "tests": {
+      "total": 47,
+      "pending": 0,
+      "failed": 0
+    },
+    "assertions": {
+      "total": 83,
+      "pending": 0,
+      "failed": 0
+    },
+    "testScripts": {
+      "total": 47,
+      "pending": 0,
+      "failed": 0
+    },
+    "prerequestScripts": {
+      "total": 24,
+      "pending": 0,
+      "failed": 0
+    }
+  },
+  "failures": [],
+  "executions": [
+    {
+      "id": "39efa761-b7d9-4775-ae66-e537d9bd6a9b",
+      "name": "CP-PTO-01 | Alta válida",
+      "method": "POST",
+      "status": 201,
+      "assertions": [
+        {
+          "name": "HTTP 201",
+          "passed": true
+        },
+        {
+          "name": "Identificador y ubicación del recurso",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "622a05ce-1a35-42a6-a68b-623caa57f343",
+      "name": "CP-PTO-01.1 | Persistencia del alta",
+      "method": "GET",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        },
+        {
+          "name": "Campos persistidos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "62bc6112-3a22-451f-8e0f-476e027a3a58",
+      "name": "CP-PTO-02 | Repetir exactamente el alta",
+      "method": "POST",
+      "status": 409,
+      "assertions": [
+        {
+          "name": "HTTP 409",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "695ac7cc-bd5b-489e-a92e-0d43d8872abd",
+      "name": "CP-PTO-02.2 | Duplicado ignora espacios mayúsculas y acentos",
+      "method": "POST",
+      "status": 409,
+      "assertions": [
+        {
+          "name": "HTTP 409",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "5e3b5ac3-9e4c-45c6-88e2-38edaba2beb1",
+      "name": "CP-PTO-02.1 | Alta rechazada conserva datos",
+      "method": "GET",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        },
+        {
+          "name": "Sin cambios tras duplicado",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "ac956962-19da-4b63-8c2c-7e736e6b3bb9",
+      "name": "CP-PTO-03 | POST alta sin rol Administrador",
+      "method": "POST",
+      "status": 403,
+      "assertions": [
+        {
+          "name": "HTTP 403",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "20d5070e-a983-4ed8-b1fc-e527855583d1",
+      "name": "CP-PTO-04 | POST alta sin token",
+      "method": "POST",
+      "status": 401,
+      "assertions": [
+        {
+          "name": "HTTP 401",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "90a44b83-b98a-4069-a4f7-7ba5962aeda2",
+      "name": "CP-PTO-03 | PUT {{deliveryPointId}} sin rol Administrador",
+      "method": "PUT",
+      "status": 403,
+      "assertions": [
+        {
+          "name": "HTTP 403",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "6aecfd35-2c16-48cc-a6de-691703bba766",
+      "name": "CP-PTO-04 | PUT {{deliveryPointId}} sin token",
+      "method": "PUT",
+      "status": 401,
+      "assertions": [
+        {
+          "name": "HTTP 401",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "70da0ef8-5b8f-4bc7-8e87-a52ad4dbe168",
+      "name": "CP-PTO-03 | PATCH deactive sin rol Administrador",
+      "method": "PATCH",
+      "status": 403,
+      "assertions": [
+        {
+          "name": "HTTP 403",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "90344509-0fdc-4bde-b378-4d0058bc4475",
+      "name": "CP-PTO-04 | PATCH deactive sin token",
+      "method": "PATCH",
+      "status": 401,
+      "assertions": [
+        {
+          "name": "HTTP 401",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "e6b46ce7-4f54-44d8-9f9b-9f341cc4269f",
+      "name": "CP-PTO-03 | PATCH active sin rol Administrador",
+      "method": "PATCH",
+      "status": 403,
+      "assertions": [
+        {
+          "name": "HTTP 403",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "c4083888-98b5-4ef1-8880-7567274ffc98",
+      "name": "CP-PTO-04 | PATCH active sin token",
+      "method": "PATCH",
+      "status": 401,
+      "assertions": [
+        {
+          "name": "HTTP 401",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "3426aa81-ac0e-4351-81a5-108b42aeea67",
+      "name": "CP-PTO-04.1 | Rechazos de autorización conservan estado",
+      "method": "GET",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        },
+        {
+          "name": "Sin cambios tras 401/403",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "4e13b364-02f1-4bbd-bbf7-44aaa827734f",
+      "name": "CP-PTO-05 | Capturar punto con lote vigente",
+      "method": "GET",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        },
+        {
+          "name": "Fixture activo",
+          "passed": true
+        },
+        {
+          "name": "Punto de prueba controlado",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "d8466f88-6c02-49cc-ab92-eefbd103c3a8",
+      "name": "CP-PTO-05.1 | RN-07 rechaza desactivación",
+      "method": "PATCH",
+      "status": 409,
+      "assertions": [
+        {
+          "name": "HTTP 409",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "c8ac9041-ec9c-4ae6-ac94-435a1aa1d133",
+      "name": "CP-PTO-06 | RN-07 conserva registro y estado",
+      "method": "GET",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        },
+        {
+          "name": "Punto idéntico después del rechazo",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "ade43f41-e0d9-497c-9f20-fd441c72a2c1",
+      "name": "CP-PTO-07 | Desactivar punto sin lotes",
+      "method": "PATCH",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        },
+        {
+          "name": "Mensaje de éxito",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "937c3d75-d42d-4ba4-855b-f31bad7812b2",
+      "name": "CP-PTO-07.1 | Registro conservado e inactivo",
+      "method": "GET",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        },
+        {
+          "name": "Baja lógica",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "f6e03766-388c-461c-a522-8e936f5c4d4d",
+      "name": "CP-PTO-08 | POST sin latitud",
+      "method": "POST",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "HTTP 400",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "acf0f86b-2246-4889-87f2-f62ea73d6605",
+      "name": "CP-PTO-08 | PUT sin latitud",
+      "method": "PUT",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "HTTP 400",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "b7dc5278-7cd0-4f98-ba30-c79f2c3c9692",
+      "name": "CP-PTO-08 | POST sin longitud",
+      "method": "POST",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "HTTP 400",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "402796ad-469f-4b34-9169-653101c43bf9",
+      "name": "CP-PTO-08 | PUT sin longitud",
+      "method": "PUT",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "HTTP 400",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "6e479bb7-7895-4280-b921-217cb4e6b408",
+      "name": "CP-PTO-08 | POST sin coordenadas",
+      "method": "POST",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "HTTP 400",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "830167a2-ad41-4ef3-8a4d-7cdf8ea119ff",
+      "name": "CP-PTO-08 | PUT sin coordenadas",
+      "method": "PUT",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "HTTP 400",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "49a3aea3-67a8-4715-9fcd-a074e44d783f",
+      "name": "CP-PTO-08 | POST latitud menor",
+      "method": "POST",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "HTTP 400",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "376970d6-1a8c-441b-961b-986b296b90af",
+      "name": "CP-PTO-08 | PUT latitud menor",
+      "method": "PUT",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "HTTP 400",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "2419b557-7250-43df-8dc3-fe73846dfb3a",
+      "name": "CP-PTO-08 | POST latitud mayor",
+      "method": "POST",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "HTTP 400",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "c5ebcae7-56fc-40f6-a3d6-285e130afa24",
+      "name": "CP-PTO-08 | PUT latitud mayor",
+      "method": "PUT",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "HTTP 400",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "127a84e1-910f-43a6-8120-6615a511556c",
+      "name": "CP-PTO-08 | POST longitud menor",
+      "method": "POST",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "HTTP 400",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "4748bc82-9a01-4029-9c20-2122908b7444",
+      "name": "CP-PTO-08 | PUT longitud menor",
+      "method": "PUT",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "HTTP 400",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "52508af7-f284-4720-81e1-8c9e3757149c",
+      "name": "CP-PTO-08 | POST longitud mayor",
+      "method": "POST",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "HTTP 400",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "00ba29c0-06b4-451e-b4d6-19c768fe0838",
+      "name": "CP-PTO-08 | PUT longitud mayor",
+      "method": "PUT",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "HTTP 400",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "4234bd2e-9aaa-4bd6-9a27-3e6ff716dad2",
+      "name": "CP-PTO-08 | POST no numérica",
+      "method": "POST",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "HTTP 400",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "b8609478-ae96-48fd-8a00-0a3d0b592796",
+      "name": "CP-PTO-08 | PUT no numérica",
+      "method": "PUT",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "HTTP 400",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "3680a36c-34c1-4111-9199-193d84936f43",
+      "name": "CP-PTO-09 | Municipio inexistente",
+      "method": "POST",
+      "status": 400,
+      "assertions": [
+        {
+          "name": "HTTP 400",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "42a19be0-f627-4e65-b46a-b4ed9ce2c2a1",
+      "name": "CP-PTO-10 | GET identificador inexistente",
+      "method": "GET",
+      "status": 404,
+      "assertions": [
+        {
+          "name": "HTTP 404",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "7a7c0f9d-1c50-4692-8a00-0f56e4bba445",
+      "name": "CP-PTO-10 | PUT identificador inexistente",
+      "method": "PUT",
+      "status": 404,
+      "assertions": [
+        {
+          "name": "HTTP 404",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "6cd333df-73a1-43b6-bb1a-49aa96379d1f",
+      "name": "CP-PTO-10 | PATCH identificador inexistente",
+      "method": "PATCH",
+      "status": 404,
+      "assertions": [
+        {
+          "name": "HTTP 404",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "15eff227-aeea-4984-b1b3-cc3e4d48738d",
+      "name": "CP-PTO-11 | Alta auxiliar para actualización",
+      "method": "POST",
+      "status": 201,
+      "assertions": [
+        {
+          "name": "HTTP 201",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "0c5f4a4a-4333-48e6-adbf-bc9f4904c271",
+      "name": "CP-PTO-11.1 | Capturar auxiliar",
+      "method": "GET",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "33fb2e93-e32b-4f09-80e1-6fc4d409b7ca",
+      "name": "CP-PTO-11.2 | Actualización duplicada",
+      "method": "PUT",
+      "status": 409,
+      "assertions": [
+        {
+          "name": "HTTP 409",
+          "passed": true
+        },
+        {
+          "name": "Error de aplicación sin detalles internos",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "96c00ad7-7f1f-46d4-b632-189c8c4c23c5",
+      "name": "CP-PTO-11.3 | Duplicado conserva auxiliar",
+      "method": "GET",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        },
+        {
+          "name": "Actualización atómica",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "a8d919ff-4f1e-4e9d-8097-4f10de592688",
+      "name": "CP-PTO-12 | Actualización válida con coordenadas cero",
+      "method": "PUT",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "39ce8360-4ae6-4d58-8b63-c54d82581439",
+      "name": "CP-PTO-12.1 | Persistencia de coordenadas cero",
+      "method": "GET",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        },
+        {
+          "name": "Cero es válido",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "15e73006-9195-4e77-8635-8ed6f8237777",
+      "name": "CP-PTO-13 | Limpieza lógica del auxiliar propio",
+      "method": "PATCH",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "e15b50b2-5353-47a5-a822-d7b6c992a808",
+      "name": "CP-PTO-13.1 | Errores de edición no alteraron punto inicial",
+      "method": "GET",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        },
+        {
+          "name": "Sin modificaciones tras validaciones rechazadas",
+          "passed": true
+        }
+      ]
+    }
+  ]
+}

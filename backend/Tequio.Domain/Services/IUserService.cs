@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using Tequio.Domain.Constants;
 using Tequio.Domain.Dtos;
 using Tequio.Domain.Repositories;
@@ -47,7 +47,10 @@ namespace Tequio.Domain.Services
 
         public async Task UpdateUserProfileAsync(int userId, UpdateUserProfileDto request)
         {
-            _logger.LogInformation("Delegando actualización de perfil del usuario {UserId} al repositorio.", userId);
+            if (_logger.IsEnabled(LogLevel.Information))
+            {
+                _logger.LogInformation("Delegando actualización de perfil del usuario {UserId} al repositorio.", userId);
+            }
             await _userRepository.UpdateUserProfileAsync(userId, request);
         }
 
@@ -61,11 +64,17 @@ namespace Tequio.Domain.Services
                 throw new ArgumentException(ErrorMessages.RecordNotFound);
             }
 
-            _logger.LogInformation("Iniciando solicitud para promover al usuario {UserId} a rol de productor.", userId);
+            if (_logger.IsEnabled(LogLevel.Information))
+            {
+                _logger.LogInformation("Iniciando solicitud para promover al usuario {UserId} a rol de productor.", userId);
+            }
 
             await _userRepository.PromoteToProducerAsync(userId, cancellationToken);
 
-            _logger.LogInformation("Usuario {UserId} promovido exitosamente a rol de productor.", userId);
+            if (_logger.IsEnabled(LogLevel.Information))
+            {
+                _logger.LogInformation("Usuario {UserId} promovido exitosamente a rol de productor.", userId);
+            }
         }
 
     }

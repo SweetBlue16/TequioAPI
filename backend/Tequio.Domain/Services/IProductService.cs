@@ -82,18 +82,24 @@ namespace Tequio.Domain.Services
             dto.MeasurementUnit = dto.MeasurementUnit?.Trim() ?? string.Empty;
             dto.ImageUrl = string.IsNullOrWhiteSpace(dto.ImageUrl) ? null : dto.ImageUrl.Trim();
 
-            _logger.LogInformation(
-                "Iniciando creación de producto '{ProductName}' para el productor {ProducerId}.",
-                dto.Name,
-                producerId);
+            if (_logger.IsEnabled(LogLevel.Information))
+            {
+                _logger.LogInformation(
+                    "Iniciando creación de producto '{ProductName}' para el productor {ProducerId}.",
+                    dto.Name,
+                    producerId);
+            }
 
             int newProductId = await _repository.CreateBaseProductAsync(producerId, dto);
 
-            _logger.LogInformation(
-                "Producto '{ProductName}' creado exitosamente con ID {ProductId} para el productor {ProducerId}.",
-                dto.Name,
-                newProductId,
-                producerId);
+            if (_logger.IsEnabled(LogLevel.Information))
+            {
+                _logger.LogInformation(
+                    "Producto '{ProductName}' creado exitosamente con ID {ProductId} para el productor {ProducerId}.",
+                    dto.Name,
+                    newProductId,
+                    producerId);
+            }
 
             return newProductId;
         }
@@ -111,17 +117,23 @@ namespace Tequio.Domain.Services
                 throw new ArgumentException(ErrorMessages.ProducerNotFoundOrUnauthorized);
             }
 
-            _logger.LogInformation(
-                "Iniciando desactivación del producto {ProductId} para el productor {ProducerId}.",
-                productId,
-                producerId);
+            if (_logger.IsEnabled(LogLevel.Information))
+            {
+                _logger.LogInformation(
+                    "Iniciando desactivación del producto {ProductId} para el productor {ProducerId}.",
+                    productId,
+                    producerId);
+            }
 
             await _repository.DeactivateBaseProductAsync(productId, producerId);
 
-            _logger.LogInformation(
-                "Producto {ProductId} desactivado exitosamente por el productor {ProducerId}.",
-                productId,
-                producerId);
+            if (_logger.IsEnabled(LogLevel.Information))
+            {
+                _logger.LogInformation(
+                    "Producto {ProductId} desactivado exitosamente por el productor {ProducerId}.",
+                    productId,
+                    producerId);
+            }
         }
 
         /// <inheritdoc />

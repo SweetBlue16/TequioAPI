@@ -37,6 +37,14 @@ namespace Tequio.Api.Middlewares
                 _logger.LogWarning(ex, "Conflicto en punto de entrega.");
                 await HandleExceptionAsync(context, HttpStatusCode.Conflict, ex.Message);
             }
+            catch (ProductConflictException ex)
+            {
+                await HandleExceptionAsync(context, HttpStatusCode.Conflict, ex.Message);
+            }
+            catch (ProductOwnershipException ex)
+            {
+                await HandleExceptionAsync(context, HttpStatusCode.Forbidden, ex.Message);
+            }
             catch (ArgumentException ex)
             {
                 _logger.LogWarning(ex, "Validación incorrecta: {Message}", ex.Message);
@@ -67,11 +75,6 @@ namespace Tequio.Api.Middlewares
                 _logger.LogWarning(ex, "Recurso no encontrado: {Message}", ex.Message);
                 await HandleExceptionAsync(context, HttpStatusCode.NotFound, ex.Message);
             }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error interno no controlado durante la petición.");
-                await HandleExceptionAsync(context, HttpStatusCode.InternalServerError, "Ocurrió un error inesperado.");
-            }
         }
 
         /// <summary>
@@ -81,7 +84,9 @@ namespace Tequio.Api.Middlewares
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)statusCode;
-            return context.Response.WriteAsync(JsonSerializer.Serialize(new { error = message }));
+            return context.Response.WriteAsync(
+                JsonSerializer.Serialize(new { error = message }),
+                context.RequestAborted);
         }
     }
 }

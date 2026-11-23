@@ -377,7 +377,8 @@ public sealed class AuthServiceTest
             .ReturnsAsync(new UserVerificationData(42, "Ana", false, 3));
         await CreateService().AuthorizeAdminAsync(new AuthorizeAdminRequestDto
         {
-            NewAdminEmail = Email, VerificationCode = Code
+            NewAdminEmail = Email,
+            VerificationCode = Code
         });
         _codeRepository.Verify(r => r.ValidateAsync(42, Code, SecurityCodeEmailType.AdminAuthorization,
             It.IsAny<CancellationToken>()), Times.Once);
@@ -417,9 +418,7 @@ public sealed class AuthServiceTest
     {
         var request = new LoginRequestDto { Email = Email, Password = "TEST_PASSWORD_123" };
         _authRepository.Setup(r => r.GetUserAuthDataAsync(Email, It.IsAny<CancellationToken>()))
-            .ReturnsAsync(("42", "3", BCrypt.Net.BCrypt.HashPassword(request.Password)));
-        _authRepository.Setup(r => r.GetUserVerificationDataAsync(Email, It.IsAny<CancellationToken>()))
-            .ReturnsAsync(new UserVerificationData(42, "Ana", verified, 3));
+            .ReturnsAsync(("42", "3", BCrypt.Net.BCrypt.HashPassword(request.Password), verified));
         _jwtProvider.Setup(p => p.GenerateToken("42", "3")).Returns("TEST_TOKEN");
         if (verified)
         {
@@ -428,6 +427,32 @@ public sealed class AuthServiceTest
         else
         {
             await Assert.ThrowsAsync<UnauthorizedAccessException>(() => CreateService().AuthenticateUserAsync(request));
+            _jwtProvider.Verify(p => p.GenerateToken(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+        }
+    }
+
+    [Theory]
+    [InlineData(1, false)]
+    [InlineData(2, false)]
+    [InlineData(1, true)]
+    [InlineData(2, true)]
+    public async Task TestLoginWithPublicAccountShouldRequireVerification(int roleId, bool verified)
+    {
+        var request = new LoginRequestDto { Email = Email, Password = "TEST_PASSWORD_123" };
+        string role = roleId.ToString(System.Globalization.CultureInfo.InvariantCulture);
+        _authRepository.Setup(r => r.GetUserAuthDataAsync(Email, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(("42", role, BCrypt.Net.BCrypt.HashPassword(request.Password), verified));
+        _jwtProvider.Setup(p => p.GenerateToken("42", role)).Returns("TEST_TOKEN");
+
+        if (verified)
+        {
+            Assert.Equal("TEST_TOKEN", await CreateService().AuthenticateUserAsync(request));
+        }
+        else
+        {
+            var error = await Assert.ThrowsAsync<UnauthorizedAccessException>(() =>
+                CreateService().AuthenticateUserAsync(request));
+            Assert.Equal("Verifica tu correo electrónico antes de iniciar sesión.", error.Message);
             _jwtProvider.Verify(p => p.GenerateToken(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
         }
     }

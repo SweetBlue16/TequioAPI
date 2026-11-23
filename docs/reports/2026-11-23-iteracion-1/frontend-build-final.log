@@ -1,0 +1,39 @@
+
+> tequioapp@0.0.0 build
+> tsc -b && vite build
+
+vite v8.3.8 building client environment for production...
+transforming...
+✓ 2135 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                               0.79 kB │ gzip:   0.44 kB
+dist/assets/logo_editarPerfil-B3R3vSw2.png                    7.40 kB
+dist/assets/logo_autenticar-D2-Z_ijN.png                      7.89 kB
+dist/assets/logo_editarPuntos-Q52WnTWy.png                    9.09 kB
+dist/assets/logo_cerrarSesion-CbkbAJQp.png                   11.28 kB
+dist/assets/icon_maps-C0vlGaXy.png                           22.39 kB
+dist/assets/icon_navbarProducerProductos-D2y51JRZ.png        27.64 kB
+dist/assets/icon_navbarProducerLotes-J3Xgp8_y.png            67.95 kB
+dist/assets/sidebarProducer-CEJj7eDe.png                     71.88 kB
+dist/assets/icon_navbarProducerValidar-qDoidWAR.png          80.31 kB
+dist/assets/icon_navbarProducerEstadisticas-3m8q1o71.png    103.82 kB
+dist/assets/barraAdorno-DrDS48kb.png                        104.84 kB
+dist/assets/logo_imagenes-GpC8F2Rr.png                      145.84 kB
+dist/assets/tequioLogoTexto-wY8--ZSC.png                    163.60 kB
+dist/assets/fondo_login-CdLtF91u.jpg                        171.69 kB
+dist/assets/fondo_register-BixRL2aA.jpg                     221.36 kB
+dist/assets/icon_vendedor-uzwrsqil.png                      279.15 kB
+dist/assets/icon_comprador-DR7PBCge.png                     343.13 kB
+dist/assets/icon_carroCompra-vec4DUbv.png                   503.67 kB
+dist/assets/logoTequio-DfcI6bgC.png                         548.54 kB
+dist/assets/producerNotRegistered-CDZIcM1g.png              696.22 kB
+dist/assets/index-e3m4IS_H.css                              123.04 kB │ gzip:  19.36 kB
+dist/assets/index-DAAF5unz.js                             2,316.85 kB │ gzip: 663.44 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 1.18s

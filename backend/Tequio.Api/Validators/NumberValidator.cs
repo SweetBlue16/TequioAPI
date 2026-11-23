@@ -9,7 +9,7 @@ namespace Tequio.Api.Validators
                 throw new ArgumentException($"{argumentDescriptor} has to be equal or greater than zero");
             }
         }
-        
+
         public static void ValidateGreaterOrEqualToOne(int number, string argumentDescriptor)
         {
             if (number < 1)

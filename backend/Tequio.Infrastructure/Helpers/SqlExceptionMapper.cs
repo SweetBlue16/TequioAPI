@@ -30,9 +30,9 @@ namespace Tequio.Infrastructure.Helpers
                 50012 => new ArgumentException(ErrorMessages.ProducerNotFoundOrUnauthorized),
                 50013 => new ArgumentException(ErrorMessages.CategoryNotFound),
                 50014 => new ArgumentException(ErrorMessages.DuplicateProductName),
-                50015 => new ArgumentException(ErrorMessages.ProductNotFoundOrForbidden),
-                50016 => new InvalidOperationException(ErrorMessages.ProductAlreadyDeactivated),
-                50017 => new InvalidOperationException(ErrorMessages.ProductHasActiveBatches),
+                50015 => new ProductOwnershipException(ErrorMessages.ProductNotFoundOrForbidden),
+                50016 => new ProductConflictException(ErrorMessages.ProductAlreadyDeactivated),
+                50017 => new ProductConflictException(ErrorMessages.ProductHasActiveBatches),
                 50018 => new ArgumentException(ErrorMessages.RecordNotFound),
                 50019 => new ArgumentException(ErrorMessages.UserAlreadyProducer),
                 _ => new InvalidOperationException(ErrorMessages.DatabaseError)

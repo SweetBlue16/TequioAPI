@@ -26,7 +26,7 @@ namespace Tequio.Domain.Repositories
         /// <param name="email">User email address.</param>
         /// <param name="cancellationToken">Token used to cancel the operation.</param>
         /// <returns>The authentication data, or null values when the user does not exist.</returns>
-        Task<(string? UserId, string? RoleId, string? PasswordHash)> GetUserAuthDataAsync(
+        Task<(string? UserId, string? RoleId, string? PasswordHash, bool IsVerified)> GetUserAuthDataAsync(
             string email,
             CancellationToken cancellationToken = default);
 

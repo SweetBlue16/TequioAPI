@@ -30,7 +30,7 @@ builder.Services.PostConfigure<Microsoft.AspNetCore.Mvc.ApiBehaviorOptions>(opti
         {
             error = "Verifica los campos obligatorios, sus longitudes y las coordenadas.",
             errors = context.ModelState.Where(entry => entry.Value?.Errors.Count > 0)
-                .ToDictionary(entry => entry.Key, _ => new[] { "El valor es obligatorio o no es válido." })
+                .ToDictionary(entry => entry.Key, _ => ApiValidationMessages.InvalidValue)
         });
     };
 });
@@ -48,12 +48,26 @@ builder.Services.AddDbContext<TequioDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TequioDatabase"));
 });
 
+builder.Services.AddSingleton(_ =>
+{
+    var key = Environment.GetEnvironmentVariable("TEQUIO_JWT_SIGNING_KEY");
+    if (string.IsNullOrWhiteSpace(key) && builder.Environment.IsDevelopment())
+    {
+        key = new ConfigurationBuilder().AddUserSecrets<Program>(optional: true).Build()["Jwt:Key"];
+    }
+
+    if (string.IsNullOrWhiteSpace(key))
+    {
+        throw new InvalidOperationException(
+            "Set TEQUIO_JWT_SIGNING_KEY or configure Jwt:Key in development user secrets.");
+    }
+
+    return new JwtSigningKey(Encoding.UTF8.GetBytes(key));
+});
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        var jwtKey = builder.Configuration["Jwt:Key"]
-            ?? throw new InvalidOperationException("JWT key is not configured.");
-
         // Reject older Admin tokens issued before pending-account checks were enforced.
         options.Events = new JwtBearerEvents
         {
@@ -76,9 +90,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+            ValidAlgorithms = [SecurityAlgorithms.HmacSha256]
         };
     });
+
+builder.Services.AddOptions<JwtBearerOptions>(JwtBearerDefaults.AuthenticationScheme)
+    .Configure<JwtSigningKey>((options, key) => options.TokenValidationParameters.IssuerSigningKey = key.Key);
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJwtProvider, JwtProvider>();
@@ -100,6 +117,13 @@ builder.Services.AddTransient<IEmailService, EmailService>();
 
 var app = builder.Build();
 
+app.UseExceptionHandler(errorApp => errorApp.Run(async context =>
+{
+    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+    await context.Response.WriteAsJsonAsync(
+        new { error = "Ocurrió un error inesperado." },
+        cancellationToken: context.RequestAborted);
+}));
 app.UseMiddleware<GlobalExceptionMiddleware>();
 
 using (var scope = app.Services.CreateScope())
@@ -119,7 +143,7 @@ app.UseAuthorization();
 app.MapControllers();
 await app.RunAsync();
 
-/// <summary>Application entry point available for HTTP integration testing.</summary>
-public partial class Program
+internal static class ApiValidationMessages
 {
+    internal static readonly string[] InvalidValue = ["El valor es obligatorio o no es válido."];
 }

@@ -15,7 +15,7 @@ public sealed class VerificationCodeGeneratorTest
     [Fact]
     public void TestGenerateCodeWithProductionGeneratorShouldReturnSixDigitsInRange()
     {
-        IVerificationCodeGenerator generator = new VerificationCodeGenerator();
+        var generator = new VerificationCodeGenerator();
 
         for (int index = 0; index < 100; index++)
         {

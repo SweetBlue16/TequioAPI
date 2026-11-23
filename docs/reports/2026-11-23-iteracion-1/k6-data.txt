@@ -1,0 +1,9 @@
+TotalBaseProducts
+-----------------
+                3
+ActiveCategory1Products
+-----------------------
+                      1
+DeliveryPoints
+--------------
+             7

@@ -1,0 +1,11 @@
+  Determinando los proyectos que se van a restaurar...
+  Todos los proyectos están actualizados para la restauración.
+
+Se han usado los orígenes siguientes:
+   https://api.nuget.org/v3/index.json
+   C:\Program Files (x86)\Microsoft SDKs\NuGetPackages\
+
+El proyecto "Tequio.Api" especificado no tiene paquetes vulnerables en los orígenes actuales.
+El proyecto "Tequio.Domain" especificado no tiene paquetes vulnerables en los orígenes actuales.
+El proyecto "Tequio.Infrastructure" especificado no tiene paquetes vulnerables en los orígenes actuales.
+El proyecto "Tequio.Tests" especificado no tiene paquetes vulnerables en los orígenes actuales.

@@ -1,0 +1,8 @@
+Serie de pruebas para C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Tests\bin\Release\net10.0\Tequio.Tests.dll (.NETCoreApp,Version=v10.0)
+1 archivos de prueba en total coincidieron con el patrón especificado.
+Archivo de resultados: C:\Projects\TEQUIO\TequioAPI\docs\reports\2026-11-23-iteracion-1-seguimiento\dotnet-final\seguimiento-final.trx
+
+Correctas! - Con error:     0, Superado:   173, Omitido:     0, Total:   173, Duración: 6 s - Tequio.Tests.dll (net10.0)
+
+Datos adjuntos:
+  C:\Projects\TEQUIO\TequioAPI\docs\reports\2026-11-23-iteracion-1-seguimiento\dotnet-final\9edf08b2-a094-4f5a-b3f2-c6e7e425a923\coverage.opencover.xml

@@ -1,0 +1,130 @@
+{
+  "database": "TequioDB",
+  "targetRoleId": 3,
+  "accountCountBefore": 1,
+  "accountCountAfter": 1,
+  "verifiedBefore": false,
+  "verifiedAfter": true,
+  "authorizationCompletedBy": "owner entered OTP locally; SQL state confirmed afterward",
+  "codeWasConsumed": true,
+  "codeOrTokenExported": false,
+  "manualVerificationUpdate": false,
+  "smtpConfigurationChanged": false,
+  "liveResend": {
+    "status": 200,
+    "smtpAccepted": true,
+    "recipientRole": "MasterAdmin",
+    "immediateRepeatStatus": 429
+  },
+  "services": {
+    "api": 200,
+    "frontendProxy": 200
+  },
+  "scriptInstalled": "18_AdminAuthorization.sql",
+  "xunit": {
+    "counters": {
+      "total": "151",
+      "executed": "151",
+      "passed": "151",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "authorizationTests": [
+      {
+        "name": "Tequio.Tests.Auth.AuthServiceTest.TestResendAdminAuthorizationWithInvalidTargetShouldReject(roleId: 1, verified: False)",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Tequio.Tests.Auth.AdminAuthorizationHttpTest.TestResendWithIdentityShouldEnforceMasterAdminOverHttp(role: \"1\", expected: 403)",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Tequio.Tests.Auth.AuthServiceTest.TestResendAdminAuthorizationWithInvalidTargetShouldReject(roleId: 3, verified: True)",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Tequio.Tests.Auth.AdminAuthorizationSqlTest.TestResendWithLiveChallengeShouldRetainRemainingAttemptsAndInvalidatePreviousCode",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Tequio.Tests.Auth.AdminAuthorizationHttpTest.TestManagementWithLegacyAdminTokenShouldRejectBeforeAuthorization",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Tequio.Tests.Email.EmailTemplateProviderTest.TestCreateSecurityCodeEmailWithSupportedTypeShouldCreatePurposeSpecificContent(type: AdminAuthorization, expectedDescription: \"código de autorización\")",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Tequio.Tests.Auth.AdminAuthorizationHttpTest.TestResendWithIdentityShouldEnforceMasterAdminOverHttp(role: \"4\", expected: 200)",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Tequio.Tests.Auth.AdminAuthorizationSqlTest.TestAuthorizeWithExpiredCodeShouldRemainPendingAndAllowFreshChallenge",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Tequio.Tests.Auth.AdminAuthorizationSqlTest.TestAuthorizeWithValidCodeShouldAtomicallyVerifyAndConsumeOnce",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Tequio.Tests.Auth.AdminAuthorizationSqlTest.TestPublicVerificationWithAdminShouldRejectWithoutConsumingAuthorizationCode",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Tequio.Tests.Auth.AdminAuthorizationHttpTest.TestResendWithIdentityShouldEnforceMasterAdminOverHttp(role: \"2\", expected: 403)",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Tequio.Tests.Auth.AdminAuthorizationSqlTest.TestGenerateWithConcurrentRequestsShouldIssueOnlyOneCode",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Tequio.Tests.Auth.AdminAuthorizationHttpTest.TestResendWithIdentityShouldEnforceMasterAdminOverHttp(role: null, expected: 401)",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Tequio.Tests.Auth.AdminAuthorizationSqlTest.TestResendWithExcessiveRequestsShouldEnforceCooldownAndWindow",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Tequio.Tests.Auth.AdminAuthorizationHttpTest.TestResendWithIdentityShouldEnforceMasterAdminOverHttp(role: \"3\", expected: 403)",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Tequio.Tests.Auth.AdminAuthorizationHttpTest.TestResendWithRateLimitShouldReturn429AndRetryAfter",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Tequio.Tests.Auth.AuthServiceTest.TestResendAdminAuthorizationWithSmtpFailureShouldRemainRetryableWithoutDuplicateAccount",
+        "outcome": "Passed"
+      },
+      {
+        "name": "Tequio.Tests.Auth.AdminAuthorizationSqlTest.TestAuthorizeWithWrongCodesShouldConsumeAttemptsAndPreventResendReset",
+        "outcome": "Passed"
+      }
+    ]
+  },
+  "frontend": {
+    "build": "passed",
+    "jestFull": {
+      "passed": 99,
+      "suites": 15
+    },
+    "affectedLoginNavbarRetest": {
+      "passed": 13,
+      "suites": 3
+    },
+    "changedNavigationLint": "passed"
+  }
+}

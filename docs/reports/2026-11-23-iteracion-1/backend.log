@@ -1,0 +1,14 @@
+  Determinando los proyectos que se van a restaurar...
+  Todos los proyectos están actualizados para la restauración.
+  Tequio.Domain -> C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Domain\bin\Debug\net10.0\Tequio.Domain.dll
+  Tequio.Infrastructure -> C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Infrastructure\bin\Debug\net10.0\Tequio.Infrastructure.dll
+  Tequio.Api -> C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api\bin\Debug\net10.0\Tequio.Api.dll
+  Tequio.Tests -> C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Tests\bin\Debug\net10.0\Tequio.Tests.dll
+Serie de pruebas para C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Tests\bin\Debug\net10.0\Tequio.Tests.dll (.NETCoreApp,Version=v10.0)
+1 archivos de prueba en total coincidieron con el patrón especificado.
+Archivo de resultados: C:\Projects\TEQUIO\TequioAPI\docs\reports\2026-11-23-iteracion-1\backend.trx
+
+Correctas! - Con error:     0, Superado:   155, Omitido:     0, Total:   155, Duración: 12 s - Tequio.Tests.dll (net10.0)
+
+Datos adjuntos:
+  C:\Projects\TEQUIO\TequioAPI\docs\reports\2026-11-23-iteracion-1\a76351d2-fc79-4d7a-a78f-4d08cc4af5a0\coverage.opencover.xml

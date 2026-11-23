@@ -1,0 +1,939 @@
+{
+  "results": [
+    {
+      "name": "Read development OpenAPI document",
+      "method": "GET",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Expected HTTP status",
+          "passed": true
+        },
+        {
+          "name": "Response is a JSON object with a JSON content type",
+          "passed": true
+        },
+        {
+          "name": "Response does not expose passwords, OTP or secrets (login token is intentional)",
+          "passed": true
+        },
+        {
+          "name": "Development OpenAPI document has paths",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Register active test account",
+      "method": "POST",
+      "status": 201,
+      "assertions": [
+        {
+          "name": "Expected HTTP status",
+          "passed": true
+        },
+        {
+          "name": "Response is a JSON object with a JSON content type",
+          "passed": true
+        },
+        {
+          "name": "Response does not expose passwords, OTP or secrets (login token is intentional)",
+          "passed": true
+        },
+        {
+          "name": "Response includes a message",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Verify account with mailbox OTP",
+      "method": "POST",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Expected HTTP status",
+          "passed": true
+        },
+        {
+          "name": "Response is a JSON object with a JSON content type",
+          "passed": true
+        },
+        {
+          "name": "Response does not expose passwords, OTP or secrets (login token is intentional)",
+          "passed": true
+        },
+        {
+          "name": "Response includes a message",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Log in active test account",
+      "method": "POST",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Expected HTTP status",
+          "passed": true
+        },
+        {
+          "name": "Response is a JSON object with a JSON content type",
+          "passed": true
+        },
+        {
+          "name": "Response does not expose passwords, OTP or secrets (login token is intentional)",
+          "passed": true
+        },
+        {
+          "name": "Response includes a message",
+          "passed": true
+        },
+        {
+          "name": "Successful login returns a JWT with real identity and lifetime claims",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Read my test profile and capture real user ID",
+      "method": "GET",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Expected HTTP status",
+          "passed": true
+        },
+        {
+          "name": "Response is a JSON object with a JSON content type",
+          "passed": true
+        },
+        {
+          "name": "Response does not expose passwords, OTP or secrets (login token is intentional)",
+          "passed": true
+        },
+        {
+          "name": "Profile belongs to the active test account and run",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Register active test account",
+      "method": "POST",
+      "status": 201,
+      "assertions": [
+        {
+          "name": "Expected HTTP status",
+          "passed": true
+        },
+        {
+          "name": "Response is a JSON object with a JSON content type",
+          "passed": true
+        },
+        {
+          "name": "Response does not expose passwords, OTP or secrets (login token is intentional)",
+          "passed": true
+        },
+        {
+          "name": "Response includes a message",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Verify account with mailbox OTP",
+      "method": "POST",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Expected HTTP status",
+          "passed": true
+        },
+        {
+          "name": "Response is a JSON object with a JSON content type",
+          "passed": true
+        },
+        {
+          "name": "Response does not expose passwords, OTP or secrets (login token is intentional)",
+          "passed": true
+        },
+        {
+          "name": "Response includes a message",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Log in active test account",
+      "method": "POST",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Expected HTTP status",
+          "passed": true
+        },
+        {
+          "name": "Response is a JSON object with a JSON content type",
+          "passed": true
+        },
+        {
+          "name": "Response does not expose passwords, OTP or secrets (login token is intentional)",
+          "passed": true
+        },
+        {
+          "name": "Response includes a message",
+          "passed": true
+        },
+        {
+          "name": "Successful login returns a JWT with real identity and lifetime claims",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "Read my test profile and capture real user ID",
+      "method": "GET",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "Expected HTTP status",
+          "passed": true
+        },
+        {
+          "name": "Response is a JSON object with a JSON content type",
+          "passed": true
+        },
+        {
+          "name": "Response does not expose passwords, OTP or secrets (login token is intentional)",
+          "passed": true
+        },
+        {
+          "name": "Profile belongs to the active test account and run",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "CP-PER-01 / 01 - Consultar perfil autenticado original",
+      "method": "GET",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "CP-PER-01 / CP-PER-01.1 — Response follows the JSON contract or an empty 413 and exposes no secrets",
+          "passed": true
+        },
+        {
+          "name": "CP-PER-01 / CP-PER-01.1 — HTTP status matches the expected contract",
+          "passed": true
+        },
+        {
+          "name": "CP-PER-01 / CP-PER-01.1 — Profile contract matches the authenticated fictitious user",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "CP-PER-01 / 02 - Consultar segundo perfil de prueba como control",
+      "method": "GET",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "CP-PER-01 / CP-PER-01.2 — Response follows the JSON contract or an empty 413 and exposes no secrets",
+          "passed": true
+        },
+        {
+          "name": "CP-PER-01 / CP-PER-01.2 — HTTP status matches the expected contract",
+          "passed": true
+        },
+        {
+          "name": "CP-PER-01 / CP-PER-01.2 — Profile contract matches the authenticated fictitious user",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "CP-PER-01 / 03 - Actualizar campos permitidos con datos ficticios",
+      "method": "PUT",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "CP-PER-01 / CP-PER-01.3 — Response follows the JSON contract or an empty 413 and exposes no secrets",
+          "passed": true
+        },
+        {
+          "name": "CP-PER-01 / CP-PER-01.3 — HTTP status matches the expected contract",
+          "passed": true
+        },
+        {
+          "name": "CP-PER-01 / CP-PER-01.3 — Mutation returns HTTP 200 with a confirmation message",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "CP-PER-01 / 04 - Comparar datos persistidos e identidad",
+      "method": "GET",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "CP-PER-01 / CP-PER-01.4 — Response follows the JSON contract or an empty 413 and exposes no secrets",
+          "passed": true
+        },
+        {
+          "name": "CP-PER-01 / CP-PER-01.4 — HTTP status matches the expected contract",
+          "passed": true
+        },
+        {
+          "name": "CP-PER-01 / CP-PER-01.4 — Profile contract matches the authenticated fictitious user",
+          "passed": true
+        },
+        {
+          "name": "CP-PER-01 / CP-PER-01.4 — All profile fields match the expected state without partial or foreign changes",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "CP-PER-01 / 05 - Comprobar que el perfil de control no cambió",
+      "method": "GET",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "CP-PER-01 / CP-PER-01.5 — Response follows the JSON contract or an empty 413 and exposes no secrets",
+          "passed": true
+        },
+        {
+          "name": "CP-PER-01 / CP-PER-01.5 — HTTP status matches the expected contract",
+          "passed": true
+        },
+        {
+          "name": "CP-PER-01 / CP-PER-01.5 — Profile contract matches the authenticated fictitious user",
+          "passed": true
+        },
+        {
+          "name": "CP-PER-01 / CP-PER-01.5 — All profile fields match the expected state without partial or foreign changes",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "CP-CAT-01 / 01 - Comprobar identidad del productor de prueba",
+      "method": "GET",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "CP-CAT-01 / CP-CAT-01.1 — Response follows the JSON contract or an empty 413 and exposes no secrets",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-01 / CP-CAT-01.1 — HTTP status matches the expected contract",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-01 / CP-CAT-01.1 — Profile contract matches the authenticated fictitious user",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "CP-CAT-01 / 02 - Registrar producto ficticio y capturar ID real",
+      "method": "POST",
+      "status": 201,
+      "assertions": [
+        {
+          "name": "CP-CAT-01 / CP-CAT-01.2 — Response follows the JSON contract or an empty 413 and exposes no secrets",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-01 / CP-CAT-01.2 — HTTP status matches the expected contract",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-01 / CP-CAT-01.2 — Creation returns HTTP 201 and a real positive product ID",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-01 / CP-CAT-01.2 — Dedicated products never reuse another captured product ID",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "CP-CAT-01 / 03 - Buscar producto creado en páginas del productor",
+      "method": "GET",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "CP-CAT-01 / CP-CAT-01.3 — Response follows the JSON contract or an empty 413 and exposes no secrets",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-01 / CP-CAT-01.3 — HTTP status matches the expected contract",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-01 / CP-CAT-01.3 — Page has coherent zero-based pagination, item count and active owned products",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-01 / CP-CAT-01.3 — Catalog count remains stable throughout this full scan",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-01 / CP-CAT-01.3 — Pagination does not repeat product IDs",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-01 / CP-CAT-01.3 — Captured product persists with exact owner, name, category and payload fields",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "CP-CAT-03 / 01 - Comprobar productor autenticado",
+      "method": "GET",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "CP-CAT-03 / CP-CAT-03.1 — Response follows the JSON contract or an empty 413 and exposes no secrets",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-03 / CP-CAT-03.1 — HTTP status matches the expected contract",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-03 / CP-CAT-03.1 — Profile contract matches the authenticated fictitious user",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "CP-CAT-03 / 02 - Comprobar producto propio creado y activo",
+      "method": "GET",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "CP-CAT-03 / CP-CAT-03.2 — Response follows the JSON contract or an empty 413 and exposes no secrets",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-03 / CP-CAT-03.2 — HTTP status matches the expected contract",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-03 / CP-CAT-03.2 — Page has coherent zero-based pagination, item count and active owned products",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-03 / CP-CAT-03.2 — Catalog count remains stable throughout this full scan",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-03 / CP-CAT-03.2 — Pagination does not repeat product IDs",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-03 / CP-CAT-03.2 — Captured product persists with exact owner, name, category and payload fields",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "CP-CAT-03 / 03 - Desactivar con confirmación adicional de un uso",
+      "method": "PATCH",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "CP-CAT-03 / CP-CAT-03.3 — Response follows the JSON contract or an empty 413 and exposes no secrets",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-03 / CP-CAT-03.3 — HTTP status matches the expected contract",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-03 / CP-CAT-03.3 — Own product deactivation returns HTTP 200",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "CP-CAT-03 / 04 - Explorar todas las páginas y comprobar ausencia entre activos",
+      "method": "GET",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "CP-CAT-03 / CP-CAT-03.4 — Response follows the JSON contract or an empty 413 and exposes no secrets",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-03 / CP-CAT-03.4 — HTTP status matches the expected contract",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-03 / CP-CAT-03.4 — Page has coherent zero-based pagination, item count and active owned products",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-03 / CP-CAT-03.4 — Catalog count remains stable throughout this full scan",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-03 / CP-CAT-03.4 — Pagination does not repeat product IDs",
+          "passed": true
+        },
+        {
+          "name": "CP-CAT-03 / CP-CAT-03.4 — Deactivated product is absent across every active page and all other products are unchanged",
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "assertions": [
+    {
+      "caseId": "CP-PER-01",
+      "step": "CP-PER-01.1",
+      "method": "GET",
+      "path": "/api/v1/users/me",
+      "responses": [
+        {
+          "at": "2026-11-23T21:46:28.934Z",
+          "httpStatus": 200,
+          "page": null,
+          "checks": [
+            {
+              "name": "Response follows the JSON contract or an empty 413 and exposes no secrets",
+              "passed": true
+            },
+            {
+              "name": "HTTP status matches the expected contract",
+              "passed": true
+            },
+            {
+              "name": "Profile contract matches the authenticated fictitious user",
+              "passed": true
+            }
+          ]
+        }
+      ],
+      "status": "APROBADO",
+      "reason": ""
+    },
+    {
+      "caseId": "CP-PER-01",
+      "step": "CP-PER-01.2",
+      "method": "GET",
+      "path": "/api/v1/users/me",
+      "responses": [
+        {
+          "at": "2026-11-23T21:46:29.228Z",
+          "httpStatus": 200,
+          "page": null,
+          "checks": [
+            {
+              "name": "Response follows the JSON contract or an empty 413 and exposes no secrets",
+              "passed": true
+            },
+            {
+              "name": "HTTP status matches the expected contract",
+              "passed": true
+            },
+            {
+              "name": "Profile contract matches the authenticated fictitious user",
+              "passed": true
+            }
+          ]
+        }
+      ],
+      "status": "APROBADO",
+      "reason": ""
+    },
+    {
+      "caseId": "CP-PER-01",
+      "step": "CP-PER-01.3",
+      "method": "PUT",
+      "path": "/api/v1/users/me",
+      "responses": [
+        {
+          "at": "2026-11-23T21:46:29.503Z",
+          "httpStatus": 200,
+          "page": null,
+          "checks": [
+            {
+              "name": "Response follows the JSON contract or an empty 413 and exposes no secrets",
+              "passed": true
+            },
+            {
+              "name": "HTTP status matches the expected contract",
+              "passed": true
+            },
+            {
+              "name": "Mutation returns HTTP 200 with a confirmation message",
+              "passed": true
+            }
+          ]
+        }
+      ],
+      "status": "APROBADO",
+      "reason": ""
+    },
+    {
+      "caseId": "CP-PER-01",
+      "step": "CP-PER-01.4",
+      "method": "GET",
+      "path": "/api/v1/users/me",
+      "responses": [
+        {
+          "at": "2026-11-23T21:46:29.778Z",
+          "httpStatus": 200,
+          "page": null,
+          "checks": [
+            {
+              "name": "Response follows the JSON contract or an empty 413 and exposes no secrets",
+              "passed": true
+            },
+            {
+              "name": "HTTP status matches the expected contract",
+              "passed": true
+            },
+            {
+              "name": "Profile contract matches the authenticated fictitious user",
+              "passed": true
+            },
+            {
+              "name": "All profile fields match the expected state without partial or foreign changes",
+              "passed": true
+            }
+          ]
+        }
+      ],
+      "status": "APROBADO",
+      "reason": ""
+    },
+    {
+      "caseId": "CP-PER-01",
+      "step": "CP-PER-01.5",
+      "method": "GET",
+      "path": "/api/v1/users/me",
+      "responses": [
+        {
+          "at": "2026-11-23T21:46:30.024Z",
+          "httpStatus": 200,
+          "page": null,
+          "checks": [
+            {
+              "name": "Response follows the JSON contract or an empty 413 and exposes no secrets",
+              "passed": true
+            },
+            {
+              "name": "HTTP status matches the expected contract",
+              "passed": true
+            },
+            {
+              "name": "Profile contract matches the authenticated fictitious user",
+              "passed": true
+            },
+            {
+              "name": "All profile fields match the expected state without partial or foreign changes",
+              "passed": true
+            }
+          ]
+        }
+      ],
+      "status": "APROBADO",
+      "reason": ""
+    },
+    {
+      "caseId": "CP-CAT-01",
+      "step": "CP-CAT-01.1",
+      "method": "GET",
+      "path": "/api/v1/users/me",
+      "responses": [
+        {
+          "at": "2026-11-23T21:46:30.311Z",
+          "httpStatus": 200,
+          "page": null,
+          "checks": [
+            {
+              "name": "Response follows the JSON contract or an empty 413 and exposes no secrets",
+              "passed": true
+            },
+            {
+              "name": "HTTP status matches the expected contract",
+              "passed": true
+            },
+            {
+              "name": "Profile contract matches the authenticated fictitious user",
+              "passed": true
+            }
+          ]
+        }
+      ],
+      "status": "APROBADO",
+      "reason": ""
+    },
+    {
+      "caseId": "CP-CAT-01",
+      "step": "CP-CAT-01.2",
+      "method": "POST",
+      "path": "/api/v1/products",
+      "responses": [
+        {
+          "at": "2026-11-23T21:46:30.604Z",
+          "httpStatus": 201,
+          "page": null,
+          "checks": [
+            {
+              "name": "Response follows the JSON contract or an empty 413 and exposes no secrets",
+              "passed": true
+            },
+            {
+              "name": "HTTP status matches the expected contract",
+              "passed": true
+            },
+            {
+              "name": "Creation returns HTTP 201 and a real positive product ID",
+              "passed": true
+            },
+            {
+              "name": "Dedicated products never reuse another captured product ID",
+              "passed": true
+            }
+          ]
+        }
+      ],
+      "status": "APROBADO",
+      "reason": ""
+    },
+    {
+      "caseId": "CP-CAT-01",
+      "step": "CP-CAT-01.3",
+      "method": "GET",
+      "path": "/api/v1/products/producers/67?pageIndex=1&pageSize=100",
+      "responses": [
+        {
+          "at": "2026-11-23T21:46:30.903Z",
+          "httpStatus": 200,
+          "page": 1,
+          "checks": [
+            {
+              "name": "Response follows the JSON contract or an empty 413 and exposes no secrets",
+              "passed": true
+            },
+            {
+              "name": "HTTP status matches the expected contract",
+              "passed": true
+            },
+            {
+              "name": "Page has coherent zero-based pagination, item count and active owned products",
+              "passed": true
+            },
+            {
+              "name": "Catalog count remains stable throughout this full scan",
+              "passed": true
+            },
+            {
+              "name": "Pagination does not repeat product IDs",
+              "passed": true
+            },
+            {
+              "name": "Captured product persists with exact owner, name, category and payload fields",
+              "passed": true
+            }
+          ]
+        }
+      ],
+      "status": "APROBADO",
+      "reason": ""
+    },
+    {
+      "caseId": "CP-CAT-03",
+      "step": "CP-CAT-03.1",
+      "method": "GET",
+      "path": "/api/v1/users/me",
+      "responses": [
+        {
+          "at": "2026-11-23T21:46:31.121Z",
+          "httpStatus": 200,
+          "page": null,
+          "checks": [
+            {
+              "name": "Response follows the JSON contract or an empty 413 and exposes no secrets",
+              "passed": true
+            },
+            {
+              "name": "HTTP status matches the expected contract",
+              "passed": true
+            },
+            {
+              "name": "Profile contract matches the authenticated fictitious user",
+              "passed": true
+            }
+          ]
+        }
+      ],
+      "status": "APROBADO",
+      "reason": ""
+    },
+    {
+      "caseId": "CP-CAT-03",
+      "step": "CP-CAT-03.2",
+      "method": "GET",
+      "path": "/api/v1/products/producers/67?pageIndex=1&pageSize=100",
+      "responses": [
+        {
+          "at": "2026-11-23T21:46:31.406Z",
+          "httpStatus": 200,
+          "page": 1,
+          "checks": [
+            {
+              "name": "Response follows the JSON contract or an empty 413 and exposes no secrets",
+              "passed": true
+            },
+            {
+              "name": "HTTP status matches the expected contract",
+              "passed": true
+            },
+            {
+              "name": "Page has coherent zero-based pagination, item count and active owned products",
+              "passed": true
+            },
+            {
+              "name": "Catalog count remains stable throughout this full scan",
+              "passed": true
+            },
+            {
+              "name": "Pagination does not repeat product IDs",
+              "passed": true
+            },
+            {
+              "name": "Captured product persists with exact owner, name, category and payload fields",
+              "passed": true
+            }
+          ]
+        }
+      ],
+      "status": "APROBADO",
+      "reason": ""
+    },
+    {
+      "caseId": "CP-CAT-03",
+      "step": "CP-CAT-03.3",
+      "method": "PATCH",
+      "path": "/api/v1/products/4/deactive",
+      "responses": [
+        {
+          "at": "2026-11-23T21:46:31.743Z",
+          "httpStatus": 200,
+          "page": null,
+          "checks": [
+            {
+              "name": "Response follows the JSON contract or an empty 413 and exposes no secrets",
+              "passed": true
+            },
+            {
+              "name": "HTTP status matches the expected contract",
+              "passed": true
+            },
+            {
+              "name": "Own product deactivation returns HTTP 200",
+              "passed": true
+            }
+          ]
+        }
+      ],
+      "status": "APROBADO",
+      "reason": ""
+    },
+    {
+      "caseId": "CP-CAT-03",
+      "step": "CP-CAT-03.4",
+      "method": "GET",
+      "path": "/api/v1/products/producers/67?pageIndex=1&pageSize=100",
+      "responses": [
+        {
+          "at": "2026-11-23T21:46:32.017Z",
+          "httpStatus": 200,
+          "page": 1,
+          "checks": [
+            {
+              "name": "Response follows the JSON contract or an empty 413 and exposes no secrets",
+              "passed": true
+            },
+            {
+              "name": "HTTP status matches the expected contract",
+              "passed": true
+            },
+            {
+              "name": "Page has coherent zero-based pagination, item count and active owned products",
+              "passed": true
+            },
+            {
+              "name": "Catalog count remains stable throughout this full scan",
+              "passed": true
+            },
+            {
+              "name": "Pagination does not repeat product IDs",
+              "passed": true
+            },
+            {
+              "name": "Deactivated product is absent across every active page and all other products are unchanged",
+              "passed": true
+            }
+          ]
+        }
+      ],
+      "status": "APROBADO",
+      "reason": ""
+    }
+  ],
+  "cases": {
+    "CP-PER-01": {
+      "status": "APROBADO",
+      "reason": "Todos los pasos y postcondiciones se ejecutaron con respuestas reales"
+    },
+    "CP-PER-02": {
+      "status": "BLOQUEADO",
+      "reason": "Alcance o precondición pendiente; ver informe"
+    },
+    "CP-MUL-01": {
+      "status": "NO EJECUTADO",
+      "reason": ""
+    },
+    "CP-MUL-02": {
+      "status": "NO EJECUTADO",
+      "reason": ""
+    },
+    "CP-MUL-03": {
+      "status": "NO EJECUTADO",
+      "reason": ""
+    },
+    "CP-MUL-04": {
+      "status": "BLOQUEADO",
+      "reason": "Alcance o precondición pendiente; ver informe"
+    },
+    "CP-CAT-01": {
+      "status": "APROBADO",
+      "reason": "Todos los pasos y postcondiciones se ejecutaron con respuestas reales"
+    },
+    "CP-CAT-02": {
+      "status": "NO IMPLEMENTADO",
+      "reason": ""
+    },
+    "CP-CAT-03": {
+      "status": "APROBADO",
+      "reason": "Todos los pasos y postcondiciones se ejecutaron con respuestas reales"
+    },
+    "CP-CAT-04": {
+      "status": "BLOQUEADO",
+      "reason": "Alcance o precondición pendiente; ver informe"
+    },
+    "CP-CAT-05": {
+      "status": "NO IMPLEMENTADO",
+      "reason": ""
+    }
+  }
+}

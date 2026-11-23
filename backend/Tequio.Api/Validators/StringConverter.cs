@@ -7,14 +7,12 @@ namespace Tequio.Api.Validators
     {
         public static int ToInt(string number, string argumentDescriptor)
         {
-            try
+            if (int.TryParse(number, out int value))
             {
-                return int.Parse(number);
+                return value;
             }
-            catch (Exception ex) when (ex is ArgumentNullException || ex is FormatException || ex is OverflowException)
-            {
-                throw new ArgumentException($"The {argumentDescriptor} is not a valid number");
-            }
+
+            throw new ArgumentException($"El valor de {argumentDescriptor} no es un número válido.");
         }
     }
 }

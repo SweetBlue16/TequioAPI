@@ -236,8 +236,6 @@ public partial class TequioDbContext : DbContext
                 .HasConstraintName("FK_VerificationCode_User");
         });
 
-        OnModelCreatingPartial(modelBuilder);
     }
 
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

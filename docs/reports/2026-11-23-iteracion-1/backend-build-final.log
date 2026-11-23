@@ -1,0 +1,13 @@
+  Tequio.Domain -> C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Domain\bin\Debug\net10.0\Tequio.Domain.dll
+C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Infrastructure\Helpers\SqlExceptionMapper.cs(4,7): warning CS0105: La directiva using para 'Tequio.Domain.Services' aparece previamente en este espacio de nombres [C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Infrastructure\Tequio.Infrastructure.csproj]
+  Tequio.Infrastructure -> C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Infrastructure\bin\Debug\net10.0\Tequio.Infrastructure.dll
+  Tequio.Api -> C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api\bin\Debug\net10.0\Tequio.Api.dll
+  Tequio.Tests -> C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Tests\bin\Debug\net10.0\Tequio.Tests.dll
+
+Compilación correcta.
+
+C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Infrastructure\Helpers\SqlExceptionMapper.cs(4,7): warning CS0105: La directiva using para 'Tequio.Domain.Services' aparece previamente en este espacio de nombres [C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Infrastructure\Tequio.Infrastructure.csproj]
+    1 Advertencia(s)
+    0 Errores
+
+Tiempo transcurrido 00:00:07.04

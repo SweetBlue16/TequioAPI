@@ -1,0 +1,11 @@
+{
+  "page": "/login",
+  "control": "Iniciar sesión",
+  "colors": {
+    "text": "rgb(24, 17, 10)",
+    "background": "rgb(0, 191, 165)"
+  },
+  "ratio": 8.007512398874212,
+  "expectedMinimum": 4.5,
+  "passed": true
+}

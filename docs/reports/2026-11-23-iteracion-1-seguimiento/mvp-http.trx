@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="91d449a1-c977-4810-814a-8f1840cf017d" name="gamer@ASUSIVAN 2026-11-23 15:33:09" runUser="ASUSIVAN\gamer" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-23T15:33:09.2049468-06:00" queuing="2026-11-23T15:33:09.2049474-06:00" start="2026-11-23T15:33:05.0373485-06:00" finish="2026-11-23T15:33:10.6306724-06:00" />
+  <TestSettings name="default" id="547f835f-1f36-4034-b592-da1046f1633d">
+    <Deployment runDeploymentRoot="gamer_ASUSIVAN_2026-11-23_15_33_09" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="6757a135-b3fa-409c-88ba-ed82397d8f3a" testId="bd36373f-27e8-668f-ab3b-40056981c67a" testName="Tequio.Tests.Http.MvpHttpTest.TestCatalogWithSecondPageShouldTranslateIndexAndReturnProducts" computerName="ASUSIVAN" duration="00:00:00.1368835" startTime="2026-11-23T15:33:09.6254573-06:00" endTime="2026-11-23T15:33:09.7624930-06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6757a135-b3fa-409c-88ba-ed82397d8f3a" />
+    <UnitTestResult executionId="4bec4f4d-fab1-4b5e-a18d-3d6598afb4ee" testId="a6610415-c4df-ffb2-3d3c-379d9c6e8cbb" testName="Tequio.Tests.Http.MvpHttpTest.TestIdentifierWithNonPositiveValueShouldReject(id: -1)" computerName="ASUSIVAN" duration="00:00:00.0024970" startTime="2026-11-23T15:33:10.0367157-06:00" endTime="2026-11-23T15:33:10.0394644-06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4bec4f4d-fab1-4b5e-a18d-3d6598afb4ee" />
+    <UnitTestResult executionId="3a272728-23b9-470a-8b4c-03f48d1d1f44" testId="18ef58c6-3c04-a441-bc37-ac74e9d0e4dd" testName="Tequio.Tests.Http.MvpHttpTest.TestDeactivateProductWithOwnershipAndConflictShouldReturnContractStatuses" computerName="ASUSIVAN" duration="00:00:00.0853407" startTime="2026-11-23T15:33:09.9504650-06:00" endTime="2026-11-23T15:33:10.0362988-06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3a272728-23b9-470a-8b4c-03f48d1d1f44" />
+    <UnitTestResult executionId="45d9976d-15c1-4d1d-9047-fd7219f511f1" testId="85d1e961-a1e7-6280-944d-8bc129c4d06a" testName="Tequio.Tests.Http.MvpHttpTest.TestCatalogWithInvalidQueryShouldRejectBeforeDatabase(category: &quot;1&quot;, page: &quot;2147483647&quot;, size: &quot;101&quot;)" computerName="ASUSIVAN" duration="00:00:00.0777283" startTime="2026-11-23T15:33:09.1678353-06:00" endTime="2026-11-23T15:33:09.2184138-06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="45d9976d-15c1-4d1d-9047-fd7219f511f1" />
+    <UnitTestResult executionId="9679658f-f300-4179-aba6-37ba7e5c1bac" testId="9c4f1b30-a1a2-6158-16eb-ebaf302e0555" testName="Tequio.Tests.Http.MvpHttpTest.TestCatalogWithInvalidQueryShouldRejectBeforeDatabase(category: &quot;-1&quot;, page: &quot;1&quot;, size: &quot;10&quot;)" computerName="ASUSIVAN" duration="00:00:00.1447336" startTime="2026-11-23T15:33:09.0215458-06:00" endTime="2026-11-23T15:33:09.1397250-06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9679658f-f300-4179-aba6-37ba7e5c1bac" />
+    <UnitTestResult executionId="92e77c34-a26f-4993-a823-8716fcbf3d34" testId="f87311e6-90e8-a4f4-2410-8f9b50a4c04a" testName="Tequio.Tests.Http.MvpHttpTest.TestAuthEndpointsWithValidRequestsShouldDelegateAndPreservePublicResponse" computerName="ASUSIVAN" duration="00:00:00.1613206" startTime="2026-11-23T15:33:10.2928214-06:00" endTime="2026-11-23T15:33:10.4543155-06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="92e77c34-a26f-4993-a823-8716fcbf3d34" />
+    <UnitTestResult executionId="eb661268-e72d-49f6-8296-7eebe71b2952" testId="02768762-80d7-2ada-72b7-6720feece033" testName="Tequio.Tests.Http.MvpHttpTest.TestCreateProductWithProducerShouldPersistTrimmedFieldsAndReturnIdentifier" computerName="ASUSIVAN" duration="00:00:00.1011832" startTime="2026-11-23T15:33:10.1919440-06:00" endTime="2026-11-23T15:33:10.2921518-06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="eb661268-e72d-49f6-8296-7eebe71b2952" />
+    <UnitTestResult executionId="0a32fab7-5305-4028-9611-01d71d17eae3" testId="e3eae371-897f-8303-d0dc-4c1c1bb0c86b" testName="Tequio.Tests.Http.MvpHttpTest.TestSigningKeyWithInsufficientMaterialShouldFailBeforeSigning" computerName="ASUSIVAN" duration="00:00:00.0016159" startTime="2026-11-23T15:33:10.1912618-06:00" endTime="2026-11-23T15:33:10.1914596-06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0a32fab7-5305-4028-9611-01d71d17eae3" />
+    <UnitTestResult executionId="e8fcc909-bc43-478b-9ac9-3235ad17372e" testId="fdc1f375-9ff9-a49b-f9d8-52ef72fd3096" testName="Tequio.Tests.Http.MvpHttpTest.TestIdentifierWithNonPositiveValueShouldReject(id: 0)" computerName="ASUSIVAN" duration="00:00:00.0003482" startTime="2026-11-23T15:33:10.0396707-06:00" endTime="2026-11-23T15:33:10.0398619-06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e8fcc909-bc43-478b-9ac9-3235ad17372e" />
+    <UnitTestResult executionId="958b1f8a-adcf-43a7-9040-21929b11532e" testId="04d84db9-2bc1-10fc-06d5-b075d4f8c7ee" testName="Tequio.Tests.Http.MvpHttpTest.TestCatalogWithInvalidQueryShouldRejectBeforeDatabase(category: &quot;1&quot;, page: &quot;0&quot;, size: &quot;9&quot;)" computerName="ASUSIVAN" duration="00:00:00.0549711" startTime="2026-11-23T15:33:09.2188014-06:00" endTime="2026-11-23T15:33:09.2741815-06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="958b1f8a-adcf-43a7-9040-21929b11532e" />
+    <UnitTestResult executionId="e2a5a42e-493f-4eea-9a0f-107e215c8bef" testId="6b9c2b94-5d30-5c29-5199-03a8c7d94201" testName="Tequio.Tests.Http.MvpHttpTest.TestCatalogWithInvalidQueryShouldRejectBeforeDatabase(category: &quot;text&quot;, page: &quot;1&quot;, size: &quot;10&quot;)" computerName="ASUSIVAN" duration="00:00:01.6378641" startTime="2026-11-23T15:33:07.3294954-06:00" endTime="2026-11-23T15:33:08.9920658-06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e2a5a42e-493f-4eea-9a0f-107e215c8bef" />
+    <UnitTestResult executionId="be4e1e39-eff4-4a21-b3c9-6db2decab4ce" testId="b319456e-9ead-b368-daef-9e6e6618be44" testName="Tequio.Tests.Http.MvpHttpTest.TestProfileWithBearerIdentityShouldUpdateOnlyTheCurrentUser" computerName="ASUSIVAN" duration="00:00:00.1469493" startTime="2026-11-23T15:33:10.0401721-06:00" endTime="2026-11-23T15:33:10.1877800-06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="be4e1e39-eff4-4a21-b3c9-6db2decab4ce" />
+    <UnitTestResult executionId="0c665514-6551-4224-ad91-745a1236c0f1" testId="098a4300-d128-6236-6f7a-89863e897d93" testName="Tequio.Tests.Http.MvpHttpTest.TestUploadWithImageShouldReturnStorageUrlAndRejectEmptyContent" computerName="ASUSIVAN" duration="00:00:00.3465182" startTime="2026-11-23T15:33:09.2787661-06:00" endTime="2026-11-23T15:33:09.6246466-06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0c665514-6551-4224-ad91-745a1236c0f1" />
+    <UnitTestResult executionId="6419808c-8be2-476a-a9f3-d1f770c0116f" testId="d73c046a-40b9-e878-8c80-b4185661757c" testName="Tequio.Tests.Http.MvpHttpTest.TestAdminAuthorizationWithMasterAdminShouldPreserveScopeAndTarget" computerName="ASUSIVAN" duration="00:00:00.1584743" startTime="2026-11-23T15:33:09.7628839-06:00" endTime="2026-11-23T15:33:09.9499321-06:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6419808c-8be2-476a-a9f3-d1f770c0116f" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="Tequio.Tests.Http.MvpHttpTest.TestProfileWithBearerIdentityShouldUpdateOnlyTheCurrentUser" storage="c:\projects\tequio\tequioapi\backend\tequio.tests\bin\debug\net10.0\tequio.tests.dll" id="b319456e-9ead-b368-daef-9e6e6618be44">
+      <Execution id="be4e1e39-eff4-4a21-b3c9-6db2decab4ce" />
+      <TestMethod codeBase="C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Tests\bin\Debug\net10.0\Tequio.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="Tequio.Tests.Http.MvpHttpTest" name="TestProfileWithBearerIdentityShouldUpdateOnlyTheCurrentUser" />
+    </UnitTest>
+    <UnitTest name="Tequio.Tests.Http.MvpHttpTest.TestAuthEndpointsWithValidRequestsShouldDelegateAndPreservePublicResponse" storage="c:\projects\tequio\tequioapi\backend\tequio.tests\bin\debug\net10.0\tequio.tests.dll" id="f87311e6-90e8-a4f4-2410-8f9b50a4c04a">
+      <Execution id="92e77c34-a26f-4993-a823-8716fcbf3d34" />
+      <TestMethod codeBase="C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Tests\bin\Debug\net10.0\Tequio.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="Tequio.Tests.Http.MvpHttpTest" name="TestAuthEndpointsWithValidRequestsShouldDelegateAndPreservePublicResponse" />
+    </UnitTest>
+    <UnitTest name="Tequio.Tests.Http.MvpHttpTest.TestDeactivateProductWithOwnershipAndConflictShouldReturnContractStatuses" storage="c:\projects\tequio\tequioapi\backend\tequio.tests\bin\debug\net10.0\tequio.tests.dll" id="18ef58c6-3c04-a441-bc37-ac74e9d0e4dd">
+      <Execution id="3a272728-23b9-470a-8b4c-03f48d1d1f44" />
+      <TestMethod codeBase="C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Tests\bin\Debug\net10.0\Tequio.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="Tequio.Tests.Http.MvpHttpTest" name="TestDeactivateProductWithOwnershipAndConflictShouldReturnContractStatuses" />
+    </UnitTest>
+    <UnitTest name="Tequio.Tests.Http.MvpHttpTest.TestCatalogWithInvalidQueryShouldRejectBeforeDatabase(category: &quot;-1&quot;, page: &quot;1&quot;, size: &quot;10&quot;)" storage="c:\projects\tequio\tequioapi\backend\tequio.tests\bin\debug\net10.0\tequio.tests.dll" id="9c4f1b30-a1a2-6158-16eb-ebaf302e0555">
+      <Execution id="9679658f-f300-4179-aba6-37ba7e5c1bac" />
+      <TestMethod codeBase="C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Tests\bin\Debug\net10.0\Tequio.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="Tequio.Tests.Http.MvpHttpTest" name="TestCatalogWithInvalidQueryShouldRejectBeforeDatabase" />
+    </UnitTest>
+    <UnitTest name="Tequio.Tests.Http.MvpHttpTest.TestCatalogWithSecondPageShouldTranslateIndexAndReturnProducts" storage="c:\projects\tequio\tequioapi\backend\tequio.tests\bin\debug\net10.0\tequio.tests.dll" id="bd36373f-27e8-668f-ab3b-40056981c67a">
+      <Execution id="6757a135-b3fa-409c-88ba-ed82397d8f3a" />
+      <TestMethod codeBase="C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Tests\bin\Debug\net10.0\Tequio.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="Tequio.Tests.Http.MvpHttpTest" name="TestCatalogWithSecondPageShouldTranslateIndexAndReturnProducts" />
+    </UnitTest>
+    <UnitTest name="Tequio.Tests.Http.MvpHttpTest.TestIdentifierWithNonPositiveValueShouldReject(id: -1)" storage="c:\projects\tequio\tequioapi\backend\tequio.tests\bin\debug\net10.0\tequio.tests.dll" id="a6610415-c4df-ffb2-3d3c-379d9c6e8cbb">
+      <Execution id="4bec4f4d-fab1-4b5e-a18d-3d6598afb4ee" />
+      <TestMethod codeBase="C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Tests\bin\Debug\net10.0\Tequio.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="Tequio.Tests.Http.MvpHttpTest" name="TestIdentifierWithNonPositiveValueShouldReject" />
+    </UnitTest>
+    <UnitTest name="Tequio.Tests.Http.MvpHttpTest.TestCreateProductWithProducerShouldPersistTrimmedFieldsAndReturnIdentifier" storage="c:\projects\tequio\tequioapi\backend\tequio.tests\bin\debug\net10.0\tequio.tests.dll" id="02768762-80d7-2ada-72b7-6720feece033">
+      <Execution id="eb661268-e72d-49f6-8296-7eebe71b2952" />
+      <TestMethod codeBase="C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Tests\bin\Debug\net10.0\Tequio.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="Tequio.Tests.Http.MvpHttpTest" name="TestCreateProductWithProducerShouldPersistTrimmedFieldsAndReturnIdentifier" />
+    </UnitTest>
+    <UnitTest name="Tequio.Tests.Http.MvpHttpTest.TestAdminAuthorizationWithMasterAdminShouldPreserveScopeAndTarget" storage="c:\projects\tequio\tequioapi\backend\tequio.tests\bin\debug\net10.0\tequio.tests.dll" id="d73c046a-40b9-e878-8c80-b4185661757c">
+      <Execution id="6419808c-8be2-476a-a9f3-d1f770c0116f" />
+      <TestMethod codeBase="C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Tests\bin\Debug\net10.0\Tequio.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="Tequio.Tests.Http.MvpHttpTest" name="TestAdminAuthorizationWithMasterAdminShouldPreserveScopeAndTarget" />
+    </UnitTest>
+    <UnitTest name="Tequio.Tests.Http.MvpHttpTest.TestIdentifierWithNonPositiveValueShouldReject(id: 0)" storage="c:\projects\tequio\tequioapi\backend\tequio.tests\bin\debug\net10.0\tequio.tests.dll" id="fdc1f375-9ff9-a49b-f9d8-52ef72fd3096">
+      <Execution id="e8fcc909-bc43-478b-9ac9-3235ad17372e" />
+      <TestMethod codeBase="C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Tests\bin\Debug\net10.0\Tequio.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="Tequio.Tests.Http.MvpHttpTest" name="TestIdentifierWithNonPositiveValueShouldReject" />
+    </UnitTest>
+    <UnitTest name="Tequio.Tests.Http.MvpHttpTest.TestSigningKeyWithInsufficientMaterialShouldFailBeforeSigning" storage="c:\projects\tequio\tequioapi\backend\tequio.tests\bin\debug\net10.0\tequio.tests.dll" id="e3eae371-897f-8303-d0dc-4c1c1bb0c86b">
+      <Execution id="0a32fab7-5305-4028-9611-01d71d17eae3" />
+      <TestMethod codeBase="C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Tests\bin\Debug\net10.0\Tequio.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="Tequio.Tests.Http.MvpHttpTest" name="TestSigningKeyWithInsufficientMaterialShouldFailBeforeSigning" />
+    </UnitTest>
+    <UnitTest name="Tequio.Tests.Http.MvpHttpTest.TestCatalogWithInvalidQueryShouldRejectBeforeDatabase(category: &quot;text&quot;, page: &quot;1&quot;, size: &quot;10&quot;)" storage="c:\projects\tequio\tequioapi\backend\tequio.tests\bin\debug\net10.0\tequio.tests.dll" id="6b9c2b94-5d30-5c29-5199-03a8c7d94201">
+      <Execution id="e2a5a42e-493f-4eea-9a0f-107e215c8bef" />
+      <TestMethod codeBase="C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Tests\bin\Debug\net10.0\Tequio.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="Tequio.Tests.Http.MvpHttpTest" name="TestCatalogWithInvalidQueryShouldRejectBeforeDatabase" />
+    </UnitTest>
+    <UnitTest name="Tequio.Tests.Http.MvpHttpTest.TestCatalogWithInvalidQueryShouldRejectBeforeDatabase(category: &quot;1&quot;, page: &quot;2147483647&quot;, size: &quot;101&quot;)" storage="c:\projects\tequio\tequioapi\backend\tequio.tests\bin\debug\net10.0\tequio.tests.dll" id="85d1e961-a1e7-6280-944d-8bc129c4d06a">
+      <Execution id="45d9976d-15c1-4d1d-9047-fd7219f511f1" />
+      <TestMethod codeBase="C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Tests\bin\Debug\net10.0\Tequio.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="Tequio.Tests.Http.MvpHttpTest" name="TestCatalogWithInvalidQueryShouldRejectBeforeDatabase" />
+    </UnitTest>
+    <UnitTest name="Tequio.Tests.Http.MvpHttpTest.TestCatalogWithInvalidQueryShouldRejectBeforeDatabase(category: &quot;1&quot;, page: &quot;0&quot;, size: &quot;9&quot;)" storage="c:\projects\tequio\tequioapi\backend\tequio.tests\bin\debug\net10.0\tequio.tests.dll" id="04d84db9-2bc1-10fc-06d5-b075d4f8c7ee">
+      <Execution id="958b1f8a-adcf-43a7-9040-21929b11532e" />
+      <TestMethod codeBase="C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Tests\bin\Debug\net10.0\Tequio.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="Tequio.Tests.Http.MvpHttpTest" name="TestCatalogWithInvalidQueryShouldRejectBeforeDatabase" />
+    </UnitTest>
+    <UnitTest name="Tequio.Tests.Http.MvpHttpTest.TestUploadWithImageShouldReturnStorageUrlAndRejectEmptyContent" storage="c:\projects\tequio\tequioapi\backend\tequio.tests\bin\debug\net10.0\tequio.tests.dll" id="098a4300-d128-6236-6f7a-89863e897d93">
+      <Execution id="0c665514-6551-4224-ad91-745a1236c0f1" />
+      <TestMethod codeBase="C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Tests\bin\Debug\net10.0\Tequio.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="Tequio.Tests.Http.MvpHttpTest" name="TestUploadWithImageShouldReturnStorageUrlAndRejectEmptyContent" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="bd36373f-27e8-668f-ab3b-40056981c67a" executionId="6757a135-b3fa-409c-88ba-ed82397d8f3a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a6610415-c4df-ffb2-3d3c-379d9c6e8cbb" executionId="4bec4f4d-fab1-4b5e-a18d-3d6598afb4ee" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="18ef58c6-3c04-a441-bc37-ac74e9d0e4dd" executionId="3a272728-23b9-470a-8b4c-03f48d1d1f44" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="85d1e961-a1e7-6280-944d-8bc129c4d06a" executionId="45d9976d-15c1-4d1d-9047-fd7219f511f1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9c4f1b30-a1a2-6158-16eb-ebaf302e0555" executionId="9679658f-f300-4179-aba6-37ba7e5c1bac" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f87311e6-90e8-a4f4-2410-8f9b50a4c04a" executionId="92e77c34-a26f-4993-a823-8716fcbf3d34" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="02768762-80d7-2ada-72b7-6720feece033" executionId="eb661268-e72d-49f6-8296-7eebe71b2952" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e3eae371-897f-8303-d0dc-4c1c1bb0c86b" executionId="0a32fab7-5305-4028-9611-01d71d17eae3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fdc1f375-9ff9-a49b-f9d8-52ef72fd3096" executionId="e8fcc909-bc43-478b-9ac9-3235ad17372e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="04d84db9-2bc1-10fc-06d5-b075d4f8c7ee" executionId="958b1f8a-adcf-43a7-9040-21929b11532e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6b9c2b94-5d30-5c29-5199-03a8c7d94201" executionId="e2a5a42e-493f-4eea-9a0f-107e215c8bef" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b319456e-9ead-b368-daef-9e6e6618be44" executionId="be4e1e39-eff4-4a21-b3c9-6db2decab4ce" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="098a4300-d128-6236-6f7a-89863e897d93" executionId="0c665514-6551-4224-ad91-745a1236c0f1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d73c046a-40b9-e878-8c80-b4185661757c" executionId="6419808c-8be2-476a-a9f3-d1f770c0116f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Resultados sin formato de lista" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="Todos los resultados cargados" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="14" executed="14" passed="14" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.1.5+1b188a7b0a (64-bit .NET 10.0.12)&#xD;
+[xUnit.net 00:00:00.75]   Discovering: Tequio.Tests&#xD;
+[xUnit.net 00:00:00.93]   Discovered:  Tequio.Tests&#xD;
+[xUnit.net 00:00:01.01]   Starting:    Tequio.Tests&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Testing&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api&#xD;
+warn: Tequio.Api.Middlewares.GlobalExceptionMiddleware[0]&#xD;
+      Validaci�n incorrecta: El valor de categoryId no es un n�mero v�lido.&#xD;
+      System.ArgumentException: El valor de categoryId no es un n�mero v�lido.&#xD;
+         at Tequio.Api.Validators.StringConverter.ToInt(String number, String argumentDescriptor) in C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api\Validators\StringConverter.cs:line 15&#xD;
+         at Tequio.Api.Controllers.ProductController.GetProductsByCategoryAsync(String categoryId, String pageIndex, String pageSize) in C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api\Controllers\ProductController.cs:line 60&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.&lt;InvokeActionMethodAsync&gt;g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.&lt;InvokeNextActionFilterAsync&gt;g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State&amp; next, Scope&amp; scope, Object&amp; state, Boolean&amp; isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()&#xD;
+      --- End of stack trace from previous location ---&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeFilterPipelineAsync&gt;g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeAsync&gt;g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeAsync&gt;g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)&#xD;
+         at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)&#xD;
+         at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)&#xD;
+         at Tequio.Api.Middlewares.GlobalExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api\Middlewares\GlobalExceptionMiddleware.cs:line 28&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Testing&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api&#xD;
+warn: Tequio.Api.Middlewares.GlobalExceptionMiddleware[0]&#xD;
+      Validaci�n incorrecta: categoryId has to be equal or greater than zero&#xD;
+      System.ArgumentException: categoryId has to be equal or greater than zero&#xD;
+         at Tequio.Api.Validators.NumberValidator.ValidateGreaterOrEqualToZero(Int32 number, String argumentDescriptor) in C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api\Validators\NumberValidator.cs:line 9&#xD;
+         at Tequio.Api.Controllers.ProductController.GetProductsByCategoryAsync(String categoryId, String pageIndex, String pageSize) in C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api\Controllers\ProductController.cs:line 64&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.&lt;InvokeActionMethodAsync&gt;g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.&lt;InvokeNextActionFilterAsync&gt;g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State&amp; next, Scope&amp; scope, Object&amp; state, Boolean&amp; isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()&#xD;
+      --- End of stack trace from previous location ---&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeFilterPipelineAsync&gt;g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeAsync&gt;g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeAsync&gt;g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)&#xD;
+         at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)&#xD;
+         at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)&#xD;
+         at Tequio.Api.Middlewares.GlobalExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api\Middlewares\GlobalExceptionMiddleware.cs:line 28&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Testing&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api&#xD;
+warn: Tequio.Api.Middlewares.GlobalExceptionMiddleware[0]&#xD;
+      Validaci�n incorrecta: Page index cannot be greater than 21474736&#xD;
+      Page size cannot be greater than 100&#xD;
+      System.ArgumentException: Page index cannot be greater than 21474736&#xD;
+      Page size cannot be greater than 100&#xD;
+         at Tequio.Api.Validators.PageValidator.ValidatePageArguments(Int32 pageIndex, Int32 pageSize) in C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api\Validators\PageValidator.cs:line 35&#xD;
+         at Tequio.Api.Controllers.ProductController.GetProductsByCategoryAsync(String categoryId, String pageIndex, String pageSize) in C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api\Controllers\ProductController.cs:line 65&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.&lt;InvokeActionMethodAsync&gt;g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.&lt;InvokeNextActionFilterAsync&gt;g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State&amp; next, Scope&amp; scope, Object&amp; state, Boolean&amp; isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()&#xD;
+      --- End of stack trace from previous location ---&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeFilterPipelineAsync&gt;g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeAsync&gt;g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeAsync&gt;g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)&#xD;
+         at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)&#xD;
+         at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)&#xD;
+         at Tequio.Api.Middlewares.GlobalExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api\Middlewares\GlobalExceptionMiddleware.cs:line 28&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Testing&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api&#xD;
+warn: Tequio.Api.Middlewares.GlobalExceptionMiddleware[0]&#xD;
+      Validaci�n incorrecta: Page index starts at 1, therefore it must be greater than zero.&#xD;
+      Page size cannot be less than 10&#xD;
+      System.ArgumentException: Page index starts at 1, therefore it must be greater than zero.&#xD;
+      Page size cannot be less than 10&#xD;
+         at Tequio.Api.Validators.PageValidator.ValidatePageArguments(Int32 pageIndex, Int32 pageSize) in C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api\Validators\PageValidator.cs:line 35&#xD;
+         at Tequio.Api.Controllers.ProductController.GetProductsByCategoryAsync(String categoryId, String pageIndex, String pageSize) in C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api\Controllers\ProductController.cs:line 65&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.&lt;InvokeActionMethodAsync&gt;g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.&lt;InvokeNextActionFilterAsync&gt;g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State&amp; next, Scope&amp; scope, Object&amp; state, Boolean&amp; isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()&#xD;
+      --- End of stack trace from previous location ---&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeFilterPipelineAsync&gt;g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeAsync&gt;g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)&#xD;
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.&lt;InvokeAsync&gt;g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)&#xD;
+         at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)&#xD;
+         at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)&#xD;
+         at Tequio.Api.Middlewares.GlobalExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api\Middlewares\GlobalExceptionMiddleware.cs:line 28&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Testing&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api&#xD;
+info: Tequio.Api.Controllers.FilesController[0]&#xD;
+      Petici�n de subida de archivo recibida: menu.jpg, Tama�o: 4 bytes.&#xD;
+info: Tequio.Domain.Services.FileService[0]&#xD;
+      El archivo menu.jpg aprob� las validaciones de negocio. Iniciando transferencia a la nube.&#xD;
+info: Tequio.Api.Controllers.FilesController[0]&#xD;
+      Petici�n de subida de archivo recibida: menu.jpg, Tama�o: 0 bytes.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Testing&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Testing&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api&#xD;
+info: Tequio.Api.Controllers.AuthController[0]&#xD;
+      El Administrador Maestro 7 inici� el registro del administrador admin@example.invalid.&#xD;
+info: Tequio.Api.Controllers.AuthController[0]&#xD;
+      El Administrador Maestro con ID 7 est� ingresando el c�digo para autorizar a admin@example.invalid.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Testing&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api&#xD;
+info: Tequio.Api.Controllers.ProductController[0]&#xD;
+      El productor 7 solicit� la desactivaci�n del producto base 1.&#xD;
+info: Tequio.Domain.Services.ProductService[0]&#xD;
+      Iniciando desactivaci�n del producto 1 para el productor 7.&#xD;
+info: Tequio.Domain.Services.ProductService[0]&#xD;
+      Producto 1 desactivado exitosamente por el productor 7.&#xD;
+info: Tequio.Api.Controllers.ProductController[0]&#xD;
+      El productor 7 solicit� la desactivaci�n del producto base 2.&#xD;
+info: Tequio.Domain.Services.ProductService[0]&#xD;
+      Iniciando desactivaci�n del producto 2 para el productor 7.&#xD;
+info: Tequio.Api.Controllers.ProductController[0]&#xD;
+      El productor 7 solicit� la desactivaci�n del producto base 3.&#xD;
+info: Tequio.Domain.Services.ProductService[0]&#xD;
+      Iniciando desactivaci�n del producto 3 para el productor 7.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Testing&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api&#xD;
+info: Tequio.Api.Controllers.UserController[0]&#xD;
+      El usuario 7 solicit� la actualizaci�n de su informaci�n de perfil.&#xD;
+info: Tequio.Domain.Services.UserService[0]&#xD;
+      Delegando actualizaci�n de perfil del usuario 7 al repositorio.&#xD;
+info: Tequio.Api.Controllers.UserController[0]&#xD;
+      El usuario 7 solicit� la actualizaci�n de su foto de perfil.&#xD;
+info: Tequio.Api.Controllers.UserController[0]&#xD;
+      El usuario 7 solicit� darse de alta como vendedor.&#xD;
+info: Tequio.Domain.Services.UserService[0]&#xD;
+      Iniciando solicitud para promover al usuario 7 a rol de productor.&#xD;
+info: Tequio.Domain.Services.UserService[0]&#xD;
+      Usuario 7 promovido exitosamente a rol de productor.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Testing&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api&#xD;
+info: Tequio.Api.Controllers.ProductController[0]&#xD;
+      El productor 7 solicit� el registro del producto base ' Caf� '.&#xD;
+info: Tequio.Domain.Services.ProductService[0]&#xD;
+      Iniciando creaci�n de producto 'Caf�' para el productor 7.&#xD;
+info: Tequio.Domain.Services.ProductService[0]&#xD;
+      Producto 'Caf�' creado exitosamente con ID 12 para el productor 7.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Testing&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api&#xD;
+info: Tequio.Api.Controllers.AuthController[0]&#xD;
+      Intento de inicio de sesi�n recibido para el correo: account@example.invalid&#xD;
+info: Tequio.Api.Controllers.AuthController[0]&#xD;
+      Intento de verificaci�n de cuenta recibido para el correo: account@example.invalid&#xD;
+info: Tequio.Api.Controllers.AuthController[0]&#xD;
+      Solicitud de reenv�o de c�digo de verificaci�n recibida para el correo: account@example.invalid&#xD;
+info: Tequio.Api.Controllers.AuthController[0]&#xD;
+      Solicitud de recuperaci�n de contrase�a recibida para el correo: account@example.invalid&#xD;
+info: Tequio.Api.Controllers.AuthController[0]&#xD;
+      Intento de restablecimiento de contrase�a para el correo: account@example.invalid&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+[xUnit.net 00:00:04.22]   Finished:    Tequio.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

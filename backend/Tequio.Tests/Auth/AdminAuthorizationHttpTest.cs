@@ -1,8 +1,8 @@
+using System.Security.Cryptography;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Security.Claims;
-using System.Text;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -23,12 +23,14 @@ public sealed class AdminAuthorizationHttpTest
 {
     private sealed class Factory : WebApplicationFactory<Program>
     {
+        public JwtSigningKey SigningKey { get; } = new(RandomNumberGenerator.GetBytes(32));
+
         public Mock<IAuthService> Auth { get; } = new();
         public IConfiguration Configuration { get; } = new ConfigurationBuilder().AddInMemoryCollection(
             new Dictionary<string, string?>
             {
-                ["Jwt:Key"] = "TEST_ONLY_ADMIN_AUTHORIZATION_SIGNING_KEY_32_CHARS",
-                ["Jwt:Issuer"] = "TequioTests", ["Jwt:Audience"] = "TequioTests"
+                ["Jwt:Issuer"] = "TequioTests",
+                ["Jwt:Audience"] = "TequioTests"
             }).Build();
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
@@ -36,6 +38,7 @@ public sealed class AdminAuthorizationHttpTest
             builder.ConfigureAppConfiguration((_, config) => config.AddConfiguration(Configuration));
             builder.ConfigureServices(services =>
             {
+                services.AddSingleton(SigningKey);
                 services.RemoveAll<IAuthService>();
                 services.AddSingleton(Auth.Object);
                 services.RemoveAll<IUserService>();
@@ -56,7 +59,7 @@ public sealed class AdminAuthorizationHttpTest
             if (role is not null)
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
-                    "Bearer", new JwtProvider(Configuration).GenerateToken("7", role));
+                    "Bearer", new JwtProvider(Configuration, SigningKey).GenerateToken("7", role));
             }
             return client;
         }
@@ -100,7 +103,7 @@ public sealed class AdminAuthorizationHttpTest
         {
             new Claim(ClaimTypes.NameIdentifier, "7"), new Claim(ClaimTypes.Role, "Admin")
         }, expires: DateTime.UtcNow.AddMinutes(5), signingCredentials: new SigningCredentials(
-            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(factory.Configuration["Jwt:Key"]!)),
+            factory.SigningKey.Key,
             SecurityAlgorithms.HmacSha256));
         using var client = factory.Client(null);
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(

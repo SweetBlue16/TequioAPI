@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Verified Admin sees the delivery points panel",
+    "status": "passed"
+  },
+  {
+    "name": "A native button opens the point and is independent of its secondary controls",
+    "status": "passed"
+  },
+  {
+    "name": "ComboBox uses column layout and missing coordinates block each branch",
+    "status": "passed"
+  },
+  {
+    "name": "Saving changes returns to a consistent list",
+    "status": "passed"
+  },
+  {
+    "name": "The invalid edit ID redirects to the list",
+    "status": "passed"
+  },
+  {
+    "name": "Register a new point and read its success notification on the list",
+    "status": "passed"
+  }
+]

@@ -305,3 +305,13 @@ No borrar usuarios, tablas, bases de datos ni volúmenes. Sin commits ni pushes.
 
 
 Puntos físicos de entrega: [instalación, contrato y verificación](../docs/PUNTOS_ENTREGA.md).
+
+## Scripts compartidos con los validadores offline
+
+Los validadores de autenticación y perfiles llaman funciones de `postman/scripts/` de forma directa. Si modifica un evento compartido, sincronice el cuerpo de la función con las líneas de `script.exec` en el evento correspondiente de la colección. Los validadores comprueban esa equivalencia y analizan la sintaxis de todos los eventos con `node --check`. Los grupos con aserciones propias usan un bloque para aislar sus declaraciones del contexto de Newman.
+
+```powershell
+node postman/validate-auth.cjs
+node postman/validate-profiles-catalog.cjs
+node postman/validate-delivery-points.cjs
+```

@@ -77,10 +77,11 @@ namespace Tequio.Api.Controllers
         /// <param name="dto">Product creation parameters payload.</param>
         /// <returns>A created result containing the generated identifier.</returns>
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Producer")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> CreateBaseProductAsync([FromBody] CreateBaseProductDto dto)
         {
             if (!ModelState.IsValid)
@@ -89,10 +90,13 @@ namespace Tequio.Api.Controllers
             }
 
             int producerId = User.GetUserId();
-            logger.LogInformation(
-                "El productor {ProducerId} solicitó el registro del producto base '{ProductName}'.",
-                producerId,
-                dto.Name);
+            if (logger.IsEnabled(LogLevel.Information))
+            {
+                logger.LogInformation(
+                    "El productor {ProducerId} solicitó el registro del producto base '{ProductName}'.",
+                    producerId,
+                    dto.Name);
+            }
 
             int createdProductId = await productService.CreateBaseProductAsync(producerId, dto);
 
@@ -111,10 +115,11 @@ namespace Tequio.Api.Controllers
         /// <param name="productId">The target base product identifier.</param>
         /// <returns>Confirmation message of the deactivation.</returns>
         [HttpPatch("{productId}/deactive")]
-        [Authorize]
+        [Authorize(Roles = "Producer")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         public async Task<IActionResult> DeactivateBaseProductAsync([FromRoute] string productId)
         {
@@ -122,10 +127,13 @@ namespace Tequio.Api.Controllers
             NumberValidator.ValidateGreaterOrEqualToZero(id, "productId");
 
             int producerId = User.GetUserId();
-            logger.LogInformation(
-                "El productor {ProducerId} solicitó la desactivación del producto base {ProductId}.",
-                producerId,
-                id);
+            if (logger.IsEnabled(LogLevel.Information))
+            {
+                logger.LogInformation(
+                    "El productor {ProducerId} solicitó la desactivación del producto base {ProductId}.",
+                    producerId,
+                    id);
+            }
 
             await productService.DeactivateBaseProductAsync(id, producerId);
 

@@ -1,0 +1,58 @@
+warn: Tequio.Api.Middlewares.GlobalExceptionMiddleware[0]
+      Validación incorrecta: Debes ser mayor de 18 años para registrarte.
+      System.ArgumentException: Debes ser mayor de 18 años para registrarte.
+         at Tequio.Infrastructure.Repositories.AuthRepository.CreateUserAsync(RegisterRequestDto request, String passwordHash, CancellationToken cancellationToken) in C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Infrastructure\Repositories\AuthRepository.cs:line 69
+         at Tequio.Domain.Services.AuthService.RegisterUserAsync(RegisterRequestDto request, CancellationToken cancellationToken) in C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Domain\Services\IAuthService.cs:line 115
+         at Tequio.Api.Controllers.AuthController.Register(RegisterRequestDto request, CancellationToken cancellationToken) in C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api\Controllers\AuthController.cs:line 45
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+         at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+         at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+         at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+         at Tequio.Api.Middlewares.GlobalExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api\Middlewares\GlobalExceptionMiddleware.cs:line 28
+warn: Tequio.Api.Middlewares.GlobalExceptionMiddleware[0]
+      Acceso denegado: El correo o la contraseña son incorrectos.
+      System.UnauthorizedAccessException: El correo o la contraseña son incorrectos.
+         at Tequio.Domain.Services.AuthService.AuthenticateUserAsync(LoginRequestDto request, CancellationToken cancellationToken) in C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Domain\Services\IAuthService.cs:line 141
+         at Tequio.Api.Controllers.AuthController.Login(LoginRequestDto request, CancellationToken cancellationToken) in C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api\Controllers\AuthController.cs:line 70
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+         at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+         at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+         at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+         at Tequio.Api.Middlewares.GlobalExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api\Middlewares\GlobalExceptionMiddleware.cs:line 28
+warn: Tequio.Api.Middlewares.GlobalExceptionMiddleware[0]
+      Acceso denegado: Verifica tu correo electrónico antes de iniciar sesión.
+      System.UnauthorizedAccessException: Verifica tu correo electrónico antes de iniciar sesión.
+         at Tequio.Domain.Services.AuthService.AuthenticateUserAsync(LoginRequestDto request, CancellationToken cancellationToken) in C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Domain\Services\IAuthService.cs:line 149
+         at Tequio.Api.Controllers.AuthController.Login(LoginRequestDto request, CancellationToken cancellationToken) in C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api\Controllers\AuthController.cs:line 70
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+         at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+         at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+         at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+         at Tequio.Api.Middlewares.GlobalExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Projects\TEQUIO\TequioAPI\backend\Tequio.Api\Middlewares\GlobalExceptionMiddleware.cs:line 28

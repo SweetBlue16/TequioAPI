@@ -1,8 +1,6 @@
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 
 namespace Tequio.Domain.Services
 {
@@ -21,18 +19,16 @@ namespace Tequio.Domain.Services
     {
         private readonly IConfiguration _configuration;
 
-        public JwtProvider(IConfiguration configuration)
+        private readonly JwtSigningKey _signingKey;
+
+        public JwtProvider(IConfiguration configuration, JwtSigningKey signingKey)
         {
             _configuration = configuration;
+            _signingKey = signingKey;
         }
 
         public string GenerateToken(string userId, string roleId)
         {
-            var jwtKey = _configuration["Jwt:Key"]
-                ?? throw new InvalidOperationException("Missing JWT Key configuration.");
-
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             string roleName = roleId switch
             {
@@ -45,7 +41,9 @@ namespace Tequio.Domain.Services
 
             var claims = new[]
             {
+                new Claim(JwtRegisteredClaimNames.Sub, userId),
                 new Claim(ClaimTypes.NameIdentifier, userId),
+                new Claim("roleId", roleId),
                 new Claim(ClaimTypes.Role, roleName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim("admin_authorized", roleId == "3" ? "true" : "false")
@@ -56,7 +54,7 @@ namespace Tequio.Domain.Services
                 audience: _configuration["Jwt:Audience"],
                 claims: claims,
                 expires: DateTime.UtcNow.AddHours(2),
-                signingCredentials: credentials);
+                signingCredentials: _signingKey.CreateCredentials());
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }

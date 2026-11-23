@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Register buyer through the public form",
+    "status": "passed"
+  },
+  {
+    "name": "Reject valid credentials before email verification",
+    "status": "passed"
+  },
+  {
+    "name": "Verify the one-time code delivered over STARTTLS",
+    "status": "passed"
+  },
+  {
+    "name": "Sign in as verified buyer",
+    "status": "passed"
+  },
+  {
+    "name": "Open the catalog and preserve buyer restrictions",
+    "status": "passed"
+  },
+  {
+    "name": "Operate the seller terms modal by keyboard with restored focus",
+    "status": "failed",
+    "error": "Expected values to be strictly equal:\n\nfalse !== true\n"
+  }
+]

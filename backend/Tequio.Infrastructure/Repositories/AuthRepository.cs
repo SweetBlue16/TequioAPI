@@ -71,13 +71,13 @@ public sealed class AuthRepository : IAuthRepository
     }
 
     /// <inheritdoc />
-    public async Task<(string? UserId, string? RoleId, string? PasswordHash)> GetUserAuthDataAsync(
+    public async Task<(string? UserId, string? RoleId, string? PasswordHash, bool IsVerified)> GetUserAuthDataAsync(
         string email,
         CancellationToken cancellationToken = default)
     {
         try
         {
-            return await ExecuteWithConnectionAsync<(string? UserId, string? RoleId, string? PasswordHash)>(
+            return await ExecuteWithConnectionAsync<(string? UserId, string? RoleId, string? PasswordHash, bool IsVerified)>(
                 async connection =>
                 {
                     await using DbCommand command = CreateGetUserByEmailCommand(connection, email);
@@ -88,7 +88,8 @@ public sealed class AuthRepository : IAuthRepository
                         return (
                             UserId: (string?)null,
                             RoleId: (string?)null,
-                            PasswordHash: (string?)null);
+                            PasswordHash: (string?)null,
+                            IsVerified: false);
                     }
 
                     string passwordHash = reader.GetString(reader.GetOrdinal("PasswordHash"));
@@ -97,7 +98,7 @@ public sealed class AuthRepository : IAuthRepository
                     string roleId = reader.GetInt32(reader.GetOrdinal("RoleId"))
                         .ToString(CultureInfo.InvariantCulture);
 
-                    return (userId, roleId, passwordHash);
+                    return (userId, roleId, passwordHash, reader.GetBoolean(reader.GetOrdinal("IsVerified")));
                 },
                 cancellationToken);
         }

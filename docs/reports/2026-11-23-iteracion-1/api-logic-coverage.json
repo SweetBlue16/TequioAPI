@@ -1,0 +1,10 @@
+{
+  "scope": [
+    "Controladores",
+    "Validadores",
+    "Servicios de dominio"
+  ],
+  "covered_lines": 333,
+  "instrumented_lines": 663,
+  "percentage": 50.23
+}

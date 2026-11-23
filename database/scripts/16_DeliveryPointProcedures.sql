@@ -8,8 +8,10 @@ BEGIN
     SET NOCOUNT ON;
     IF @pageIndex < 1 OR @pageSize < 1 OR @pageSize > 100
         THROW 50101, N'Paginación inválida.', 1;
-    SELECT @totalCount = COUNT(*) FROM dbo.DeliveryPoint;
-    SELECT Id, Name, Street, Number, Neighborhood, ZipCode, City, [References], BusinessHours, Latitude, Longitude, IsActive, MunicipalityId FROM dbo.DeliveryPoint
+    SELECT @totalCount = COUNT(*)
+    FROM dbo.DeliveryPoint;
+    SELECT Id, Name, Street, Number, Neighborhood, ZipCode, City, [References], BusinessHours, Latitude, Longitude, IsActive, MunicipalityId
+    FROM dbo.DeliveryPoint
     ORDER BY Id DESC OFFSET (CONVERT(BIGINT, @pageIndex) - 1) * @pageSize ROWS
     FETCH NEXT @pageSize ROWS ONLY;
 END;
@@ -18,7 +20,9 @@ CREATE OR ALTER PROCEDURE dbo.USP_GetDeliveryPoint @id INT
 AS
 BEGIN
     SET NOCOUNT ON;
-    SELECT Id, Name, Street, Number, Neighborhood, ZipCode, City, [References], BusinessHours, Latitude, Longitude, IsActive, MunicipalityId FROM dbo.DeliveryPoint WHERE Id = @id;
+    SELECT Id, Name, Street, Number, Neighborhood, ZipCode, City, [References], BusinessHours, Latitude, Longitude, IsActive, MunicipalityId
+    FROM dbo.DeliveryPoint
+    WHERE Id = @id;
 END;
 GO
 CREATE OR ALTER PROCEDURE dbo.USP_CreateDeliveryPoint
@@ -35,32 +39,35 @@ AS
 BEGIN
     SET NOCOUNT ON;
     SET XACT_ABORT ON;
+
+    DECLARE @invalidFieldMessage NVARCHAR(80) = N'Campo obligatorio o longitud inválida.';
     SET @name = LTRIM(RTRIM(@name));
     IF @name IS NULL OR LEN(@name) = 0 OR DATALENGTH(@name) / 2 > 150
-        THROW 50101, N'Campo obligatorio o longitud inválida.', 1;
+        THROW 50101, @invalidFieldMessage, 1;
     SET @street = LTRIM(RTRIM(@street));
     IF @street IS NULL OR LEN(@street) = 0 OR DATALENGTH(@street) / 2 > 150
-        THROW 50101, N'Campo obligatorio o longitud inválida.', 1;
+        THROW 50101, @invalidFieldMessage, 1;
     SET @number = LTRIM(RTRIM(@number));
     IF @number IS NULL OR LEN(@number) = 0 OR DATALENGTH(@number) / 2 > 50
-        THROW 50101, N'Campo obligatorio o longitud inválida.', 1;
+        THROW 50101, @invalidFieldMessage, 1;
     SET @neighborhood = LTRIM(RTRIM(@neighborhood));
     IF @neighborhood IS NULL OR LEN(@neighborhood) = 0 OR DATALENGTH(@neighborhood) / 2 > 100
-        THROW 50101, N'Campo obligatorio o longitud inválida.', 1;
+        THROW 50101, @invalidFieldMessage, 1;
     SET @zipCode = LTRIM(RTRIM(@zipCode));
     IF @zipCode IS NULL OR LEN(@zipCode) = 0 OR DATALENGTH(@zipCode) / 2 > 20
-        THROW 50101, N'Campo obligatorio o longitud inválida.', 1;
+        THROW 50101, @invalidFieldMessage, 1;
     SET @city = LTRIM(RTRIM(@city));
     IF @city IS NULL OR LEN(@city) = 0 OR DATALENGTH(@city) / 2 > 100
-        THROW 50101, N'Campo obligatorio o longitud inválida.', 1;
+        THROW 50101, @invalidFieldMessage, 1;
     SET @businessHours = LTRIM(RTRIM(@businessHours));
     IF @businessHours IS NULL OR LEN(@businessHours) = 0 OR DATALENGTH(@businessHours) / 2 > 200
-        THROW 50101, N'Campo obligatorio o longitud inválida.', 1;
+        THROW 50101, @invalidFieldMessage, 1;
     IF @latitude IS NULL OR @longitude IS NULL OR @latitude NOT BETWEEN -90 AND 90
         OR @longitude NOT BETWEEN -180 AND 180 OR DATALENGTH(@references) / 2 > 400
         THROW 50101, N'Coordenadas o referencias inválidas.', 1;
     DECLARE @resolvedMunicipalityId INT;
-    SELECT @resolvedMunicipalityId = Id, @city = Name FROM dbo.Municipality
+    SELECT @resolvedMunicipalityId = Id, @city = Name
+    FROM dbo.Municipality
     WHERE Name = @city COLLATE Latin1_General_100_CI_AI
         AND (@municipalityId IS NULL OR Id = @municipalityId);
     IF @resolvedMunicipalityId IS NULL
@@ -85,32 +92,35 @@ AS
 BEGIN
     SET NOCOUNT ON;
     SET XACT_ABORT ON;
+
+    DECLARE @invalidFieldMessage NVARCHAR(80) = N'Campo obligatorio o longitud inválida.';
     SET @name = LTRIM(RTRIM(@name));
     IF @name IS NULL OR LEN(@name) = 0 OR DATALENGTH(@name) / 2 > 150
-        THROW 50101, N'Campo obligatorio o longitud inválida.', 1;
+        THROW 50101, @invalidFieldMessage, 1;
     SET @street = LTRIM(RTRIM(@street));
     IF @street IS NULL OR LEN(@street) = 0 OR DATALENGTH(@street) / 2 > 150
-        THROW 50101, N'Campo obligatorio o longitud inválida.', 1;
+        THROW 50101, @invalidFieldMessage, 1;
     SET @number = LTRIM(RTRIM(@number));
     IF @number IS NULL OR LEN(@number) = 0 OR DATALENGTH(@number) / 2 > 50
-        THROW 50101, N'Campo obligatorio o longitud inválida.', 1;
+        THROW 50101, @invalidFieldMessage, 1;
     SET @neighborhood = LTRIM(RTRIM(@neighborhood));
     IF @neighborhood IS NULL OR LEN(@neighborhood) = 0 OR DATALENGTH(@neighborhood) / 2 > 100
-        THROW 50101, N'Campo obligatorio o longitud inválida.', 1;
+        THROW 50101, @invalidFieldMessage, 1;
     SET @zipCode = LTRIM(RTRIM(@zipCode));
     IF @zipCode IS NULL OR LEN(@zipCode) = 0 OR DATALENGTH(@zipCode) / 2 > 20
-        THROW 50101, N'Campo obligatorio o longitud inválida.', 1;
+        THROW 50101, @invalidFieldMessage, 1;
     SET @city = LTRIM(RTRIM(@city));
     IF @city IS NULL OR LEN(@city) = 0 OR DATALENGTH(@city) / 2 > 100
-        THROW 50101, N'Campo obligatorio o longitud inválida.', 1;
+        THROW 50101, @invalidFieldMessage, 1;
     SET @businessHours = LTRIM(RTRIM(@businessHours));
     IF @businessHours IS NULL OR LEN(@businessHours) = 0 OR DATALENGTH(@businessHours) / 2 > 200
-        THROW 50101, N'Campo obligatorio o longitud inválida.', 1;
+        THROW 50101, @invalidFieldMessage, 1;
     IF @latitude IS NULL OR @longitude IS NULL OR @latitude NOT BETWEEN -90 AND 90
         OR @longitude NOT BETWEEN -180 AND 180 OR DATALENGTH(@references) / 2 > 400
         THROW 50101, N'Coordenadas o referencias inválidas.', 1;
     DECLARE @resolvedMunicipalityId INT;
-    SELECT @resolvedMunicipalityId = Id, @city = Name FROM dbo.Municipality
+    SELECT @resolvedMunicipalityId = Id, @city = Name
+    FROM dbo.Municipality
     WHERE Name = @city COLLATE Latin1_General_100_CI_AI
         AND (@municipalityId IS NULL OR Id = @municipalityId);
     IF @resolvedMunicipalityId IS NULL

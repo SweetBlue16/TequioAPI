@@ -57,14 +57,14 @@ public interface IAuthService
         CancellationToken cancellationToken = default);
 
     Task RegisterAdminAsync(RegisterRequestDto request,
-        string masterAdminEmail, 
+        string masterAdminEmail,
         CancellationToken cancellationToken = default);
 
     /// <summary>Resends authorization for an existing pending Admin, exclusively through MasterAdmin.</summary>
     Task ResendAdminAuthorizationAsync(string adminEmail, string masterAdminEmail,
         CancellationToken cancellationToken = default);
 
-    Task AuthorizeAdminAsync(AuthorizeAdminRequestDto request, 
+    Task AuthorizeAdminAsync(AuthorizeAdminRequestDto request,
         CancellationToken cancellationToken = default);
 }
 
@@ -121,7 +121,10 @@ public class AuthService : IAuthService
             SecurityCodeEmailType.AccountVerification,
             cancellationToken);
 
-        _logger.LogInformation("Usuario {Email} registrado exitosamente en el sistema.", request.Email);
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation("Usuario {Email} registrado exitosamente en el sistema.", request.Email);
+        }
         return userId;
     }
 
@@ -138,16 +141,18 @@ public class AuthService : IAuthService
             throw new UnauthorizedAccessException(ErrorMessages.InvalidCredentials);
         }
 
-        if (authData.RoleId == "3")
+        if (!authData.IsVerified)
         {
-            var admin = await _authRepository.GetUserVerificationDataAsync(request.Email, cancellationToken);
-            if (admin is null || !admin.IsVerified || admin.RoleId != 3)
-            {
-                throw new UnauthorizedAccessException("La cuenta está pendiente de autorización por el administrador maestro.");
-            }
+            string message = authData.RoleId == "3"
+                ? "La cuenta está pendiente de autorización por el administrador maestro."
+                : "Verifica tu correo electrónico antes de iniciar sesión.";
+            throw new UnauthorizedAccessException(message);
         }
 
-        _logger.LogInformation("Inicio de sesión exitoso y token generado para el usuario {UserId}.", authData.UserId);
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation("Inicio de sesión exitoso y token generado para el usuario {UserId}.", authData.UserId);
+        }
         return _jwtProvider.GenerateToken(authData.UserId!, authData.RoleId!);
     }
 
@@ -237,7 +242,10 @@ public class AuthService : IAuthService
 
         await _authRepository.UpdatePasswordAsync(user.UserId, newPasswordHash, cancellationToken);
 
-        _logger.LogInformation("Contraseña restablecida exitosamente para el usuario {Email}.", request.Email);
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation("Contraseña restablecida exitosamente para el usuario {Email}.", request.Email);
+        }
     }
 
     public async Task RegisterAdminAsync(RegisterRequestDto request, string masterAdminEmail, CancellationToken cancellationToken = default)
@@ -264,7 +272,10 @@ public class AuthService : IAuthService
             "Master Admin",
             SecurityCodeEmailType.AdminAuthorization,
             cancellationToken);
-        _logger.LogInformation("El Administrador Maestro solicitó la creación del administrador {NewAdminEmail}.", request.Email);
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation("El Administrador Maestro solicitó la creación del administrador {NewAdminEmail}.", request.Email);
+        }
     }
 
     /// <inheritdoc />
@@ -304,7 +315,10 @@ public class AuthService : IAuthService
             cancellationToken);
 
         // Authorization itself is committed atomically by SQL. Do not send a fabricated OTP as a receipt.
-        _logger.LogInformation("El Administrador Maestro autorizó la cuenta del nuevo administrador {NewAdminEmail}.", request.NewAdminEmail);  
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation("El Administrador Maestro autorizó la cuenta del nuevo administrador {NewAdminEmail}.", request.NewAdminEmail);
+        }
     }
 
     private async Task GeneratePersistAndSendCodeAsync(
@@ -334,6 +348,9 @@ public class AuthService : IAuthService
             },
             cancellationToken);
 
-        _logger.LogInformation("Código de seguridad enviado para {Purpose}.", type);
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation("Código de seguridad enviado para {Purpose}.", type);
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Tequio.Api.Extensions;
 using Tequio.Domain.Dtos;
@@ -42,7 +42,10 @@ namespace Tequio.Api.Controllers
         public async Task<IActionResult> UpdateMyProfile([FromBody] UpdateUserProfileDto request)
         {
             int userId = User.GetUserId();
-            _logger.LogInformation("El usuario {UserId} solicitó la actualización de su información de perfil.", userId);
+            if (_logger.IsEnabled(LogLevel.Information))
+            {
+                _logger.LogInformation("El usuario {UserId} solicitó la actualización de su información de perfil.", userId);
+            }
 
             await _userService.UpdateUserProfileAsync(userId, request);
             return Ok(new
@@ -58,7 +61,10 @@ namespace Tequio.Api.Controllers
         public async Task<IActionResult> UpdateProfilePicture([FromBody] UpdateProfilePictureDto request)
         {
             int userId = User.GetUserId();
-            _logger.LogInformation("El usuario {UserId} solicitó la actualización de su foto de perfil.", userId);
+            if (_logger.IsEnabled(LogLevel.Information))
+            {
+                _logger.LogInformation("El usuario {UserId} solicitó la actualización de su foto de perfil.", userId);
+            }
 
             await _userService.UpdateProfilePictureAsync(userId, request.PictureUrl);
             return Ok(new
@@ -79,7 +85,10 @@ namespace Tequio.Api.Controllers
         public async Task<IActionResult> BecomeProducerAsync(CancellationToken cancellationToken)
         {
             int userId = User.GetUserId();
-            _logger.LogInformation("El usuario {UserId} solicitó darse de alta como vendedor.", userId);
+            if (_logger.IsEnabled(LogLevel.Information))
+            {
+                _logger.LogInformation("El usuario {UserId} solicitó darse de alta como vendedor.", userId);
+            }
 
             await _userService.PromoteToProducerAsync(userId, cancellationToken);
 

@@ -29,7 +29,7 @@ public sealed class AuthControllerTest
             Password = "SecurePassword123!",
             FirstName = "Ana",
             PaternalLastName = "López",
-            BirthDate = new DateTime(1990, 1, 1, 0, 0 ,0, DateTimeKind.Utc),
+            BirthDate = new DateTime(1990, 1, 1, 0, 0, 0, DateTimeKind.Utc),
             RoleId = 1
         };
         authService

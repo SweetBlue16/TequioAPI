@@ -1,0 +1,231 @@
+﻿Ruta	Resultado	Líneas	Líneas superiores a 120	Líneas con tabulación	SHA-256
+.env.example	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	2a03102e4b84178c87a16c7bc2c4bae59faca4ea88b40be25f407bea3bb4b854
+.github/workflows/sonarcloud.yml	Modificado	56	0	0	d71c19a7f0037846fe046a087e3294eadbdfe0e50309ba2283161e53e7d3577b
+__mocks__/fileMocks.js	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	1	0	0	9511e7bc24a9e0589f73af6ec1dd8b8fb1f6fb388decfdcb80a827860181226b
+eslint.config.js	Modificado	22	0	0	3ea52c6079df056d0d46f15ecadc7e1aef34f0faf7df3b43cbbb3b4fe61d9573
+example.env	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	1	0	0	5a86692141c0af7abacde36bbd824bcb5b08b8013972362ec9f6f6f1d4bfe29e
+index.html	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	20	1	0	d661d1b123ae02ebe2686f7815730b209e1bf52a3b94ead03cc9a834984c9c7b
+jest.config.cjs	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	44	0	0	2c7a49d32f47a20a72db2efba0beedba5e05aad06e4cd86d1ff0f6f77ca61257
+jest.setup.ts	Modificado	22	0	0	94a595ee87e0ad472a908f0059b557e01fccbce643fc22f864c60d89c8f519bd
+package-lock.json	Lockfile de dependencias verificado por npm ci
+package.json	Modificado	52	0	0	ecdfd4a1dacce146c7a61b6c72758d4c3a4a304ece1a1c68d70ee8291ebd7a90
+sonar-project.properties	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	19	0	0	c02ac7cdc4c924d884c56e835b6016acafde836e637bbb3055b26cb4c96fcb7c
+src/App.css	Retirado por estar vacío
+src/App.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	38	0	0	ff6c1cb05dfda8febc6393073a1bb00c94370a7e366a3e848f4ac436e38ada29
+src/components/admin/AdminWelcome/AdminWelcome.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	32	0	0	d4554f9816f9b1c4e183fd24964735fef952033bb0ae61d125ce98f50fe15233
+src/components/admin/AdminWelcome/AdminWelcome.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	30	0	0	af7aad28253c176189b06c4e5cab231979785a6ec47335f2517d6d0cde217dc8
+src/components/admin/AdminWelcome/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	f21401e323339dd0fe0843659a9ebcde6608e1bbc9972641bbc660c6b4e5f618
+src/components/admin/deliveryPoints/DeliveryPointDetailCard/DeliveryPointDetailCard.module.css	Modificado	143	0	0	76f312b0b6afc86fc83e3551708f39c52f9a12c832e509ad7d3b881091af99c1
+src/components/admin/deliveryPoints/DeliveryPointDetailCard/DeliveryPointDetailCard.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	168	0	0	856235a95d9e61d215965baeba0338f55671d7bfa834308b18782a3301992210
+src/components/admin/deliveryPoints/DeliveryPointDetailCard/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	458cee1bc5b866f5c0527a94e91842e6b7bd70a7fd58fda502f85a7c93b3573c
+src/components/admin/deliveryPoints/DeliveryPointListItem/DeliveryPointListItem.module.css	Modificado	226	0	0	b57a2780a46c4530ac409dc554dc500103bea8f0a099790bfe125e0ca332edef
+src/components/admin/deliveryPoints/DeliveryPointListItem/DeliveryPointListItem.tsx	Modificado	102	0	0	a78f780ee9296c5d31403ead8e401e10788972ddb4427dbd06e7cc48116e7957
+src/components/admin/deliveryPoints/DeliveryPointListItem/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	0b7363307a3b4e0bf066154d05bf18a92e04b23ad4a7d09671a8001dc39fc3b3
+src/components/admin/deliveryPoints/DeliveryPointListTable/DeliveryPointListTable.module.css	Modificado	64	0	0	847586067f2a7d9f69312b15163a369db1d27fe5a1af5cdc4434a6f5e3876428
+src/components/admin/deliveryPoints/DeliveryPointListTable/DeliveryPointListTable.tsx	Modificado	64	0	0	764ce8fd348cfa5155bb50999f82224a08967bcad0f9f442938eaaf619237226
+src/components/admin/deliveryPoints/DeliveryPointListTable/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	25ae3caebc346e896597c7a779a076dd1a54672231ec2600b664e6099328a246
+src/components/admin/deliveryPoints/DeliveryPointToolbar/DeliveryPointToolbar.module.css	Modificado	70	0	0	b76b2f745c565710ddc5c82141114292f9dd478ff5a264af507504278951f521
+src/components/admin/deliveryPoints/DeliveryPointToolbar/DeliveryPointToolbar.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	67	0	0	c6db678117f384fc64b5ceb35d9b851b2fd6e593356d424302f51e4c86336f1d
+src/components/admin/deliveryPoints/DeliveryPointToolbar/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	e5ecbfa4b741098f9a3a5dd7eed255b0405a741bf2d108fbdc68c98d9acad701
+src/components/admin/deliveryPoints/DeliveryPointWizard/DeliveryPointWizard.module.css	Modificado	160	0	0	8c9a2c4f143e9f0a62619a827bfece83de8103ff02a5c6e502289d02decc5718
+src/components/admin/deliveryPoints/DeliveryPointWizard/DeliveryPointWizard.tsx	Modificado	240	0	0	69a073663177b956be633fb580bbb17aecfdaf1b1a3c02eb7bc0955a90a82e5b
+src/components/admin/deliveryPoints/DeliveryPointWizard/__tests__/useDeliveryPointWizard.test.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	44	0	0	b40a824ca73ca9e9ecd9d69e70879f45c1f724a79ffd34b002286b5e06a3197e
+src/components/admin/deliveryPoints/DeliveryPointWizard/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	827ccfe664b0af278ae2f00ccfca81c29a4b166ae8e764ec3cd4cedcc2de54a3
+src/components/admin/deliveryPoints/DeliveryPointWizard/useDeliveryPointWizard.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	187	0	0	2d2b42eb380dda9fd7a7a976998a6c5e46387a735cb8b41200514daba639ad0c
+src/components/common/Avatar/Avatar.module.css	Modificado	41	0	0	3f6c4c8e0e0285f8b5851929032bdc926079240878e56e94c26d5a1db5793584
+src/components/common/Avatar/Avatar.tsx	Modificado	60	0	0	55e8c213375cfcdcf6978b4957ac17b62925bc127c21317e2e1858af9819b95a
+src/components/common/Avatar/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	8e7708bef9ea84840d01eb9b4f46b53a71e48cffb7f3119304c7445e2000e17f
+src/components/common/Button/Button.module.css	Modificado	87	0	0	ba51757e5839497c18c598dd681250858b27dbe58c35eaff551855e5b7ed3391
+src/components/common/Button/Button.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	80	0	0	0815bed5d5766db339a6b9a4894e2f42c1eafa7054cbd0d6cc8e6eecddcd36e7
+src/components/common/Button/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	63d61310e16d11b012b88d0aa6839e8d3f0b4547b3a273d77e9e5a3e0b3c27ad
+src/components/common/Card/Card.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	41	0	0	5de9c6842a0139cbb940ca888c54bd65bfcf7052dc648b9a937cc0f4c821c39f
+src/components/common/Card/Card.tsx	Modificado	81	0	0	5609547e49a0498d6759ef72d5f2189ff533e218f131b71509cdf694ec1c9cf8
+src/components/common/Card/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	74dc0266e1de272fadefb8a2cbb67e8b05ab1d30391590cf38db861fc5f29385
+src/components/common/CodeInput/CodeInput.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	72	0	0	6bfb53deaa4f9cba89b3e5f9f57f37838184a236a3d23093fa4b9a513002bd32
+src/components/common/CodeInput/CodeInput.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	132	0	0	c401cefa237b90f335f7f2c97a5c5933f7d6655bd66b14306dcf435ded11fe95
+src/components/common/CodeInput/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	164e821f486762c30dd4538c49e19a8f049661787bd9bb7e902c82f86d9ae1a7
+src/components/common/ColorBar/ColorBar.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	12	0	0	0f26f83344356386c55eacecc1a955279a72049d6ab77b765cfb7c539e5befb9
+src/components/common/ColorBar/ColorBar.tsx	Modificado	26	0	0	a8ec2f20242c81d7ba0d9fda2cfdea5186f1e5b3218c1ab0c973d8938f6daa11
+src/components/common/ColorBar/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	720c3ad276a0945feaa8d84b74ab1f1b980743dcdbc671beb567bb4d9efee27c
+src/components/common/ComboBox/ComboBox.module.css	Modificado	64	0	0	db39fbbaff4757f77b2e3dce715745265a97ebe0cdca954771fba72c57d190ac
+src/components/common/ComboBox/ComboBox.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	106	0	0	70b3ad5bb66e4824baf2195587af0cc44a7c281fd4e56762b953a67a99371ba5
+src/components/common/ComboBox/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	9bcb41e7fb07a78abf251ed2ea91d349414d095733239df1132a1c02c7453e7f
+src/components/common/DateInputField/DateInputField.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	76	0	0	c27bf1fc7c22b1e98a49fe16f73ea19c26cca68290cc422d9f0d04098f63b0c8
+src/components/common/DateInputField/DateInputField.tsx	Modificado	85	0	0	92ef82aeb85abb969f4867fbc8ab160d89ebd70e73bb860a279065a9b5211eb0
+src/components/common/DateInputField/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	c0f3f18dd0bb3ed2355ceaddd7c566da68d117c68e2fc4a9b8e634a60bdad20b
+src/components/common/ImageUploader/ImagePreview.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	76	0	0	020188e6dfe75dfc78777bc44bae41e5502bcfe9ff28f1cbfddc081a15891136
+src/components/common/ImageUploader/ImageUploader.module.css	Modificado	179	0	0	380a59824fbe6f9ea24a93a579cb5eb8573d2d4704cdfb58c6c37d668c546602
+src/components/common/ImageUploader/ImageUploader.tsx	Modificado	126	0	0	453622d62ad2c037dc996ccb456edafc93459b1927caa8e0b749a16cf0bbd1c6
+src/components/common/ImageUploader/__tests__/ImageUploader.test.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	76	0	0	8d9ec618d37ff5004c644c56fe0a9cc408820690442e459f5c747e8b82d9c0dd
+src/components/common/ImageUploader/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	05853cfb8beed1a5219397bff695f0d5879e2847ecf1d5d4bab83e7fc4569d9a
+src/components/common/InputField/InputField.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	92	0	0	3a2aee0cd0ed32db13e360428f30fe2eacf9318bf3a693a62fa09f10f771dc57
+src/components/common/InputField/InputField.tsx	Modificado	110	0	0	fc3b7f663b90ea22291580541db79c3df825880bc086da1e4e714713670f77b3
+src/components/common/InputField/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	3303afb13418439b968020c73c1c4dcdc85b5955dc2d08355e689dfbcd70efc4
+src/components/common/MapboxPicker/MapboxPicker.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	48	0	0	448b2d7eacc26d6c073cfaec18fd4a7a7474336ea5a3fde5c7d153847da73cef
+src/components/common/MapboxPicker/MapboxPicker.tsx	Modificado	155	0	0	3efaf5a0f56a10ad1b578227e148f8b03ab5b9e87eca242b1742a4782ff2a5f8
+src/components/common/MapboxPicker/__tests__/MapboxPicker.test.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	81	2	0	34d6b679b08e21667c4d7fd2a2d316eac95963ce464af2e93acf30b2c0821964
+src/components/common/MapboxPicker/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	eefd3a873678b0cc9ac8f908ce0cc34309b3181d861063244e41a3838e7545fe
+src/components/common/Modal/Modal.module.css	Modificado	157	0	0	876c9d0baba31449dd05d1ba0ffc973328f07d3381177ed997d9771b602bd352
+src/components/common/Modal/Modal.tsx	Modificado	98	0	0	43038d56dc3c230908c1bec05ac9cdbea66b005c5726930a7c2b5b7a14a4cb7f
+src/components/common/Modal/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	fcf96cff63a66011b0528c4328b986facb79a5def51e14c36ccbf5982f86f99f
+src/components/common/NavTextButton/NavTextButton.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	31	0	0	21988226a9bc701e3ef0e13011f309982cbc2c248055a3cb22a572edeb3bf397
+src/components/common/NavTextButton/NavTextButton.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	43	0	0	b02d3fa9c2304a83e6baf966c4d29b8d048a18bd470c07f8edd911fa2b6eac14
+src/components/common/NavTextButton/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	05265694ff2e5cf932c9d94099261f3813c66145e0e6463ba1b5ddceb7980c9d
+src/components/common/OrnamentCard/OrnamentCard.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	63	0	0	6a7a6b112c8a9d3e3104530b56b7ed446daffc1090c56bfdee63e55cb04e8d2e
+src/components/common/OrnamentCard/OrnamentCard.tsx	Modificado	46	0	0	96111568d5dcb2d2f2a9f30b5612eafc82b4c52460de2c927241b5c38608b665
+src/components/common/OrnamentCard/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	696568119f928fcce0078221b5a48b13db9224fa5098b7379690e889d41adae0
+src/components/common/Pagination/Pagination.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	110	0	0	24e3a8dca8461ceeae2616183a79d3b07ef99e8326d19c74e61020f1183c4c35
+src/components/common/Pagination/Pagination.tsx	Modificado	149	0	0	6d337ff6e5437fcc169031dba6d534f0196b21438e995888ca9aa8a781f0852a
+src/components/common/Pagination/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	4412cf809453b89d86acc3f8ae975838f32677ac21313ac2a491fd9485bff44a
+src/components/common/SearchBar/SearchBar.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	76	0	0	11e33431743cb2600acd4ce9dda5b398ec22cc2c924ee4de5c173f16218e6081
+src/components/common/SearchBar/SearchBar.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	66	0	0	ad41626079eb3f21aea7df5462d30e03134a0299bee0b981d6cec6390011c982
+src/components/common/SearchBar/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	851d843c07d9df6850e532468b7d5dae017c3180882d4700407f6a92e39da6a6
+src/components/common/SortSelect/SortSelect.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	73	0	0	10d9c6256c7646cb491bd339d31cf9f9215ef224b337d1c1161ae96a5d0b23ff
+src/components/common/SortSelect/SortSelect.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	79	0	0	51e3be4c09bf2d8eaecebe385d2670a9b966afd2220d297d1119df1d1e9c237b
+src/components/common/SortSelect/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	0d2e9ea3450431be202480f0e0ec6b69c86802414b8561af9f513fff66dc9319
+src/components/common/Stepper/Stepper.module.css	Modificado	118	0	0	32594e73ade410ac34510d103d5d2c13d48d6470a4aa6edb67c3c2dd4411f226
+src/components/common/Stepper/Stepper.tsx	Modificado	111	0	0	594d423e1f64759239c9ea842fedd7368630d8b1405e63f5a37e84b9adcf658c
+src/components/common/Stepper/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	10e582db6a6e87892aec2b112767d6a7e93d5bfe65dda788db14f11d41a807ac
+src/components/common/TextLink/TextLink.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	48	0	0	f332ce4841a071c1f57dfdf5e9336d8befaee6e2912158e452a175e0c880003a
+src/components/common/TextLink/TextLink.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	90	0	0	e16afa31c76633ca3abfc0d1e2ce1ebd578067abd0740a8cc12f4ae40ee59cce
+src/components/common/TextLink/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	a6edbcdc1ad255b1e3291fa2d297c56b042b489aef9a4fb167338290747e0524
+src/components/common/Toast/Toast.module.css	Modificado	108	0	0	1219a80a975d940e230d9ce112f1647e80ff2416d16988d92eab90bf68c8e924
+src/components/common/Toast/Toast.tsx	Modificado	99	0	0	1b55bc9e5d28031c4138964e543171b93be816e81044e50f408a032386a01f81
+src/components/common/Toast/__tests__/Toast.test.tsx	Modificado	114	0	0	b863147b1d99ac471a2bd79533699e2b2262f0ad6d6cc08b6d1a1661011d828e
+src/components/common/Toast/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	d2614602ebc4313b6b8f679789b98a26f1b2d77e96819c60342ce7d10332b28b
+src/components/layout/AdminSidebar/AdminSidebar.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	300	0	0	b251c4f9764b73039c991003e5e4368f2bcdde6f4ef3b11989d514c2a5d26927
+src/components/layout/AdminSidebar/AdminSidebar.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	143	0	0	1db4c44b9e84079b82e081afc8f95986a723fedc3c90b53de7de54071a7e56e3
+src/components/layout/AdminSidebar/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	9ca49063a872ad31f1e014506d71c3727a70b924f2d40f47edd41473290b5cb7
+src/components/layout/Footer/Footer.module.css	Retirado por estar vacío
+src/components/layout/Footer/Footer.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	0	0	0	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+src/components/layout/Footer/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	0	0	0	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+src/components/layout/Navbar/Navbar.module.css	Modificado	181	0	0	3268c357daf0d69b132fd111d666ae0d5e93d5c989923538a99221cdbf0c22e3
+src/components/layout/Navbar/Navbar.tsx	Modificado	160	0	0	73b99811856ce5f0fae05475c5ff00adea6bc18b8e7b5ac435bbc47c8385950a
+src/components/layout/Navbar/__tests__/NavbarAdmin.test.tsx	Modificado	172	0	0	a34a9f58808410d30e682b3b3e0923d7556e06f2b64171e9e3f5367e75920410
+src/components/layout/Navbar/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	dcaf8c51c9d735f3abae7d758a181151167b218e8a306ac8f53bbc2c12d76d83
+src/components/layout/ProducerSidebar/ProducerSidebar.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	209	0	0	b9394e339d779bf515ae8b33f0a43b2dfec60a1df88974814b52c2e576f0029b
+src/components/layout/ProducerSidebar/ProducerSidebar.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	110	0	0	e8be000b101cf4a485ea79d8372e77fff38e73c6066bc8f58d679f9b8c2a44c0
+src/components/layout/ProducerSidebar/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	05d37ce98ba0993bde235780e789e8a2deafb3c9b1107928a7f16afb4621fd08
+src/components/producer/BecomeSellerModal/BecomeSellerModal.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	74	0	0	61a10a506345834c1721883085ed87ca69d97e6fd18b57ec094c3f8ea57c1a88
+src/components/producer/BecomeSellerModal/BecomeSellerModal.tsx	Modificado	126	4	0	c65a7c1fafb813f69927817cec5a9d503c2a2e084aa6ed7ac03c6f5538314ad2
+src/components/producer/BecomeSellerModal/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	a4b25cf1de1f40362070b2b70218c7f5b06699ac3fef9e0d161d22fd9c70688c
+src/components/producer/JoinSellersPrompt/JoinSellersPrompt.module.css	Modificado	220	0	0	a1ac014fb4edc758057aa593e94c6888ef533238be732177b2d19c3ace1332dc
+src/components/producer/JoinSellersPrompt/JoinSellersPrompt.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	102	0	0	bbfcc4eaccc11a53eb47c4d99449e6d793f78ebdfaf92fe6f9b8fd7b2fdd5b18
+src/components/producer/JoinSellersPrompt/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	922aac3a94fb26b1887858d3e464ca3876283d1a577e84d53243e8f7cb82433d
+src/components/producer/ProducerWelcome/ProducerWelcome.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	27	0	0	5469466296ecf1632a7c6981282d79bb3770fecf39292275476f5076acfd3f37
+src/components/producer/ProducerWelcome/ProducerWelcome.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	33	0	0	778f0703b0e3f3bc9f00a2eb7068e3a43cf10a23807329232ef69a3c8ce4ba87
+src/components/producer/ProducerWelcome/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	cf4c1b598e88379f4b0dd308c29743ef0cd2022304207a259db657ebbc0aa208
+src/components/producer/products/AddProductForm/AddProductForm.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	131	0	0	7647d41afc4d0483f6cd40f07f48d100ff8d9c0cfad23b25fd4db03084073fa2
+src/components/producer/products/AddProductForm/AddProductForm.tsx	Modificado	141	0	0	cfa8dab81c6105e3ba05c33d38fc22ff3dfbfdd1bb05071bf842855c99f9c440
+src/components/producer/products/AddProductForm/__tests__/AddProductForm.test.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	154	0	0	0a430a4e1349b79b29db3f2c7586dbff611d990f511a37cfcaeb94f771c63a3a
+src/components/producer/products/AddProductForm/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	3	0	0	8f1836b805c98174c49be1fb10c56abd64298f4d23dc8141b553d0157e08f1f1
+src/components/producer/products/AddProductForm/useAddProductForm.ts	Modificado	155	0	0	7340aa34f599c9d01c060f32513e753fe2c693a0da4403640553976e720d57fb
+src/components/producer/products/ProductListItem/ProductListItem.module.css	Modificado	244	0	0	23c2fcf639be197a780a795559afd3536c3a52c21f9ece94d6f3a72ba07d5889
+src/components/producer/products/ProductListItem/ProductListItem.tsx	Modificado	91	0	0	c06bfd0ec1cd1d45d78d684c093ddcb7f4484d971e78aec17246e2ffc78682d8
+src/components/producer/products/ProductListItem/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	f4b5299d50933d626f89af4d97441393707e9dadfe8e005e74fce21ffa6cf12c
+src/components/producer/products/ProductListTable/ProductListTable.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	52	0	0	1f389a1113af163e3900b43bd974b7e86f1cd3c1e1cebf8a01b8d15cef17d6db
+src/components/producer/products/ProductListTable/ProductListTable.tsx	Modificado	60	0	0	6372bc2825d738c0a8a2c74c138dc3a3f57e260023efd13cb3735e3573c946d8
+src/components/producer/products/ProductListTable/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	50cb4a90223f52a81fb26aa40988d1ba8cf276df4dbf4e169dcd95e0e1aba462
+src/components/producer/products/ProductToolbar/ProductToolbar.module.css	Modificado	73	0	0	52085f1b3e98077dda3587fc45ce2c062dbb978c96458e481d17c5d89260bff0
+src/components/producer/products/ProductToolbar/ProductToolbar.tsx	Modificado	62	0	0	d5545a0ff9c2c73c2bac838581673525d0407b474a3f34e060df73f72b9ca7f4
+src/components/producer/products/ProductToolbar/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	ed8c5d3b0de5ebba1ee39869da8ef6cdd3992794b6c32b1c2c41bcbebab6326b
+src/config/mapbox.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	ceaa7d28f764ac4d33e5077a17b6460b7071670ed366610bd5edb4770ef0307b
+src/constants/categories.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	107	0	0	609301e8c026439fbea2dd9c3937af4b8934756e82f8a859796e79a9a8cfe8ff
+src/constants/colors/theme.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	24	0	0	13e7fbe77ba61a47f7b3eb562c340df4a27a444bac98dff4bd17aba36502ca4a
+src/constants/routes.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	40	0	0	e40f53b5b04f2771bd2ef5106e56a6a8243724ef1479d18522f2343624bfad82
+src/contexts/AuthContext.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	32	0	0	3326967c034743cde8ad2deaf4b5aae791f5733ee9a38a4eb808d1604e69b0be
+src/contexts/AuthServiceContext.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	101	1	0	0ee7fcf2c102e310afc91f752be350752457b30b13d7ae7a9ecffcfa8fd78165
+src/index.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	117	0	0	f44cbe7d73ae930fa9001d736e81759970ffc3dfd4f147c83ac9c7827f80a025
+src/main.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	22	0	0	9578e7dd3d05a65bfad85bc0b70ff0a1ffb7fb6e7a7dc9888f214151f03c888e
+src/pages/MyProducts.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	8	0	0	e2ac55f6cb9b11751d7c69027b30f34f391b8b730627410b0bc4310e5614d92c
+src/pages/admin/AddDeliveryPoint/AddDeliveryPoint.tsx	Modificado	81	0	0	f5115dc8c56370d67daf7b2922fc86b9bc10d8fc7686fd7c65032ac1ac1d3a66
+src/pages/admin/AddDeliveryPoint/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	bfb8d11c92593d51a37762aa51c3ef4e920fc0d94522bc7f12881f2f06ccb162
+src/pages/admin/Admin.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	34	0	0	f5288527af7acdda51d02191dc36e57778aa7109d2095d3e1c3b37cc6bdcab1e
+src/pages/admin/Admin.tsx	Modificado	50	0	0	1dd6b9d94db7b6cd4ba59a44d24ec3a40f91798cdb686d162be503343cfe9b96
+src/pages/admin/DeliveryPoints/DeliveryPoints.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	74	0	0	053c087c731f6d3113e308a3da1acc071cea61aa0aa8988d6989a9601a59fe4c
+src/pages/admin/DeliveryPoints/DeliveryPoints.tsx	Modificado	253	0	0	78fb726905cbdd2d329cddbaa3b64efd4ba888c0b572eab2f452d5447c2931aa
+src/pages/admin/DeliveryPoints/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	ba42ac3c9ce197afe0b6942bbb0dd969acdcda5feefc4fa5d067d1392938b60f
+src/pages/admin/EditDeliveryPoint/EditDeliveryPoint.tsx	Modificado	129	0	0	86a80e40893854ee34e5a2a687f77c33a309179b0ba2e26c8284e4b058645fa4
+src/pages/admin/EditDeliveryPoint/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	84c5fc9ae495129cfb7813c3fd052cf89ad38353f708a2fb93335e0c1ca04b83
+src/pages/admin/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	4fc90414905f8ccdb60d921719d7a5334c4fa19dafae32a9e1539522372a33e7
+src/pages/auth/Login/Login.module.css	Modificado	210	0	0	df039ac0613598904bf8a9bc41a4ba4d10f00fe09c5f96aa6312f933ae547b81
+src/pages/auth/Login/Login.tsx	Modificado	195	0	0	f380e4619827162d0babd47f4c68561b2527a53987392d0218ce141a2fba9d8f
+src/pages/auth/Login/__tests__/Login.test.tsx	Modificado	79	0	0	9152da50604df86b0d9e291ed21ef4a51cd61fba6b742fdc473c9153a80f975d
+src/pages/auth/Login/__tests__/LoginSession.test.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	32	0	0	98edb2634dd217e7efd54c6dc267094e1167dd4ce8aad95f3dc65618f35791e8
+src/pages/auth/Login/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	2eabcd4468860b43185c46e86cee1c86db1c76e7b6e7a4b6d1ef96a65de08463
+src/pages/auth/RecoverAccount/RecoverAccount.module.css	Modificado	235	0	0	f5f3d525807a1426d1aa94f08907401d048f0c0be5be35df157605bfb7960625
+src/pages/auth/RecoverAccount/RecoverAccount.tsx	Modificado	212	0	0	d51e384a7449dc3dadf308798c8d6332cf50de5b96c91d721d25910cb80ff00e
+src/pages/auth/RecoverAccount/components/RequestCodeStep.tsx	Modificado	52	0	0	c6069ed2a21a5de2218190ad2382b3358e2a26c1ee693b46d2ce02f4ebab539b
+src/pages/auth/RecoverAccount/components/ResetPasswordStep.tsx	Modificado	156	3	0	f1420a6531247f23c002ed1a58ea88d7a271118e5898e5d64028dcff8fa9a603
+src/pages/auth/RecoverAccount/components/SuccessStep.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	31	0	0	054adacd39c9bb83f9adf5dff7f95b13631f2db7abc85eb36e88e5c68f535615
+src/pages/auth/RecoverAccount/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	e6c7e1f18fb4bf98494659e662df6632a5486b2ee7fd1382f7bb64ea9ef9c099
+src/pages/auth/Register/Register.module.css	Modificado	231	0	0	f4f07a74d0ac53c51fac471dc2306a9a9a072c191fca16a7576c44263325c768
+src/pages/auth/Register/Register.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	185	0	0	a2086dbb58f5baa4782fd4d31eec0c58c46566da5e3fb739f6daf5504f1f0728
+src/pages/auth/Register/components/RegisterWizard.tsx	Modificado	380	0	0	77c3a7004fa07dc064a73c55d25faf3f7d23bbcb4cc9056089c3664efabe2d1a
+src/pages/auth/Register/components/RoleSelector.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	70	0	0	70e66be4e143fe8f73fc5abaa40f65de57b4bfa2b624724bb83e032a6e55e451
+src/pages/auth/Register/components/__tests__/RegisterWizard.test.tsx	Modificado	80	0	0	e06591acce7af7eaa3cb1f025c7d00130012b660d27bd5d59fc3c7066741b3d6
+src/pages/auth/Register/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	087c57a0452d79ea69561486e314a9e5715eb173c5baa7b73f96fe9ef526b8f2
+src/pages/auth/VerifyAccount/VerifyAccount.module.css	Modificado	132	0	0	a71d4962a8d2ab06fc8742cd926fe8e0eb2ea311b9f2687470104d6d47da0069
+src/pages/auth/VerifyAccount/VerifyAccount.tsx	Modificado	268	0	0	0ef80c10e2bbc31696fce2e89623a82990332a2a6b893831c65412f5b50404c9
+src/pages/auth/VerifyAccount/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	3a38d5d490bf7612f90727e79f3f5ab20c78b12600eabd22ab2ad8772c612e18
+src/pages/catalog/Catalog.module.css	Añadido	39	0	0	b241879d1f7936c81fe179d91b3c4b1a13b47ae71f7f1ed05f9d79c45e4f1b3d
+src/pages/catalog/Catalog.tsx	Añadido	111	0	0	f5fad875061537e289944648f1a82a556fc83d8207da19944c165ba4629d2745
+src/pages/catalog/__tests__/Catalog.test.tsx	Añadido	48	0	0	e6fdbd9115d1ceca30133575af6b232e57a3c301dab5866bc2d1ea20c0a38666
+src/pages/main/Main.css	Retirado por estar vacío
+src/pages/main/Main.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	0	0	0	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+src/pages/main/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	0	0	0	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+src/pages/producer/AddProduct/AddProduct.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	36	0	0	241f8b574e92e08af2a4a387b08f34d99f0a1e230db8d0a5b9646adadd752f46
+src/pages/producer/AddProduct/AddProduct.tsx	Modificado	171	0	0	0fccb69437e5c07edee770253a1abd1096a1bfbeff7d4e80f624e84537c8930c
+src/pages/producer/AddProduct/__tests__/AddProduct.test.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	192	0	0	adc0d2a167e6bd9c39b5cfdbd2050e0ecb3d1953336d4b914b65d6e1fa89f817
+src/pages/producer/AddProduct/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	f47393c0c3575f013df41ab00aa9f5efc9f4571a6b536c87820d27c94307ada2
+src/pages/producer/Producer.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	74	0	0	deb93cb314cbae102c08029aba0fffedf1bdd258a2a11d2ccff3f12e7432b396
+src/pages/producer/Producer.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	91	0	0	b030a07c4b5337cd78fa166275263d6b8df83424a0222ecaf900fc790db05e4d
+src/pages/producer/Products/Products.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	43	0	0	067e5e80a6e631d0c29561ac3c1a719616a845a503a75156aa9d41a04981195e
+src/pages/producer/Products/Products.tsx	Modificado	307	0	0	b8f35151166a9d9ba1f5e470eb931d5242096772b5dbb88f4ce1943bcd669126
+src/pages/producer/Products/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	b290913c919da0831d0ee6ed88623b97f45191b6161590aa62137a74b6ea3994
+src/pages/producer/index.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	2	0	0	f8056b6c344a669dde2f57e4b4c941432b45e3626f8224424a984c34b26c5dd3
+src/pages/profile/ProfilePage.module.css	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	13	1	0	d35f4de3c7f2a806699ef591900fc927fd45e7e96e64d7fbd6d891fe2a712690
+src/pages/profile/ProfilePage.tsx	Modificado	282	0	0	6bd81b621a5650fc00a431debe86654db95d8929efe0268124c449949737ab56
+src/pages/profile/__tests__/ProfilePage.test.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	290	5	0	96af595c89fb28931a958c038a474b27236bb4e046115bfd86e6524bb0982881
+src/routes/AdminRoutes.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	27	0	0	f3494129980f863fac9dbb140755ec0cb747c7af707d9879f01b6b6cd1b28ff2
+src/routes/AppRouter.tsx	Modificado	73	0	0	0210d78ab9367ba5f16db1c795a98d5fd7930b057caa9aa5745eb6f4a21b379c
+src/routes/AuthRoutes.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	21	0	0	0d6beb197dcc330ad15bb739448d682a46e828eaee4aaaf58b5de70d4b4dac98
+src/routes/ProducerRoutes.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	21	0	0	bc8a876a1a76d9862904a197d8200950f564419ff73cc5fa443adca3bc11d89a
+src/routes/ProtectedRoutes.tsx	Modificado	18	0	0	fae44296bc87c0ea0205b130db9a083b436b2a9f1ee8bced4a58cd3d8a33e6c5
+src/routes/PublicRoutes.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	0	0	0	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+src/routes/__tests__/ProtectedRoutes.test.tsx	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	98	3	0	baf4c698a0a47cb42bf76b955ed10d9b51d89b8bff7451ae93b81b7356803c52
+src/services/api.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	18	0	0	aebae90afb1385e502116096d85abc3d7886861f1c25d51f3acf046a31816891
+src/services/auth/AuthService.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	52	0	0	4525cd46bd5c10dfb0b98aed3d4fd93d1da17e108731efb757730ac86df58632
+src/services/auth/AuthServiceInterface.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	15	0	0	bebe7d32e16352494fb97dadabeb7d1f21ac8f96acf31a9da081d1089be6cae7
+src/services/auth/TokenStorage.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	25	0	0	26fd049b20ee9e4a96df4b258ecce1849478953ba8dda435f213ad8faf7da5c4
+src/services/auth/TokenStorageInterface.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	7	0	0	b4b79824d67b8764ce5a3b27918492fc7b941d80ac75c73325cb9de078474978
+src/services/auth/__tests__/attachAuthInterceptors.test.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	15	0	0	0ea1d3dac6743a031878caaacfcdd7bf41f3220252a0bee6a19344a9684c74e6
+src/services/auth/__tests__/decodeSession.test.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	21	1	0	00e04946c015e85a3af5510ca43b76ce5466fb33491a32e106e79d2fc6b42a79
+src/services/auth/attachAuthInterceptors.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	21	0	0	c9d491a2a4fa7f77c71fdde4bf378d1715bd0b52c954a19ae8f3b8638ae7cf29
+src/services/auth/decodeSession.ts	Modificado	41	0	0	e227e4ceb771ec3d33229d7994aa86c3a2d456eab7d883a13d552f1862102f59
+src/services/deliveryPoints/DeliveryPointService.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	209	1	0	9ed64d5db13048a5934dc2965b748505f0128595aac0d85b683cdfaa0e39e14d
+src/services/deliveryPoints/deliveryPointError.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	16	0	0	e9bf3bc9dc308fd411858aa2c49e8efcdc2ad0fb659402a759790b7d52868f10
+src/services/files/FileService.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	49	0	0	afcd5bbde87393fd239d122a3c951c74019f88f56121322201512bc681554a95
+src/services/products/ProductService.ts	Modificado	77	0	0	c43e3546ba6583d6834ef08a39d71b8c32985c2af07062551e4f22d0536f1065
+src/services/profile/ProfileService.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	68	0	0	1d415312fcedf187e3f687e6f6bd0d51a0534c018ebc484dc08db40ca357772e
+src/services/profile/__tests__/ProfileService.test.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	16	0	0	0db4ef1d17114989cafba45ede7a83e14bc5a11cb49f8f51e99fe33b0c1cb61f
+src/types/deliveryPoint/DeliveryPoint.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	35	0	0	cab7f0e6cbc79be8a865819ea76bcc908b31b059c9fc11fa7c6c05c5d8689fa3
+src/types/deliveryPoint/DeliveryPointRequest.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	22	0	0	219007fe1db1ae9d8ab40ac6c15880758fbd72260202df5c08f987620298842a
+src/types/login/LoginRequest.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	5	0	0	40f49f3ba7fa9084a5ddc40f04721a1ab7a329c5f3372e81c201ee846f904679
+src/types/login/LoginResponse.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	5	0	0	2bfdd80c03ca04c379a4605f8d66829ed291b4c4a21f057ff1c22ce3f0ea4c16
+src/types/passwordRecovery/PasswordRecoveryRequest.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	3	0	0	8a836717c75617154dc2f5b8f5e94079c987be2e4163e8f7278d0e8c9c2fbbd8
+src/types/passwordRecovery/ResetPasswordrequest.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	5	0	0	5c55e9d31293fbed1a3ae76ca3d84c2140818d832d8e2fccb2bae9dc21f75c24
+src/types/product/AddProduct.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	22	0	0	c35bd05bf8c94e3499e99982a57f0141774881b519551ef4da45ce8358dedfee
+src/types/product/Product.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	36	0	0	8778eb88ea2d1fb759f5043c24b8f19923909cc0a2a67bea9ac04035e3b5bdec
+src/types/registration/RegistrationRequest.ts	Modificado	10	0	0	46e4a09caf28887a26547b8b08380e64528e0dd54efe5f3450d7ea3ebc9736b5
+src/types/registration/VerificationRequest.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	5	0	0	09fe7825130d8c84cf8bb008f710b0519e1852815a7304f48d3275d00d309046
+src/utils/__tests__/validationRegression.test.ts	Añadido	39	0	0	39ebd75597df50e7884dba560d93ff79de7b6a195ceda0a20906bd2838d87fe9
+src/utils/apiError.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	12	0	0	2a148b826869700384d1863d6f46de7596a22266e448f5350e4b8488dd9741f3
+src/utils/deliveryPointGeocoding.ts	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	142	1	0	5a65d6ba9b4de29d5e2d13d969f9863d893cdf160685470d17152da84be3a745
+src/utils/deliveryPointValidators.ts	Modificado	176	0	0	04aab3f283bd72b0e44cb347adaa371c15e6326ffea8292588487f5d8c262f60
+src/utils/formValidators.ts	Modificado	254	0	0	3fa26ec0a602a07a0f733c4f01e0a3da5db695e8916a54444ada1b78b62dac9d
+tsconfig.app.json	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	30	0	0	f2199e58cd9e978035954e6f62b7fe81f2469af4778289c8f6e9f6d7fdc5cbd1
+tsconfig.json	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	7	0	0	ad28d132ee48d6e23917cf5827cace785d0fc01a44ca68b0dda51cc8c3fd3f52
+tsconfig.node.json	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	23	0	0	a9e6c7f6fd3ec455a6fe1d4fbb83091e774b62fe116008ab6d8c5e1e88af4629
+tsconfig.test.json	Inventariado y revisado por controles estáticos de alcance; revisión manual completa pendiente	17	0	0	2b5bcd22b3e8f70af27cba9780ae7ac83a742f371153e8d2497ab5ff79f3b71c
+vite.config.ts	Modificado	21	0	0	b8df2210e4090585cc50b466023087588a4d2033953bbebd72f4832b2936f804

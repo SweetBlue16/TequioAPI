@@ -1,4 +1,4 @@
-﻿using CloudinaryDotNet;
+using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -29,7 +29,10 @@ namespace Tequio.Infrastructure.Services
 
         public async Task<string> UploadFileAsync(Stream fileStream, string fileName)
         {
-            _logger.LogInformation("Iniciando conexión con Cloudinary para subir el archivo: {FileName}", fileName);
+            if (_logger.IsEnabled(LogLevel.Information))
+            {
+                _logger.LogInformation("Iniciando conexión con Cloudinary para subir el archivo: {FileName}", fileName);
+            }
             var uploadParams = new ImageUploadParams
             {
                 File = new FileDescription(fileName, fileStream),
@@ -46,7 +49,10 @@ namespace Tequio.Infrastructure.Services
                 throw new InvalidOperationException(uploadResult.Error.Message);
             }
 
-            _logger.LogInformation("Archivo {FileName} almacenado exitosamente en Cloudinary. URL generada.", fileName);
+            if (_logger.IsEnabled(LogLevel.Information))
+            {
+                _logger.LogInformation("Archivo {FileName} almacenado exitosamente en Cloudinary. URL generada.", fileName);
+            }
             return uploadResult.SecureUrl.ToString();
         }
     }

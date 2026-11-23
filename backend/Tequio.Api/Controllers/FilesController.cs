@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Tequio.Domain.Services;
 
@@ -27,7 +27,10 @@ namespace Tequio.Api.Controllers
         [HttpPost("image")]
         public async Task<IActionResult> UploadImage(IFormFile file)
         {
-            _logger.LogInformation("Petición de subida de archivo recibida: {FileName}, Tamaño: {Size} bytes.", file?.FileName, file?.Length);
+            if (_logger.IsEnabled(LogLevel.Information))
+            {
+                _logger.LogInformation("Petición de subida de archivo recibida: {FileName}, Tamaño: {Size} bytes.", file?.FileName, file?.Length);
+            }
 
             if (file == null || file.Length == 0)
             {

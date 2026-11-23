@@ -5,11 +5,11 @@ namespace Tequio.Api.Validators
         private static int _minPageSize = 10;
         private static int _maxPageSize = 100;
         private static int _maxIndex = ((int.MaxValue / _maxPageSize) - _maxPageSize);
-        
+
         public static void ValidatePageArguments(int pageIndex, int pageSize)
         {
             var errors = new List<string>();
-            
+
             if ((pageIndex - 1) < 0)
             {
                 errors.Add("Page index starts at 1, therefore it must be greater than zero.");

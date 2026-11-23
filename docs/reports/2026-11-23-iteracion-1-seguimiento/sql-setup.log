@@ -1,0 +1,58 @@
+Installing 01_InitTequio.sql
+Changed database context to 'TequioIteracion1_Seguimiento_20261123'.
+
+(4 rows affected)
+
+(1 rows affected)
+
+(3 rows affected)
+
+(1 rows affected)
+
+(3 rows affected)
+
+(1 rows affected)
+
+(2 rows affected)
+
+(1 rows affected)
+
+(3 rows affected)
+
+(1 rows affected)
+
+(3 rows affected)
+
+(1 rows affected)
+
+(4 rows affected)
+
+(1 rows affected)
+
+(3 rows affected)
+
+(1 rows affected)
+
+(2 rows affected)
+Installing 02_USP_CreateUser.sql
+Installing 03_USP_GetUserByEmail.sql
+Installing 04_USP_GenerateVerificationCode.sql
+Installing 05_USP_ValidateVerificationCode.sql
+Installing 06_USP_UpdateUserPassword.sql
+Installing 07_USP_UpdateUserProfile.sql
+Installing 08_USP_UpdateUserProfilePicture.sql
+Installing 09_USP_GetUserProfile.sql
+Installing 10_USP_GetProductsFromProducer.sql
+Installing 11_USP_GetProductsByCategory.sql
+Installing 12_USP_CreateBaseProduct.sql
+Installing 13_USP_DeactivateBaseProduct.sql
+Installing 14_USP_PromoteToProducer.sql
+Changed database context to 'TequioIteracion1_Seguimiento_20261123'.
+Installing 15_DeliveryPointSchema.sql
+
+(9 rows affected)
+
+(0 rows affected)
+Installing 16_DeliveryPointProcedures.sql
+Installing 17_DeliveryPointStatus.sql
+Installing 18_AdminAuthorization.sql

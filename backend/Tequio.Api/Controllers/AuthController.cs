@@ -38,7 +38,10 @@ public class AuthController : ControllerBase
         [FromBody] RegisterRequestDto request,
         CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Intento de registro en proceso para el correo: {Email}", request.Email);
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation("Intento de registro en proceso para el correo: {Email}", request.Email);
+        }
         await _authService.RegisterUserAsync(request, cancellationToken);
 
         return StatusCode(
@@ -60,7 +63,10 @@ public class AuthController : ControllerBase
         [FromBody] LoginRequestDto request,
         CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Intento de inicio de sesión recibido para el correo: {Email}", request.Email);
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation("Intento de inicio de sesión recibido para el correo: {Email}", request.Email);
+        }
         string token = await _authService.AuthenticateUserAsync(request, cancellationToken);
 
         return Ok(new
@@ -81,7 +87,10 @@ public class AuthController : ControllerBase
         [FromBody] VerifyAccountRequestDto request,
         CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Intento de verificación de cuenta recibido para el correo: {Email}", request.Email);
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation("Intento de verificación de cuenta recibido para el correo: {Email}", request.Email);
+        }
         await _authService.VerifyAccountAsync(request, cancellationToken);
         return Ok(new { mensaje = "Tu cuenta fue verificada exitosamente." });
     }
@@ -97,7 +106,10 @@ public class AuthController : ControllerBase
         [FromBody] EmailAddressRequestDto request,
         CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Solicitud de reenvío de código de verificación recibida para el correo: {Email}", request.Email);
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation("Solicitud de reenvío de código de verificación recibida para el correo: {Email}", request.Email);
+        }
         await _authService.ResendVerificationCodeAsync(request.Email, cancellationToken);
 
         return Ok(new
@@ -117,7 +129,10 @@ public class AuthController : ControllerBase
         [FromBody] EmailAddressRequestDto request,
         CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Solicitud de recuperación de contraseña recibida para el correo: {Email}", request.Email);
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation("Solicitud de recuperación de contraseña recibida para el correo: {Email}", request.Email);
+        }
         await _authService.SendPasswordRecoveryCodeAsync(request.Email, cancellationToken);
 
         return Ok(new
@@ -137,7 +152,10 @@ public class AuthController : ControllerBase
         [FromBody] ResetPasswordRequestDto request,
         CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Intento de restablecimiento de contraseña para el correo: {Email}", request.Email);
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation("Intento de restablecimiento de contraseña para el correo: {Email}", request.Email);
+        }
         await _authService.ResetPasswordAsync(request, cancellationToken);
 
         return Ok(new
@@ -161,7 +179,10 @@ public class AuthController : ControllerBase
             throw new UnauthorizedAccessException("No se pudo obtener el correo del administrador maestro.");
         }
 
-        _logger.LogInformation("El Administrador Maestro {MasterId} inició el registro del administrador {NewAdminEmail}.", masterAdminId, request.Email);
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation("El Administrador Maestro {MasterId} inició el registro del administrador {NewAdminEmail}.", masterAdminId, request.Email);
+        }
 
         await _authService.RegisterAdminAsync(request, masterAdminEmail, cancellationToken);
 
@@ -190,7 +211,10 @@ public class AuthController : ControllerBase
     {
         int masterAdminId = User.GetUserId();
 
-        _logger.LogInformation("El Administrador Maestro con ID {UserId} está ingresando el código para autorizar a {NewAdminEmail}.", masterAdminId, request.NewAdminEmail);
+        if (_logger.IsEnabled(LogLevel.Information))
+        {
+            _logger.LogInformation("El Administrador Maestro con ID {UserId} está ingresando el código para autorizar a {NewAdminEmail}.", masterAdminId, request.NewAdminEmail);
+        }
 
         await _authService.AuthorizeAdminAsync(request, cancellationToken);
 

@@ -10,9 +10,15 @@ public sealed class DeliveryPointServiceTest
 {
     internal static SaveDeliveryPointDto Valid() => new()
     {
-        Name = "TEST_Point", Street = "Enriquez", Number = "1", Neighborhood = "Centro",
-        ZipCode = "91000", City = "Xalapa", BusinessHours = "09:00 - 18:00",
-        Latitude = 19.53m, Longitude = -96.92m
+        Name = "TEST_Point",
+        Street = "Enriquez",
+        Number = "1",
+        Neighborhood = "Centro",
+        ZipCode = "91000",
+        City = "Xalapa",
+        BusinessHours = "09:00 - 18:00",
+        Latitude = 19.53m,
+        Longitude = -96.92m
     };
 
     public static TheoryData<decimal?, decimal?> InvalidCoordinates => new()

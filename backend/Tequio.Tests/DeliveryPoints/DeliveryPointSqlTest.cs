@@ -19,6 +19,10 @@ public sealed class DeliverySqlFactAttribute : FactAttribute
 /// <summary>Exercises real procedures, constraints and triggers; every fixture is rolled back.</summary>
 public sealed class DeliveryPointSqlTest
 {
+    private static readonly int[] DuplicateKeyErrors = [2601, 2627];
+    private static readonly string[] CurrentStates = ["Draft", "Active", "Confirmed", "Vigente", "Unknown"];
+    private static readonly string[] TerminalStates = ["Cancelled", "Completed", "Cancelado", "Finalizado", "Entregado"];
+
     private static async Task WithFixture(Func<SqlConnection, SqlTransaction, string, Task> test)
     {
         await using var connection = new SqlConnection(Environment.GetEnvironmentVariable("TEQUIO_TEST_SQL"));
@@ -48,7 +52,8 @@ public sealed class DeliveryPointSqlTest
         string extra = "", int? id = null)
     {
         await using var command = new SqlCommand(id.HasValue ? "USP_UpdateDeliveryPoint" : "USP_CreateDeliveryPoint",
-            connection, transaction) { CommandType = CommandType.StoredProcedure };
+            connection, transaction)
+        { CommandType = CommandType.StoredProcedure };
         command.Parameters.AddWithValue("@name", name);
         command.Parameters.AddWithValue("@street", "Enriquez");
         command.Parameters.AddWithValue("@number", "1");
@@ -74,7 +79,7 @@ public sealed class DeliveryPointSqlTest
     {
         await Create(c, t, run + "_Café");
         var error = await Assert.ThrowsAsync<SqlException>(() => Create(c, t, "  " + run.ToLowerInvariant() + "_cafe  "));
-        Assert.Contains(error.Number, new[] { 2601, 2627 });
+        Assert.Contains(error.Number, DuplicateKeyErrors);
     });
 
     [DeliverySqlFact]
@@ -83,7 +88,7 @@ public sealed class DeliveryPointSqlTest
         await Create(c, t, run);
         int second = await Create(c, t, run + "_second");
         var error = await Assert.ThrowsAsync<SqlException>(() => Create(c, t, run, id: second));
-        Assert.Contains(error.Number, new[] { 2601, 2627 });
+        Assert.Contains(error.Number, DuplicateKeyErrors);
         // The update statement is atomic; XACT_ABORT may abort the enclosing fixture transaction.
     });
 
@@ -113,11 +118,11 @@ public sealed class DeliveryPointSqlTest
     [DeliverySqlFact]
     public Task TestBatchStatesWithCurrentOrTerminalValuesShouldFollowRn07() => WithFixture(async (c, t, run) =>
     {
-        foreach (string status in new[] { "Draft", "Active", "Confirmed", "Vigente", "Unknown" })
+        foreach (string status in CurrentStates)
         {
             Assert.True(Convert.ToBoolean(await Execute(c, t, $"SELECT dbo.UF_IsCurrentBatch(N'{status}')")));
         }
-        foreach (string status in new[] { "Cancelled", "Completed", "Cancelado", "Finalizado", "Entregado" })
+        foreach (string status in TerminalStates)
         {
             Assert.False(Convert.ToBoolean(await Execute(c, t, $"SELECT dbo.UF_IsCurrentBatch(N'{status}')")));
         }
@@ -162,7 +167,7 @@ public sealed class DeliveryPointSqlTest
         }
         try
         {
-            foreach (string status in new[] { "Draft", "Active", "Confirmed", "Vigente", "Unknown" })
+            foreach (string status in CurrentStates)
             {
                 await using var update = new SqlCommand($"UPDATE dbo.Batch SET Status=N'{status}' WHERE Id={batchId}", connection);
                 await update.ExecuteNonQueryAsync();

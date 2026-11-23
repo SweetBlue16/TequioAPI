@@ -1,0 +1,22 @@
+PASS (offline): JSON, unique names, 13 scenario folders and 16+49 requests
+PASS (offline): original 16 request definitions remain identical to committed activity 6.0
+PASS (offline): script syntax, variable references, secret defaults and audited methods/routes
+PASS (offline): installed Postman SDK deserializes the collection and environment
+PASS (offline): all 65 requests blocked with the sanitized exported defaults
+PASS (offline): origin confirmation, mutation permission, mail routing, method and route gates
+PASS (offline): register has no fabricated ID and a duplicate step cannot be sent twice
+PASS (offline): SMTP 503 is blocked, may have persisted, and registration is never retried blindly
+PASS (offline): an interrupted request remains indeterminate and cannot be resent automatically
+PASS (offline): a malformed or wrong-role login cannot populate the secure JWT variable
+PASS (offline): a leaked password makes the contract fail without copying it into evidence
+PASS (offline): prepare phase records only completed scenarios and leaves OTP-dependent cases incomplete
+PASS (offline): OTP missing is a blocked precondition, never a passed verification
+PASS (offline): execute phase preserves the CP-AUT-07 plan failure and blocks pending mailbox/expiration checkpoints
+PASS (offline): resume does not repeat OTP attempts; replacement OTP and recovery postconditions finish their flows
+PASS (offline): expired JWT requires the exact previously accepted token and a natural wait
+PASS (offline): evidence is sanitized and no integration status is inferred from omitted steps
+PASS (offline): all collection HTTP routes exist in controller attributes; Swagger is configured
+PASS (offline): verification fixtures generate deliberately different wrong codes, never a fabricated correct OTP
+PASS (offline): CP-AUT-13 expired mode waits naturally and requires the specific expiration response
+PASS (offline): resuming cannot silently replace mailbox routing or the original fictitious credentials
+{"kind":"OFFLINE_SCRIPT_VALIDATION_ONLY","offlineChecksPassed":21,"officialSchema":false,"sdkImport":true,"collectionRequests":65,"realHttpRequests":0,"sqlOperations":0}

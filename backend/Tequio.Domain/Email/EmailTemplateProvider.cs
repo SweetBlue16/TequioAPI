@@ -138,7 +138,7 @@ public sealed class EmailTemplateProvider : IEmailTemplateProvider
             return false;
         }
 
-        var primaryLanguage = languageCode.Split('-', '_')[0];
+        var primaryLanguage = languageCode.Split(['-', '_'], 2)[0];
         return primaryLanguage.Equals("en", StringComparison.OrdinalIgnoreCase);
     }
 }

@@ -1,0 +1,27 @@
+PASS (offline): 104 requests, 11 new scenarios, all original 65 requests and 64 variables preserved
+PASS (offline): valid JavaScript, defined variables, no live secrets or automatic external requests
+PASS (offline): PNG signature, pixel content, CRCs and exact fixture sizes are valid without writing large files
+PASS (offline): Postman SDK deserializes the expanded collection and environment
+PASS (offline): all 104 requests are skipped with exported safe defaults
+PASS (offline): explicit selection, URL authorization, mutation flag and provenance cannot be bypassed
+PASS (offline): CP-PER-01 compares every updated field and an independent controlled profile
+PASS (offline): CP-PER-01 detects unintended writes to the observer profile
+PASS (offline): DTO rejection and unchanged GET remain partial, not approval of missing format validation
+PASS (offline): a rejected profile PUT with partial persistence fails the following GET comparison
+PASS (offline): external uploads require separate consent and exact local fixture selection
+PASS (offline): a successful real-shaped image response is associated and verified by profile GET
+PASS (offline): an upload URL outside the authorized origin or path fails and cannot be associated
+PASS (offline): accepting a .txt file or returning provider 500 cannot pass CP-MUL-02
+PASS (offline): CP-MUL-03 validates both exact limits and the over-limit 400 response
+PASS (offline): an empty HTTP 413 is accepted for the excessive file and still followed by an unchanged GET
+PASS (offline): filename probes transmit harmless multipart names but never approve physical confinement
+PASS (offline): creation captures a real ID and exact persisted product fields
+PASS (offline): missing productId cannot be invented or followed by deactivation
+PASS (offline): deactivation requires the captured own product and the original one-use confirmation
+PASS (offline): pagination follows every page before declaring absence and preserves other active products
+PASS (offline): a page cap leaves absence unproven and blocks approval
+PASS (offline): CAT-04 is blocked without an approved batch preparation mechanism
+PASS (offline): RN-10 HTTP 500 fails the 409 assertion while GET still confirms active product
+PASS (offline): even a 409 cannot prove the unavailable batch association postcondition
+PASS (offline): HTTP evidence never stores credentials, tokens, request bodies or fixture content
+{"kind":"OFFLINE_SCRIPT_VALIDATION_ONLY","offlineChecksPassed":26,"schemaChecked":false,"sdkChecked":true,"totalRequests":104,"newScenarios":11,"realHttpRequests":0,"sqlOperations":0,"largeFixtureFilesWritten":0}
