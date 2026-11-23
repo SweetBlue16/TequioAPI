@@ -1,9 +1,0 @@
-
-> tequioapp@0.0.0 test
-> jest --runInBand --runTestsByPath src/routes/__tests__/NavigationRejection.test.tsx
-
-Test Suites: 1 passed, 1 total
-Tests:       4 passed, 4 total
-Snapshots:   0 total
-Time:        8.956 s
-Ran all test suites within paths "src/routes/__tests__/NavigationRejection.test.tsx".

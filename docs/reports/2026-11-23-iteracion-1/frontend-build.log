@@ -1,5 +1,0 @@
-
-> tequioapp@0.0.0 build
-> tsc -b && vite build
-
-src/pages/auth/VerifyAccount/VerifyAccount.tsx(8,1): error TS6133: 'TextLink' is declared but its value is never read.

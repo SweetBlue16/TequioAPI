@@ -17,3 +17,10 @@ TestResults/
 # Archivos temporales del sistema operativo
 .DS_Store
 Thumbs.db
+
+# Documentación y evidencias locales
+docs/reports/
+postman/evidence/
+
+# Archivos temporales de Office
+~$*
