@@ -60,18 +60,17 @@ builder.Services
     .ValidateDataAnnotations()
     .Validate(options => options.UseStartTls, "Email:UseStartTls must be enabled.");
 
-string connectionString = builder.Configuration.GetConnectionString("TequioDatabase")
-    ?? throw new InvalidOperationException("La cadena de conexión TequioDatabase no está configurada.");
-
 builder.Services.AddDbContext<TequioDbContext>(options =>
 {
-    options.UseSqlServer(connectionString, sqlOptions =>
-    {
-        sqlOptions.EnableRetryOnFailure(
-            maxRetryCount: 5,
-            maxRetryDelay: TimeSpan.FromSeconds(10),
-            errorNumbersToAdd: null);
-    });
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("TequioDatabase"),
+        sqlOptions =>
+        {
+            sqlOptions.EnableRetryOnFailure(
+                maxRetryCount: 5,
+                maxRetryDelay: TimeSpan.FromSeconds(10),
+                errorNumbersToAdd: null);
+        });
 });
 
 builder.Services.AddSingleton(_ =>
