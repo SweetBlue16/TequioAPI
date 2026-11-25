@@ -1,7 +1,7 @@
+using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using Tequio.Api.Middlewares;
 using Tequio.Domain.Email;
 using Tequio.Domain.Repositories;
@@ -15,6 +15,22 @@ using Tequio.Infrastructure.Security;
 using Tequio.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+string[] allowedOrigins = GetAllowedOrigins(builder.Configuration);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("TequioCorsPolicy", policy =>
+    {
+        if (allowedOrigins.Length > 0)
+        {
+            policy.WithOrigins(allowedOrigins)
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
+        }
+    });
+});
 
 builder.Services.AddControllers();
 builder.Services.PostConfigure<Microsoft.AspNetCore.Mvc.ApiBehaviorOptions>(options =>
@@ -34,6 +50,7 @@ builder.Services.PostConfigure<Microsoft.AspNetCore.Mvc.ApiBehaviorOptions>(opti
         });
     };
 });
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -43,14 +60,29 @@ builder.Services
     .ValidateDataAnnotations()
     .Validate(options => options.UseStartTls, "Email:UseStartTls must be enabled.");
 
+string connectionString = builder.Configuration.GetConnectionString("TequioDatabase")
+    ?? throw new InvalidOperationException("La cadena de conexión TequioDatabase no está configurada.");
+
 builder.Services.AddDbContext<TequioDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("TequioDatabase"));
+    options.UseSqlServer(connectionString, sqlOptions =>
+    {
+        sqlOptions.EnableRetryOnFailure(
+            maxRetryCount: 5,
+            maxRetryDelay: TimeSpan.FromSeconds(10),
+            errorNumbersToAdd: null);
+    });
 });
 
 builder.Services.AddSingleton(_ =>
 {
     var key = Environment.GetEnvironmentVariable("TEQUIO_JWT_SIGNING_KEY");
+
+    if (string.IsNullOrWhiteSpace(key))
+    {
+        key = builder.Configuration["Jwt:Key"];
+    }
+
     if (string.IsNullOrWhiteSpace(key) && builder.Environment.IsDevelopment())
     {
         key = new ConfigurationBuilder().AddUserSecrets<Program>(optional: true).Build()["Jwt:Key"];
@@ -132,16 +164,46 @@ using (var scope = app.Services.CreateScope())
     await seeder.SeedAdminAsync();
 }
 
-if (app.Environment.IsDevelopment())
+bool isSwaggerEnabled = app.Environment.IsDevelopment()
+    || builder.Configuration.GetValue<bool>("Swagger:Enabled");
+
+if (isSwaggerEnabled)
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+app.UseCors("TequioCorsPolicy");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 await app.RunAsync();
+
+static string[] GetAllowedOrigins(IConfiguration configuration)
+{
+    string[]? arrayOptions = configuration.GetSection("AllowedOrigins").Get<string[]>();
+
+    if (arrayOptions is { Length: > 0 })
+    {
+        return arrayOptions
+            .Where(origin => !string.IsNullOrWhiteSpace(origin))
+            .Select(origin => origin.Trim().TrimEnd('/'))
+            .ToArray();
+    }
+
+    string? rawOrigins = configuration["AllowedOrigins"];
+
+    if (string.IsNullOrWhiteSpace(rawOrigins))
+    {
+        return Array.Empty<string>();
+    }
+
+    return rawOrigins
+        .Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries)
+        .Select(origin => origin.Trim().TrimEnd('/'))
+        .Where(origin => !string.IsNullOrWhiteSpace(origin))
+        .ToArray();
+}
 
 internal static class ApiValidationMessages
 {
