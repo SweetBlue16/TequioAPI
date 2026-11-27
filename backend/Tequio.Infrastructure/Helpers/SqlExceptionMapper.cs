@@ -13,9 +13,6 @@ namespace Tequio.Infrastructure.Helpers
         {
             return exception.Number switch
             {
-                50020 => new VerificationCodeRateLimitException("Espera un minuto antes de pedir otro código.", 60),
-                50021 => new VerificationCodeRateLimitException(
-                    "Se alcanzó el límite. Espera a que venza el periodo de quince minutos.", 900),
                 50001 => new ArgumentException(ErrorMessages.AgeRestriction),
                 50002 => new ArgumentException(ErrorMessages.EmailAlreadyRegistered),
                 50003 => new ArgumentException(ErrorMessages.OtpInvalid),
@@ -35,6 +32,11 @@ namespace Tequio.Infrastructure.Helpers
                 50017 => new ProductConflictException(ErrorMessages.ProductHasActiveBatches),
                 50018 => new ArgumentException(ErrorMessages.RecordNotFound),
                 50019 => new ArgumentException(ErrorMessages.UserAlreadyProducer),
+                50020 => new VerificationCodeRateLimitException(ErrorMessages.WaitAMinuteBeforeRequestingNewCode, 60),
+                50021 => new VerificationCodeRateLimitException(ErrorMessages.CodeLimitReachedWaitForExpiration, 900),
+                50022 => new VerificationCodeRateLimitException(ErrorMessages.WaitForOutOfAttemptsCodeToExpire, 900),
+                50023 => new ArgumentException(ErrorMessages.AdminProtectedAuthorizationRequired),
+                50024 => new ArgumentException(ErrorMessages.AdminAuthorizationNotApplicable),
                 _ => new InvalidOperationException(ErrorMessages.DatabaseError)
             };
         }

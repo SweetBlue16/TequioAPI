@@ -65,6 +65,7 @@ public partial class TequioDbContext : DbContext
             entity.HasKey(e => e.Id).HasName("PK__Batch__3214EC07DBD0D620");
 
             entity.ToTable("Batch", table => table.UseSqlOutputClause(false));
+            entity.ToTable("Batch", tb => tb.HasTrigger("TR_Batch_RequireActiveDeliveryPoint"));
 
             entity.Property(e => e.BatchName).HasMaxLength(150);
             entity.Property(e => e.Deadline).HasColumnType("datetime");

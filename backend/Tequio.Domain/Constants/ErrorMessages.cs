@@ -19,8 +19,13 @@
         public const string MasterAdminEmailRequired = "El correo electrónico del nuevo administrador es obligatorio.";
         public const string OtpRequired = "El código de verificación es obligatorio.";
         public const string InvalidEmail = "El formato del correo electrónico no es válido.";
+        public const string AdminProtectedAuthorizationRequired = "La cuenta administrativa requiere autorización protegida.";
+        public const string AdminAuthorizationNotApplicable = "No hay una solicitud pendiente de autorización administrativa para esta cuenta.";
 
-
+        public const string WaitAMinuteBeforeRequestingNewCode = "Espera un minuto antes de pedir otro código.";
+        public const string CodeLimitReachedWaitForExpiration = "Se alcanzó el límite. Espera a que venza el periodo de quince minutos.";
+        public const string WaitForOutOfAttemptsCodeToExpire = "Espera a que venza el código actual sin intentos disponibles.";
+        
         public const string NegativePageIndex = "El índice de página no puede ser negativo.";
         public const string InvalidPageSize = "El tamaño de página debe ser mayor a cero.";
         public const string PageSizeExceeded = "El tamaño de página no puede exceder los 100 productos.";

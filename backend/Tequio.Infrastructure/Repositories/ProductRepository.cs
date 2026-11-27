@@ -47,12 +47,7 @@ namespace Tequio.Infrastructure.Repositories
                     },
                     cancellationToken);
 
-                if (result is null || result is DBNull)
-                {
-                    throw new InvalidOperationException(ErrorMessages.DatabaseError);
-                }
-
-                return Convert.ToInt32(result, CultureInfo.InvariantCulture);
+                return result is null or DBNull ? throw new InvalidOperationException(ErrorMessages.DatabaseError) : Convert.ToInt32(result, CultureInfo.InvariantCulture);
             }
             catch (SqlException exception)
             {
@@ -132,10 +127,6 @@ namespace Tequio.Infrastructure.Repositories
             }
             catch (SqlException exception)
             {
-                Console.WriteLine($"\n================== SQL ERROR EN PRODUCTOS ==================");
-                Console.WriteLine($"Número de Error SQL: {exception.Number}");
-                Console.WriteLine($"Mensaje SQL: {exception.Message}");
-                Console.WriteLine($"============================================================\n");
                 throw SqlExceptionMapper.Map(exception);
             }
         }

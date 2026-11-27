@@ -86,9 +86,9 @@ public sealed class AuthRepository : IAuthRepository
                     if (!await reader.ReadAsync(cancellationToken))
                     {
                         return (
-                            UserId: (string?)null,
-                            RoleId: (string?)null,
-                            PasswordHash: (string?)null,
+                            UserId: null,
+                            RoleId: null,
+                            PasswordHash: null,
                             IsVerified: false);
                     }
 
